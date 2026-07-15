@@ -4,6 +4,12 @@ import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { SUBJECTS, getLessonsForSubjectAndGrade, type Subject } from '@/lib/curriculum'
 
+interface Student {
+  id: string
+  name: string
+  grade: number
+}
+
 interface Progress {
   subject: Subject
   placed_grade: number | null
@@ -15,48 +21,84 @@ interface Progress {
 export default function StudentDashboard() {
   const router = useRouter()
   const supabase = createClient()
-  const [studentId, setStudentId] = useState<string | null>(null)
-  const [studentName, setStudentName] = useState('Mathias')
-  const [progress, setProgress] = useState<Progress[]>([])
-  const [loading, setLoading] = useState(true)
+
+  const [authed, setAuthed] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [authed, setAuthed] = useState(false)
   const [loginErr, setLoginErr] = useState('')
 
-  const load = useCallback(async (sid: string) => {
-    const { data: prog } = await supabase
-      .from('hs_progress')
-      .select('*')
-      .eq('student_id', sid)
+  // Student picker
+  const [allStudents, setAllStudents] = useState<Student[]>([])
+  const [pickingStudent, setPickingStudent] = useState(false)
+
+  // Active student
+  const [studentId, setStudentId] = useState<string | null>(null)
+  const [studentName, setStudentName] = useState('')
+  const [progress, setProgress] = useState<Progress[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const loadProgress = useCallback(async (sid: string) => {
+    const { data: prog } = await supabase.from('hs_progress').select('*').eq('student_id', sid)
     setProgress(prog || [])
     setLoading(false)
   }, [supabase])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        fetchStudent()
-      } else {
-        setLoading(false)
-      }
+      if (data.session) fetchStudents()
+      else setLoading(false)
     })
   }, [])
 
-  async function fetchStudent() {
+  async function fetchStudents() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { setLoading(false); return }
     setAuthed(true)
-    let { data: s } = await supabase.from('hs_students').select('id,name').eq('user_id', user.id).single()
-    if (!s) {
-      const { data: anyS } = await supabase.from('hs_students').select('id,name').limit(1).single()
-      s = anyS
+    const { data } = await supabase.from('hs_students').select('id,name,grade').eq('user_id', user.id).order('name')
+    const list = data || []
+    setAllStudents(list)
+    if (list.length === 1) {
+      // Only one student — go straight in
+      setStudentId(list[0].id)
+      setStudentName(list[0].name)
+      loadProgress(list[0].id)
+    } else if (list.length > 1) {
+      // Multiple students — show picker
+      setPickingStudent(true)
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
-    if (s) { setStudentId(s.id); setStudentName(s.name); load(s.id) }
-    else setLoading(false)
   }
 
-  // Default grades per subject — used if no DB record exists
+  function selectStudent(s: Student) {
+    setStudentId(s.id)
+    setStudentName(s.name)
+    setPickingStudent(false)
+    setLoading(true)
+    loadProgress(s.id)
+  }
+
+  async function login(e: React.FormEvent) {
+    e.preventDefault()
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) setLoginErr('Wrong email or password')
+    else fetchStudents()
+  }
+
+  function getSubjectProgress(subject: Subject): Progress | undefined {
+    return progress.find(p => p.subject === subject)
+  }
+
+  function subjectStatus(subject: Subject) {
+    const p = getSubjectProgress(subject)
+    if (!p?.placed_grade) return 'placement'
+    const lessons = getLessonsForSubjectAndGrade(subject, p.placed_grade)
+    if (lessons.length === 0) return 'lesson'
+    if (p.current_lesson > lessons.length) return 'done'
+    return 'lesson'
+  }
+
   const DEFAULT_GRADES: Record<Subject, number> = {
     math: 4, ela: 4, science: 8, history: 7, writing: 5
   }
@@ -75,26 +117,7 @@ export default function StudentDashboard() {
     window.location.href = `/lesson/${subject}/${grade}/1`
   }
 
-  async function login(e: React.FormEvent) {
-    e.preventDefault()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) setLoginErr('Wrong email or password')
-    else fetchStudent()
-  }
-
-  function getSubjectProgress(subject: Subject): Progress | undefined {
-    return progress.find(p => p.subject === subject)
-  }
-
-  function subjectStatus(subject: Subject) {
-    const p = getSubjectProgress(subject)
-    if (!p?.placed_grade) return 'placement'
-    const lessons = getLessonsForSubjectAndGrade(subject, p.placed_grade)
-    if (lessons.length === 0) return 'lesson'
-    if (p.current_lesson > lessons.length) return 'done'
-    return 'lesson'
-  }
-
+  // ── LOGIN SCREEN ───────────────────────────────────────────────────────────
   if (!authed && !loading) return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       <div className="card" style={{ maxWidth: 400, width: '100%', textAlign: 'center' }}>
@@ -114,6 +137,36 @@ export default function StudentDashboard() {
     </div>
   )
 
+  // ── STUDENT PICKER ─────────────────────────────────────────────────────────
+  if (pickingStudent) return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+      <div className="card" style={{ maxWidth: 440, width: '100%', textAlign: 'center' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>👋</div>
+        <h1 style={{ margin: '0 0 0.25rem', fontSize: '1.5rem', fontWeight: 800 }}>Who&apos;s learning today?</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Tap your name to get started</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {allStudents.map(s => (
+            <button key={s.id} onClick={() => selectStudent(s)}
+              style={{ padding: '1rem', border: '2px solid var(--border)', borderRadius: 12, background: 'var(--bg)', cursor: 'pointer', fontSize: '1.1rem', fontWeight: 700, textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.75rem', transition: 'all 0.15s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--primary)'; (e.currentTarget as HTMLButtonElement).style.background = 'var(--primary-light)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg)' }}>
+              <span style={{ fontSize: '2rem' }}>🎒</span>
+              <div style={{ textAlign: 'left' }}>
+                <div>{s.name}</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 400 }}>Grade {s.grade}</div>
+              </div>
+            </button>
+          ))}
+        </div>
+        <button onClick={() => { supabase.auth.signOut(); setAuthed(false); setPickingStudent(false) }}
+          style={{ marginTop: '1.25rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85rem' }}>
+          Sign out
+        </button>
+      </div>
+    </div>
+  )
+
+  // ── LOADING ────────────────────────────────────────────────────────────────
   if (loading) return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1rem' }}>
       <div style={{ fontSize: '2rem' }}>⏳</div>
@@ -121,21 +174,30 @@ export default function StudentDashboard() {
     </div>
   )
 
+  // ── DASHBOARD ──────────────────────────────────────────────────────────────
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
   const allPlaced = SUBJECTS.every(s => getSubjectProgress(s.key)?.placed_grade)
 
   return (
     <div style={{ maxWidth: 700, margin: '0 auto', padding: '1.5rem 1rem' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800 }}>Hey, {studentName}! 👋</h1>
-        <p style={{ margin: '0.25rem 0 0', color: 'var(--text-muted)' }}>{today}</p>
+      <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+        <div>
+          <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800 }}>Hey, {studentName}! 👋</h1>
+          <p style={{ margin: '0.25rem 0 0', color: 'var(--text-muted)' }}>{today}</p>
+        </div>
+        {allStudents.length > 1 && (
+          <button onClick={() => { setPickingStudent(true); setStudentId(null) }}
+            style={{ background: 'none', border: '2px solid var(--border)', borderRadius: 8, padding: '0.4rem 0.75rem', cursor: 'pointer', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+            Switch student
+          </button>
+        )}
       </div>
 
       {!allPlaced && (
         <div className="card" style={{ marginBottom: '1.5rem', borderColor: 'var(--primary)', background: 'var(--primary-light)' }}>
           <h2 style={{ margin: '0 0 0.5rem', color: 'var(--primary)', fontSize: '1.1rem' }}>🎯 Let&apos;s find your level first!</h2>
           <p style={{ margin: '0 0 1rem', color: 'var(--primary)', fontSize: '0.9rem' }}>
-            Before you start lessons, take a quick quiz in each subject. It&apos;s not a test — it just helps us put you in the right spot so things aren&apos;t too easy or too hard.
+            Before you start lessons, take a quick quiz in each subject so we can put you in exactly the right spot.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {SUBJECTS.filter(s => !getSubjectProgress(s.key)?.placed_grade).map(s => (
@@ -165,7 +227,7 @@ export default function StudentDashboard() {
                 {status === 'lesson' && currentLesson && (
                   <>
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                      Grade {p?.placed_grade ?? DEFAULT_GRADES[s.key]} · Lesson {p?.current_lesson ?? 1} of {lessons.length}
+                      Grade {p?.placed_grade} · Lesson {p?.current_lesson} of {lessons.length}
                     </div>
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{currentLesson.title}</div>
                     <div style={{ marginTop: '0.5rem', height: 6, background: 'var(--border)', borderRadius: 99 }}>
@@ -181,13 +243,13 @@ export default function StudentDashboard() {
                 )}
               </div>
               <div style={{ flexShrink: 0 }}>
-                {status === 'placement' && currentLesson && (
+                {status === 'placement' && (
                   <a href={`/placement/${s.key}`} className="btn btn-primary" style={{ textDecoration: 'none', fontSize: '0.85rem' }}>
                     Take Quiz
                   </a>
                 )}
                 {status === 'lesson' && currentLesson && (
-                  <a href={`/lesson/${s.key}/${p?.placed_grade ?? DEFAULT_GRADES[s.key]}/${p?.current_lesson ?? 1}`} className="btn btn-primary" style={{ textDecoration: 'none', fontSize: '0.85rem' }}>
+                  <a href={`/lesson/${s.key}/${p?.placed_grade}/${p?.current_lesson}`} className="btn btn-primary" style={{ textDecoration: 'none', fontSize: '0.85rem' }}>
                     Start →
                   </a>
                 )}

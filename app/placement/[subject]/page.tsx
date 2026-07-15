@@ -74,14 +74,12 @@ export default function PlacementQuiz() {
   function computePlacement() {
     // Find highest grade where student got >= 67% correct
     let placed = 4
-    for (const grade of [4, 5, 6, 7, 8]) {
+    for (const grade of [4, 5, 6, 7, 8, 9, 10, 11, 12]) {
       const gs = gradeScores[grade]
       if (gs && gs.total > 0 && (gs.right / gs.total) >= 0.67) {
         placed = grade
       }
     }
-    // If they aced everything, place at 7 (grade-appropriate starting point)
-    if (placed === 8 && gradeScores[8]?.right === gradeScores[8]?.total) placed = 8
     setPlacedGrade(placed)
     setDone(true)
   }
