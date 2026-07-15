@@ -75,7 +75,7 @@ export default function PlacementQuiz() {
     }
   }
 
-  function computePlacement() {
+  async function computePlacement() {
     // Find highest grade where student got >= 67% correct
     let placed = 4
     for (const grade of [4, 5, 6, 7, 8, 9, 10, 11, 12]) {
@@ -85,33 +85,31 @@ export default function PlacementQuiz() {
       }
     }
     setPlacedGrade(placed)
+    // Save immediately so results persist even if student navigates away
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      const saved = typeof window !== 'undefined' ? sessionStorage.getItem('activeStudent') : null
+      let student: { id: string } | null = saved ? JSON.parse(saved) : null
+      if (!student) {
+        const { data: s } = await supabase.from('hs_students').select('id').eq('user_id', user.id).limit(1).single()
+        student = s
+      }
+      if (student) {
+        await supabase.from('hs_progress').upsert({
+          student_id: student.id,
+          subject,
+          placed_grade: placed,
+          lessons_completed: 0,
+          current_lesson: 1,
+          last_score: null,
+        }, { onConflict: 'student_id,subject' })
+      }
+    }
     setDone(true)
   }
 
   async function saveAndStart() {
     if (!placedGrade) return
-    setSaving(true)
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { router.push('/'); return }
-    // Use the student selected on the picker screen
-    const saved = typeof window !== 'undefined' ? sessionStorage.getItem('activeStudent') : null
-    let student: { id: string } | null = saved ? JSON.parse(saved) : null
-    if (!student) {
-      const { data: s } = await supabase.from('hs_students').select('id').eq('user_id', user.id).limit(1).single()
-      student = s
-    }
-    if (!student) { router.push('/student'); return }
-
-    await supabase.from('hs_progress').upsert({
-      student_id: student.id,
-      subject,
-      placed_grade: placedGrade,
-      lessons_completed: 0,
-      current_lesson: 1,
-      last_score: null,
-    }, { onConflict: 'student_id,subject' })
-
-    setSaving(false)
     router.push(`/lesson/${subject}/${placedGrade}/1`)
   }
 
