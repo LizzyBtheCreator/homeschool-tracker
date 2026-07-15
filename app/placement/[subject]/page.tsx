@@ -89,11 +89,12 @@ export default function PlacementQuiz() {
     setSaving(true)
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { router.push('/'); return }
-    // Try current user's student, then fall back to any student (for shared family account)
-    let { data: student } = await supabase.from('hs_students').select('id').eq('user_id', user.id).single()
+    // Use the student selected on the picker screen
+    const saved = typeof window !== 'undefined' ? sessionStorage.getItem('activeStudent') : null
+    let student: { id: string } | null = saved ? JSON.parse(saved) : null
     if (!student) {
-      const { data: anyStudent } = await supabase.from('hs_students').select('id').limit(1).single()
-      student = anyStudent
+      const { data: s } = await supabase.from('hs_students').select('id').eq('user_id', user.id).limit(1).single()
+      student = s
     }
     if (!student) { router.push('/student'); return }
 

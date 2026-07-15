@@ -57,8 +57,20 @@ export default function StudentDashboard() {
     const { data } = await supabase.from('hs_students').select('id,name,grade').eq('user_id', user.id).order('name')
     const list = data || []
     setAllStudents(list)
+    // Check if we already have an active student in this session
+    const saved = sessionStorage.getItem('activeStudent')
+    if (saved) {
+      const active = JSON.parse(saved) as Student
+      // Verify they're still in the list
+      if (list.find(s => s.id === active.id)) {
+        setStudentId(active.id)
+        setStudentName(active.name)
+        loadProgress(active.id)
+        return
+      }
+    }
     if (list.length === 1) {
-      // Only one student — go straight in
+      sessionStorage.setItem('activeStudent', JSON.stringify(list[0]))
       setStudentId(list[0].id)
       setStudentName(list[0].name)
       loadProgress(list[0].id)
@@ -72,6 +84,7 @@ export default function StudentDashboard() {
   }
 
   function selectStudent(s: Student) {
+    sessionStorage.setItem('activeStudent', JSON.stringify(s))
     setStudentId(s.id)
     setStudentName(s.name)
     setPickingStudent(false)
@@ -158,7 +171,7 @@ export default function StudentDashboard() {
             </button>
           ))}
         </div>
-        <button onClick={() => { supabase.auth.signOut(); setAuthed(false); setPickingStudent(false) }}
+        <button onClick={() => { sessionStorage.removeItem('activeStudent'); supabase.auth.signOut(); setAuthed(false); setPickingStudent(false) }}
           style={{ marginTop: '1.25rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85rem' }}>
           Sign out
         </button>
@@ -268,7 +281,7 @@ export default function StudentDashboard() {
       </div>
 
       <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-        <button onClick={() => supabase.auth.signOut().then(() => router.push('/'))}
+        <button onClick={() => { sessionStorage.removeItem('activeStudent'); supabase.auth.signOut().then(() => router.push('/')) }}
           style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85rem' }}>
           Sign out
         </button>
