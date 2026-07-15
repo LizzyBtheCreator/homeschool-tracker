@@ -248,7 +248,7 @@ export default function StudentDashboard() {
                     </div>
                   </>
                 )}
-                {(status === 'lesson' || status === 'placement') && !currentLesson && (
+                {status === 'lesson' && !currentLesson && (
                   <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Grade {DEFAULT_GRADES[s.key]} · Ready to start</div>
                 )}
                 {status === 'done' && (
@@ -266,7 +266,7 @@ export default function StudentDashboard() {
                     Start →
                   </a>
                 )}
-                {(status === 'lesson' || status === 'placement') && !currentLesson && (
+                {status === 'lesson' && !currentLesson && (
                   <button className="btn btn-primary" style={{ fontSize: '0.85rem' }} onClick={() => startSubject(s.key)}>
                     Start →
                   </button>
