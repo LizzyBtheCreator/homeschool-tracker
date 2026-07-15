@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NC Homeschool Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: white; }
+    }
+    .print-only { display: none; }
+    .tab-active { border-bottom: 3px solid #2563eb; color: #2563eb; font-weight: 600; }
+    .progress-bar { transition: width 0.5s ease; }
+    .cal-day { min-height: 2rem; }
+    input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen" class="flex items-center justify-center min-h-screen">
+  <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+    <div class="text-center mb-8">
+      <div class="text-4xl mb-3">🎓</div>
+      <h1 class="text-2xl font-bold text-gray-900">NC Homeschool Tracker</h1>
+      <p class="text-gray-500 mt-1">2025–2026 School Year</p>
+    </div>
+    <div id="auth-error" class="hidden bg-red-50 text-red-700 rounded-lg p-3 mb-4 text-sm"></div>
+    <div id="login-form">
+      <input id="email" type="email" placeholder="Email" class="w-full border rounded-lg px-4 py-3 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <input id="password" type="password" placeholder="Password" class="w-full border rounded-lg px-4 py-3 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button onclick="signIn()" class="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold hover:bg-blue-700 transition">Sign In</button>
+      <button onclick="showSignup()" class="w-full mt-3 text-blue-600 text-sm hover:underline">Create account</button>
+      <button onclick="resetPassword()" class="w-full mt-1 text-gray-400 text-sm hover:underline">Forgot password?</button>
+    </div>
+    <div id="signup-form" class="hidden">
+      <input id="su-name" type="text" placeholder="Your name" class="w-full border rounded-lg px-4 py-3 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <input id="su-email" type="email" placeholder="Email" class="w-full border rounded-lg px-4 py-3 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <input id="su-password" type="password" placeholder="Password (min 8 chars)" class="w-full border rounded-lg px-4 py-3 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button onclick="signUp()" class="w-full bg-green-600 text-white rounded-lg py-3 font-semibold hover:bg-green-700 transition">Create Account</button>
+      <button onclick="showLogin()" class="w-full mt-3 text-blue-600 text-sm hover:underline">Back to sign in</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+
+  <!-- TOP NAV -->
+  <nav class="bg-white border-b shadow-sm sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🎓</span>
+        <span class="font-bold text-gray-900">NC Homeschool Tracker</span>
+        <span class="hidden sm:inline text-gray-400 text-sm ml-2">2025–2026</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="nav-user" class="text-sm text-gray-500 hidden sm:block"></span>
+        <button onclick="signOut()" class="text-sm text-red-500 hover:text-red-700 border border-red-200 rounded-lg px-3 py-1">Sign Out</button>
+      </div>
+    </div>
+    <!-- TAB BAR -->
+    <div class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto">
+      <button onclick="showTab('dashboard')" id="tab-dashboard" class="tab-btn tab-active px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition">📊 Dashboard</button>
+      <button onclick="showTab('attendance')" id="tab-attendance" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">📅 Attendance</button>
+      <button onclick="showTab('subjects')" id="tab-subjects" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">📚 Subjects</button>
+      <button onclick="showTab('students')" id="tab-students" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">👤 Students</button>
+      <button onclick="showTab('assessments')" id="tab-assessments" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">📝 Assessments</button>
+      <button onclick="showTab('documents')" id="tab-documents" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">📁 Documents</button>
+      <button onclick="showTab('reports')" id="tab-reports" class="tab-btn px-4 py-3 text-sm whitespace-nowrap border-b-2 border-transparent transition text-gray-500 hover:text-gray-700">🖨️ Reports</button>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-6">
+
+    <!-- DASHBOARD TAB -->
+    <div id="tab-content-dashboard">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900">Dashboard</h2>
+          <p id="today-date" class="text-gray-500 text-sm mt-1"></p>
+        </div>
+        <button onclick="showTab('attendance'); openQuickLog()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Log Today's Attendance
+        </button>
+      </div>
+
+      <div id="dashboard-alerts" class="mb-4"></div>
+
+      <div id="student-cards" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border p-5">
+        <h3 class="font-semibold text-gray-800 mb-4">NC 180-Day Requirement — All Students</h3>
+        <div id="summary-table" class="overflow-x-auto">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTENDANCE TAB -->
+    <div id="tab-content-attendance" class="hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h2 class="text-2xl font-bold text-gray-900">Attendance Log</h2>
+        <button onclick="openAttendanceModal()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Log Attendance
+        </button>
+      </div>
+
+      <!-- Student filter -->
+      <div class="flex gap-2 mb-5 flex-wrap">
+        <button onclick="setAttFilter('all')" id="att-filter-all" class="filter-btn bg-blue-600 text-white rounded-full px-4 py-1.5 text-sm">All Students</button>
+        <div id="att-student-btns" class="flex gap-2 flex-wrap"></div>
+      </div>
+
+      <!-- Calendar view -->
+      <div class="bg-white rounded-2xl shadow-sm border p-5 mb-5">
+        <div class="flex items-center justify-between mb-4">
+          <button onclick="calPrev()" class="text-gray-400 hover:text-gray-600 text-xl px-2">‹</button>
+          <h3 id="cal-month-label" class="font-semibold text-gray-800"></h3>
+          <button onclick="calNext()" class="text-gray-400 hover:text-gray-600 text-xl px-2">›</button>
+        </div>
+        <div class="grid grid-cols-7 gap-1 text-center mb-2">
+          <div class="text-xs text-gray-400 font-medium">Sun</div><div class="text-xs text-gray-400 font-medium">Mon</div><div class="text-xs text-gray-400 font-medium">Tue</div><div class="text-xs text-gray-400 font-medium">Wed</div><div class="text-xs text-gray-400 font-medium">Thu</div><div class="text-xs text-gray-400 font-medium">Fri</div><div class="text-xs text-gray-400 font-medium">Sat</div>
+        </div>
+        <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
+        <div class="flex gap-4 mt-4 text-xs text-gray-500">
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span> Present</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-red-400 inline-block"></span> Absent</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-yellow-400 inline-block"></span> Excused</span>
+        </div>
+      </div>
+
+      <!-- Recent log -->
+      <div class="bg-white rounded-2xl shadow-sm border p-5">
+        <h3 class="font-semibold text-gray-800 mb-4">Recent Attendance Records</h3>
+        <div id="attendance-list" class="space-y-2">
+          <p class="text-gray-400 text-sm">Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBJECTS TAB -->
+    <div id="tab-content-subjects" class="hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h2 class="text-2xl font-bold text-gray-900">Subject Log</h2>
+        <button onclick="openSubjectModal()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Log Subjects
+        </button>
+      </div>
+
+      <!-- Student filter -->
+      <div class="flex gap-2 mb-5 flex-wrap">
+        <button onclick="setSubFilter('all')" id="sub-filter-all" class="filter-btn bg-blue-600 text-white rounded-full px-4 py-1.5 text-sm">All Students</button>
+        <div id="sub-student-btns" class="flex gap-2 flex-wrap"></div>
+      </div>
+
+      <div id="subject-list" class="space-y-3">
+        <p class="text-gray-400 text-sm">Loading...</p>
+      </div>
+    </div>
+
+    <!-- STUDENTS TAB -->
+    <div id="tab-content-students" class="hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h2 class="text-2xl font-bold text-gray-900">Student Profiles</h2>
+        <button onclick="openStudentModal()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Add Student
+        </button>
+      </div>
+      <div id="student-profiles" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+    </div>
+
+    <!-- ASSESSMENTS TAB -->
+    <div id="tab-content-assessments" class="hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h2 class="text-2xl font-bold text-gray-900">Assessments</h2>
+        <button onclick="openAssessmentModal()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Log Assessment
+        </button>
+      </div>
+      <div id="assessment-list" class="space-y-3">
+        <p class="text-gray-400 text-sm">Loading...</p>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS TAB -->
+    <div id="tab-content-documents" class="hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h2 class="text-2xl font-bold text-gray-900">Documents</h2>
+        <button onclick="openDocModal()" class="bg-blue-600 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-blue-700 transition text-sm">
+          + Upload Document
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div class="text-2xl mb-2">📋</div>
+          <div class="font-semibold text-blue-800 text-sm">NC Intent to Homeschool</div>
+          <div class="text-xs text-blue-600 mt-1">State-required annual filing</div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+          <div class="text-2xl mb-2">💉</div>
+          <div class="font-semibold text-green-800 text-sm">Immunization Records</div>
+          <div class="text-xs text-green-600 mt-1">Records or exemption letters</div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 rounded-xl p-4">
+          <div class="text-2xl mb-2">📊</div>
+          <div class="font-semibold text-purple-800 text-sm">Assessment Results</div>
+          <div class="text-xs text-purple-600 mt-1">Standardized test scores</div>
+        </div>
+      </div>
+      <div id="document-list" class="space-y-3">
+        <p class="text-gray-400 text-sm">Loading...</p>
+      </div>
+    </div>
+
+    <!-- REPORTS TAB -->
+    <div id="tab-content-reports" class="hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Reports</h2>
+        <button onclick="window.print()" class="no-print bg-gray-800 text-white rounded-xl px-5 py-2.5 font-semibold hover:bg-gray-900 transition text-sm">
+          🖨️ Print / Save PDF
+        </button>
+      </div>
+
+      <!-- Report controls (no-print) -->
+      <div class="no-print bg-white rounded-2xl shadow-sm border p-5 mb-6">
+        <h3 class="font-semibold text-gray-800 mb-4">Generate Report</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">Student</label>
+            <select id="rpt-student" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="all">All Students</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">From Date</label>
+            <input type="date" id="rpt-from" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">To Date</label>
+            <input type="date" id="rpt-to" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+        <button onclick="generateReport()" class="mt-4 bg-blue-600 text-white rounded-lg px-5 py-2 font-semibold hover:bg-blue-700 transition text-sm">Generate Report</button>
+      </div>
+
+      <!-- Printable report -->
+      <div id="report-output" class="bg-white rounded-2xl shadow-sm border p-8">
+        <p class="text-gray-400 text-sm text-center py-8">Configure report options above and click Generate.</p>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /app -->
+
+<!-- MODAL BACKDROP -->
+<div id="modal-backdrop" class="hidden fixed inset-0 bg-black bg-opacity-40 z-50 flex items-start justify-center pt-10 px-4 pb-4 overflow-y-auto">
+  <div id="modal-box" class="bg-white rounded-2xl shadow-xl w-full max-w-lg relative">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl leading-none">✕</button>
+    <div id="modal-content" class="p-6"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIG — update these with your Supabase project details
+// ============================================================
+const SUPABASE_URL = 'https://ukmyevdvlvnpryawsyea.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrbXlldmR2bHZucHJ5YXdzeWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjM3NjcsImV4cCI6MjA5Nzc5OTc2N30.1QqTIAC2086mkdS5B6-dJNifzMhaCdNL8NgmDXEx9GM';
+
+const SCHOOL_YEAR_START = '2025-08-01';
+const SCHOOL_YEAR_END   = '2026-06-30';
+const REQUIRED_DAYS = 180;
+
+const SUBJECTS = [
+  'Math',
+  'Reading / Language Arts',
+  'Writing / Composition',
+  'Science',
+  'History / Social Studies',
+  'Bible / Character',
+  'Art',
+  'Music',
+  'Physical Education',
+  'Foreign Language',
+  'Life Skills / Home Ec',
+  'Independent Study',
+  'Other (specify in notes)',
+];
+
+const DOC_TYPES = [
+  'NC Intent to Homeschool',
+  'Immunization Record',
+  'Immunization Exemption',
+  'Standardized Test Result',
+  'Teacher Evaluation',
+  'Curriculum Enrollment',
+  'Other',
+];
+
+// ============================================================
+// INIT
+// ============================================================
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentUser = null;
+let students = [];
+let allAttendance = [];
+let allSubjects = [];
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+let attFilter = 'all';
+let subFilter = 'all';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session } } = await db.auth.getSession();
+  if (session) {
+    currentUser = session.user;
+    showApp();
+  }
+  db.auth.onAuthStateChange((event, session) => {
+    if (session && !currentUser) {
+      currentUser = session.user;
+      showApp();
+    } else if (!session) {
+      currentUser = null;
+      showAuthScreen();
+    }
+  });
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  // Set default report dates
+  document.getElementById('rpt-from').value = SCHOOL_YEAR_START;
+  document.getElementById('rpt-to').value = new Date().toISOString().split('T')[0];
+});
+
+// ============================================================
+// AUTH
+// ============================================================
+async function signIn() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const { error } = await db.auth.signInWithPassword({ email, password });
+  if (error) showAuthError(error.message);
+}
+
+async function signUp() {
+  const email = document.getElementById('su-email').value;
+  const password = document.getElementById('su-password').value;
+  const { error } = await db.auth.signUp({ email, password });
+  if (error) showAuthError(error.message);
+  else showAuthError('Check your email to confirm your account.', 'green');
+}
+
+async function signOut() {
+  await db.auth.signOut();
+}
+
+async function resetPassword() {
+  const email = prompt('Enter your email address:');
+  if (!email) return;
+  const { error } = await db.auth.resetPasswordForEmail(email);
+  alert(error ? error.message : 'Password reset email sent!');
+}
+
+function showAuthError(msg, color = 'red') {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg;
+  el.className = `rounded-lg p-3 mb-4 text-sm bg-${color}-50 text-${color}-700`;
+  el.classList.remove('hidden');
+}
+
+function showSignup() {
+  document.getElementById('login-form').classList.add('hidden');
+  document.getElementById('signup-form').classList.remove('hidden');
+}
+function showLogin() {
+  document.getElementById('signup-form').classList.add('hidden');
+  document.getElementById('login-form').classList.remove('hidden');
+}
+
+function showApp() {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('nav-user').textContent = currentUser?.email || '';
+  loadAll();
+}
+
+function showAuthScreen() {
+  document.getElementById('auth-screen').classList.remove('hidden');
+  document.getElementById('app').classList.add('hidden');
+}
+
+// ============================================================
+// DATA LOADING
+// ============================================================
+async function loadAll() {
+  await loadStudents();
+  await Promise.all([loadAttendance(), loadSubjects()]);
+  renderDashboard();
+  renderCalendar();
+  renderAttendanceList();
+  renderSubjectList();
+  renderStudentProfiles();
+  renderAssessments();
+  renderDocuments();
+  populateReportStudentSelect();
+}
+
+async function loadStudents() {
+  const { data, error } = await db.from('hs_students').select('*').order('name');
+  if (!error) students = data || [];
+  renderStudentFilterBtns();
+}
+
+async function loadAttendance() {
+  const { data, error } = await db.from('hs_attendance').select('*, hs_students(name)').order('date', { ascending: false });
+  if (!error) allAttendance = data || [];
+}
+
+async function loadSubjects() {
+  const { data, error } = await db.from('hs_subjects').select('*, hs_students(name)').order('date', { ascending: false });
+  if (!error) allSubjects = data || [];
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function showTab(name) {
+  document.querySelectorAll('[id^="tab-content-"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById('tab-content-' + name).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('tab-active', 'text-blue-600');
+    btn.classList.add('text-gray-500');
+  });
+  const activeBtn = document.getElementById('tab-' + name);
+  if (activeBtn) {
+    activeBtn.classList.add('tab-active');
+    activeBtn.classList.remove('text-gray-500');
+  }
+}
+
+function openQuickLog() {
+  setTimeout(() => openAttendanceModal(), 100);
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard() {
+  const cards = document.getElementById('student-cards');
+  const table = document.getElementById('summary-table');
+  const alerts = document.getElementById('dashboard-alerts');
+
+  if (students.length === 0) {
+    cards.innerHTML = `<div class="col-span-3 bg-yellow-50 border border-yellow-200 rounded-2xl p-6 text-center">
+      <p class="text-yellow-800 font-semibold">No students yet.</p>
+      <p class="text-yellow-600 text-sm mt-1">Go to the <strong>Students</strong> tab to add your children.</p>
+    </div>`;
+    return;
+  }
+
+  let alertHtml = '';
+  let cardHtml = '';
+  let tableRows = '';
+
+  students.forEach(s => {
+    const days = countPresentDays(s.id);
+    const pct = Math.min(100, Math.round((days / REQUIRED_DAYS) * 100));
+    const remaining = Math.max(0, REQUIRED_DAYS - days);
+    const behind = remaining > daysLeftInYear();
+    const color = behind ? 'red' : pct >= 80 ? 'green' : 'blue';
+
+    if (behind) alertHtml += `<div class="bg-red-50 border border-red-300 rounded-xl p-3 mb-3 text-red-800 text-sm">⚠️ <strong>${s.name}</strong> may not meet the 180-day requirement. Only ${daysLeftInYear()} school days remain and ${remaining} days are still needed.</div>`;
+
+    cardHtml += `<div class="bg-white rounded-2xl shadow-sm border p-5">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h3 class="font-bold text-gray-900 text-lg">${s.name}</h3>
+          <p class="text-gray-500 text-sm">Grade ${s.grade}</p>
+        </div>
+        <div class="text-3xl font-bold text-${color}-600">${days}</div>
+      </div>
+      <div class="mb-1 flex justify-between text-xs text-gray-500">
+        <span>${days} of ${REQUIRED_DAYS} days</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="w-full bg-gray-100 rounded-full h-3">
+        <div class="bg-${color}-500 h-3 rounded-full progress-bar" style="width:${pct}%"></div>
+      </div>
+      <p class="text-xs mt-2 ${behind ? 'text-red-600 font-semibold' : 'text-gray-400'}">${remaining > 0 ? remaining + ' days remaining' : '✅ Requirement met!'}</p>
+    </div>`;
+
+    tableRows += `<tr class="border-b last:border-0">
+      <td class="py-2 pr-4 font-medium text-gray-800">${s.name}</td>
+      <td class="py-2 pr-4 text-gray-600">Grade ${s.grade}</td>
+      <td class="py-2 pr-4 text-gray-800 font-semibold">${days}</td>
+      <td class="py-2 pr-4 text-gray-600">${remaining}</td>
+      <td class="py-2"><span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-${color}-100 text-${color}-700">${pct}%</span></td>
+    </tr>`;
+  });
+
+  alerts.innerHTML = alertHtml;
+  cards.innerHTML = cardHtml;
+  table.innerHTML = `<table class="w-full text-sm"><thead><tr class="border-b"><th class="text-left py-2 pr-4 text-gray-500 font-medium">Student</th><th class="text-left py-2 pr-4 text-gray-500 font-medium">Grade</th><th class="text-left py-2 pr-4 text-gray-500 font-medium">Days Attended</th><th class="text-left py-2 pr-4 text-gray-500 font-medium">Days Needed</th><th class="text-left py-2 text-gray-500 font-medium">Progress</th></tr></thead><tbody>${tableRows}</tbody></table>`;
+}
+
+function countPresentDays(studentId) {
+  return allAttendance.filter(r =>
+    r.student_id === studentId &&
+    r.status === 'Present' &&
+    r.date >= SCHOOL_YEAR_START &&
+    r.date <= SCHOOL_YEAR_END
+  ).length;
+}
+
+function daysLeftInYear() {
+  const today = new Date();
+  const end = new Date(SCHOOL_YEAR_END);
+  const diff = Math.max(0, Math.round((end - today) / (1000 * 60 * 60 * 24)));
+  return diff;
+}
+
+// ============================================================
+// CALENDAR
+// ============================================================
+function renderCalendar() {
+  const label = document.getElementById('cal-month-label');
+  const grid = document.getElementById('cal-grid');
+  const d = new Date(calYear, calMonth, 1);
+  label.textContent = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const startDay = d.getDay();
+
+  // Build attendance lookup for this month
+  const lookup = {};
+  allAttendance.forEach(r => {
+    if (attFilter !== 'all' && r.student_id !== attFilter) return;
+    if (!lookup[r.date]) lookup[r.date] = { Present: 0, Absent: 0, 'Excused Absence': 0 };
+    lookup[r.date][r.status] = (lookup[r.date][r.status] || 0) + 1;
+  });
+
+  let html = '';
+  for (let i = 0; i < startDay; i++) html += `<div></div>`;
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const info = lookup[dateStr];
+    const today = new Date().toISOString().split('T')[0] === dateStr;
+    let bg = 'bg-gray-50 text-gray-400';
+    if (info) {
+      if (info.Present > 0) bg = 'bg-green-100 text-green-800 font-semibold';
+      else if (info['Excused Absence'] > 0) bg = 'bg-yellow-100 text-yellow-800';
+      else if (info.Absent > 0) bg = 'bg-red-100 text-red-800';
+    }
+    const ring = today ? 'ring-2 ring-blue-500' : '';
+    html += `<div class="cal-day flex items-center justify-center rounded-lg text-xs ${bg} ${ring} cursor-pointer hover:opacity-80" onclick="filterByDate('${dateStr}')">${day}</div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function calPrev() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
+function calNext() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
+
+function filterByDate(date) {
+  const records = allAttendance.filter(r => r.date === date);
+  if (records.length === 0) return;
+  const info = records.map(r => `${r.hs_students?.name}: ${r.status}${r.reason ? ' — ' + r.reason : ''}`).join('\n');
+  alert(`Attendance for ${date}:\n\n${info}`);
+}
+
+// ============================================================
+// ATTENDANCE LIST
+// ============================================================
+function renderAttendanceList() {
+  const el = document.getElementById('attendance-list');
+  const filtered = attFilter === 'all' ? allAttendance : allAttendance.filter(r => r.student_id === attFilter);
+  if (filtered.length === 0) { el.innerHTML = '<p class="text-gray-400 text-sm">No attendance records yet.</p>'; return; }
+
+  const byDate = {};
+  filtered.slice(0, 60).forEach(r => {
+    if (!byDate[r.date]) byDate[r.date] = [];
+    byDate[r.date].push(r);
+  });
+
+  el.innerHTML = Object.keys(byDate).sort((a, b) => b.localeCompare(a)).slice(0, 20).map(date => {
+    const recs = byDate[date];
+    return `<div class="border rounded-xl p-3">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-semibold text-gray-800 text-sm">${formatDate(date)}</span>
+        <button onclick="deleteAttendanceByDate('${date}')" class="text-xs text-red-400 hover:text-red-600">Delete</button>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        ${recs.map(r => {
+          const color = r.status === 'Present' ? 'green' : r.status === 'Excused Absence' ? 'yellow' : 'red';
+          return `<span class="px-2 py-0.5 bg-${color}-100 text-${color}-800 rounded-full text-xs">${r.hs_students?.name}: ${r.status}${r.reason ? ' (' + r.reason + ')' : ''}</span>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteAttendanceByDate(date) {
+  if (!confirm(`Delete all attendance records for ${date}?`)) return;
+  await db.from('hs_attendance').delete().eq('date', date).eq('user_id', currentUser.id);
+  await loadAttendance();
+  renderDashboard();
+  renderCalendar();
+  renderAttendanceList();
+}
+
+// ============================================================
+// SUBJECT LIST
+// ============================================================
+function renderSubjectList() {
+  const el = document.getElementById('subject-list');
+  const filtered = subFilter === 'all' ? allSubjects : allSubjects.filter(r => r.student_id === subFilter);
+  if (filtered.length === 0) { el.innerHTML = '<p class="text-gray-400 text-sm">No subject logs yet.</p>'; return; }
+
+  const byDate = {};
+  filtered.slice(0, 100).forEach(r => {
+    if (!byDate[r.date]) byDate[r.date] = [];
+    byDate[r.date].push(r);
+  });
+
+  el.innerHTML = Object.keys(byDate).sort((a, b) => b.localeCompare(a)).slice(0, 20).map(date => {
+    const recs = byDate[date];
+    return `<div class="bg-white border rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-semibold text-gray-800 text-sm">${formatDate(date)}</span>
+      </div>
+      <div class="space-y-2">
+        ${recs.map(r => `<div class="flex items-start gap-3 text-sm">
+          <span class="font-medium text-gray-700 min-w-[120px]">${r.hs_students?.name}</span>
+          <span class="text-gray-600">${r.subject}${r.ep_lesson ? ' — Lesson ' + r.ep_lesson : ''}${r.hours ? ' (' + r.hours + 'h)' : ''}${r.notes ? ' · ' + r.notes : ''}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// STUDENT PROFILES
+// ============================================================
+function renderStudentProfiles() {
+  const el = document.getElementById('student-profiles');
+  if (students.length === 0) {
+    el.innerHTML = '<div class="col-span-3 text-gray-400 text-sm">No students added yet. Click "Add Student" to get started.</div>';
+    return;
+  }
+  el.innerHTML = students.map(s => `
+    <div class="bg-white rounded-2xl shadow-sm border p-5">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <h3 class="font-bold text-gray-900 text-lg">${s.name}</h3>
+          <p class="text-gray-500 text-sm">Grade ${s.grade}${s.dob ? ' · DOB: ' + formatDate(s.dob) : ''}</p>
+        </div>
+        <button onclick="deleteStudent('${s.id}', '${s.name}')" class="text-gray-300 hover:text-red-500 text-sm">✕</button>
+      </div>
+      ${s.ep_courses ? `<div class="mb-3"><p class="text-xs text-gray-400 uppercase font-semibold mb-1">Easy Peasy Courses</p><p class="text-sm text-gray-600">${s.ep_courses}</p></div>` : ''}
+      ${s.immunization_notes ? `<div class="mb-3"><p class="text-xs text-gray-400 uppercase font-semibold mb-1">Immunization</p><p class="text-sm text-gray-600">${s.immunization_notes}</p></div>` : ''}
+      ${s.notes ? `<div><p class="text-xs text-gray-400 uppercase font-semibold mb-1">Notes</p><p class="text-sm text-gray-600">${s.notes}</p></div>` : ''}
+    </div>
+  `).join('');
+}
+
+function renderStudentFilterBtns() {
+  ['att-student-btns', 'sub-student-btns'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = students.map(s => `<button onclick="${id.startsWith('att') ? 'setAttFilter' : 'setSubFilter'}('${s.id}')" id="${id}-${s.id}" class="filter-btn bg-white text-gray-600 border rounded-full px-4 py-1.5 text-sm hover:bg-gray-50">${s.name}</button>`).join('');
+  });
+}
+
+function setAttFilter(id) {
+  attFilter = id;
+  document.getElementById('att-filter-all').className = 'filter-btn rounded-full px-4 py-1.5 text-sm ' + (id === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border');
+  students.forEach(s => {
+    const btn = document.getElementById('att-student-btns-' + s.id);
+    if (btn) btn.className = 'filter-btn rounded-full px-4 py-1.5 text-sm ' + (id === s.id ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border');
+  });
+  renderCalendar();
+  renderAttendanceList();
+}
+
+function setSubFilter(id) {
+  subFilter = id;
+  document.getElementById('sub-filter-all').className = 'filter-btn rounded-full px-4 py-1.5 text-sm ' + (id === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border');
+  students.forEach(s => {
+    const btn = document.getElementById('sub-student-btns-' + s.id);
+    if (btn) btn.className = 'filter-btn rounded-full px-4 py-1.5 text-sm ' + (id === s.id ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border');
+  });
+  renderSubjectList();
+}
+
+// ============================================================
+// ASSESSMENTS
+// ============================================================
+async function renderAssessments() {
+  const { data } = await db.from('hs_assessments').select('*, hs_students(name)').order('date', { ascending: false });
+  const el = document.getElementById('assessment-list');
+  if (!data || data.length === 0) { el.innerHTML = '<p class="text-gray-400 text-sm">No assessments logged yet.</p>'; return; }
+  el.innerHTML = data.map(a => `
+    <div class="bg-white border rounded-xl p-4">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-semibold text-gray-800">${a.hs_students?.name}</span>
+            <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs">${a.type}</span>
+          </div>
+          <p class="text-sm text-gray-600">${formatDate(a.date)}${a.results ? ' · ' + a.results : ''}${a.notes ? ' · ' + a.notes : ''}</p>
+        </div>
+        <button onclick="deleteAssessment('${a.id}')" class="text-gray-300 hover:text-red-500 text-sm">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteAssessment(id) {
+  if (!confirm('Delete this assessment?')) return;
+  await db.from('hs_assessments').delete().eq('id', id);
+  renderAssessments();
+}
+
+// ============================================================
+// DOCUMENTS
+// ============================================================
+async function renderDocuments() {
+  const { data } = await db.from('hs_documents').select('*, hs_students(name)').order('created_at', { ascending: false });
+  const el = document.getElementById('document-list');
+  if (!data || data.length === 0) { el.innerHTML = '<p class="text-gray-400 text-sm text-center py-4">No documents uploaded yet.</p>'; return; }
+  el.innerHTML = data.map(d => `
+    <div class="bg-white border rounded-xl p-4 flex items-center justify-between">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-lg">📄</span>
+          <span class="font-semibold text-gray-800 text-sm">${d.title}</span>
+          <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs">${d.doc_type}</span>
+          ${d.hs_students?.name ? `<span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">${d.hs_students.name}</span>` : ''}
+        </div>
+        ${d.notes ? `<p class="text-xs text-gray-400 ml-7">${d.notes}</p>` : ''}
+      </div>
+      <div class="flex items-center gap-3">
+        ${d.file_url ? `<a href="${d.file_url}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm">View</a>` : ''}
+        <button onclick="deleteDoc('${d.id}')" class="text-gray-300 hover:text-red-500 text-sm">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteDoc(id) {
+  if (!confirm('Delete this document?')) return;
+  await db.from('hs_documents').delete().eq('id', id);
+  renderDocuments();
+}
+
+// ============================================================
+// REPORTS
+// ============================================================
+function populateReportStudentSelect() {
+  const sel = document.getElementById('rpt-student');
+  sel.innerHTML = '<option value="all">All Students</option>' +
+    students.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+}
+
+async function generateReport() {
+  const studentId = document.getElementById('rpt-student').value;
+  const fromDate = document.getElementById('rpt-from').value;
+  const toDate = document.getElementById('rpt-to').value;
+
+  const studentsToReport = studentId === 'all' ? students : students.filter(s => s.id === studentId);
+
+  // Load fresh data for the range
+  const { data: attData } = await db.from('hs_attendance').select('*, hs_students(name)')
+    .gte('date', fromDate).lte('date', toDate)
+    .order('date');
+
+  const { data: subData } = await db.from('hs_subjects').select('*, hs_students(name)')
+    .gte('date', fromDate).lte('date', toDate)
+    .order('date');
+
+  const generatedAt = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  let html = `
+    <div class="print-header mb-8">
+      <div class="flex items-center justify-between border-b pb-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">NC Homeschool Attendance & Compliance Report</h1>
+          <p class="text-gray-500 mt-1">Report Period: ${formatDate(fromDate)} — ${formatDate(toDate)}</p>
+          <p class="text-gray-400 text-sm">Generated: ${generatedAt} · NC 180-Day Requirement</p>
+        </div>
+        <div class="text-4xl">🎓</div>
+      </div>
+    </div>
+  `;
+
+  studentsToReport.forEach(s => {
+    const attRecords = (attData || []).filter(r => r.student_id === s.id);
+    const subRecords = (subData || []).filter(r => r.student_id === s.id);
+
+    const presentDays = attRecords.filter(r => r.status === 'Present').length;
+    const absentDays = attRecords.filter(r => r.status === 'Absent').length;
+    const excusedDays = attRecords.filter(r => r.status === 'Excused Absence').length;
+    const totalYearDays = countPresentDays(s.id); // full year count
+    const pct = Math.min(100, Math.round((totalYearDays / REQUIRED_DAYS) * 100));
+
+    // Group subjects by date
+    const subByDate = {};
+    subRecords.forEach(r => {
+      if (!subByDate[r.date]) subByDate[r.date] = [];
+      subByDate[r.date].push(r);
+    });
+
+    html += `
+      <div class="mb-10 border rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold text-gray-900">${s.name} — Grade ${s.grade}</h2>
+          <span class="px-3 py-1 rounded-full text-sm font-semibold ${pct >= 100 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">${totalYearDays}/${REQUIRED_DAYS} days (${pct}%)</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-green-50 rounded-lg p-3 text-center">
+            <div class="text-2xl font-bold text-green-700">${presentDays}</div>
+            <div class="text-xs text-green-600 mt-0.5">Days Present (this period)</div>
+          </div>
+          <div class="bg-yellow-50 rounded-lg p-3 text-center">
+            <div class="text-2xl font-bold text-yellow-700">${excusedDays}</div>
+            <div class="text-xs text-yellow-600 mt-0.5">Excused Absences</div>
+          </div>
+          <div class="bg-red-50 rounded-lg p-3 text-center">
+            <div class="text-2xl font-bold text-red-700">${absentDays}</div>
+            <div class="text-xs text-red-600 mt-0.5">Unexcused Absences</div>
+          </div>
+        </div>
+
+        <h3 class="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">Attendance Record</h3>
+        <table class="w-full text-sm mb-6 border-collapse">
+          <thead><tr class="bg-gray-50">
+            <th class="text-left p-2 border font-medium text-gray-600">Date</th>
+            <th class="text-left p-2 border font-medium text-gray-600">Status</th>
+            <th class="text-left p-2 border font-medium text-gray-600">Reason</th>
+          </tr></thead>
+          <tbody>
+            ${attRecords.map(r => `<tr>
+              <td class="p-2 border text-gray-700">${formatDate(r.date)}</td>
+              <td class="p-2 border"><span class="px-1.5 rounded text-xs ${r.status === 'Present' ? 'bg-green-100 text-green-700' : r.status === 'Excused Absence' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}">${r.status}</span></td>
+              <td class="p-2 border text-gray-500">${r.reason || ''}</td>
+            </tr>`).join('') || '<tr><td colspan="3" class="p-2 border text-gray-400 text-center">No records in this date range.</td></tr>'}
+          </tbody>
+        </table>
+
+      </div>
+    `;
+  });
+
+  html += `<p class="text-xs text-gray-400 mt-6 text-center">NC Homeschool Tracker · Annual requirement: ${REQUIRED_DAYS} days per G.S. 115C-563 · Report generated ${generatedAt}</p>`;
+
+  document.getElementById('report-output').innerHTML = html;
+}
+
+// ============================================================
+// MODALS
+// ============================================================
+function openModal(html) {
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal-backdrop').classList.remove('hidden');
+}
+function closeModal() {
+  document.getElementById('modal-backdrop').classList.add('hidden');
+}
+document.getElementById('modal-backdrop').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-backdrop')) closeModal();
+});
+
+// --- ATTENDANCE MODAL ---
+function openAttendanceModal(prefillDate = '') {
+  const today = prefillDate || new Date().toISOString().split('T')[0];
+  const studentOptions = students.map(s => `<option value="${s.id}">${s.name} (Grade ${s.grade})</option>`).join('');
+  if (students.length === 0) { alert('Please add students first.'); showTab('students'); return; }
+
+  openModal(`
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Log Attendance</h2>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Date *</label>
+        <input type="date" id="att-date" value="${today}" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <p class="text-xs text-gray-400">Log for each student individually or use the quick buttons below.</p>
+      <div id="att-student-rows" class="space-y-3">
+        ${students.map(s => `
+          <div class="border rounded-xl p-3">
+            <div class="font-medium text-gray-800 mb-2 text-sm">${s.name}</div>
+            <div class="flex gap-2 mb-2 flex-wrap">
+              <button onclick="setStatus('${s.id}','Present')" id="btn-${s.id}-Present" class="status-btn px-3 py-1 text-xs rounded-full border border-green-300 text-green-700 hover:bg-green-50">✓ Present</button>
+              <button onclick="setStatus('${s.id}','Absent')" id="btn-${s.id}-Absent" class="status-btn px-3 py-1 text-xs rounded-full border border-red-300 text-red-700 hover:bg-red-50">✗ Absent</button>
+              <button onclick="setStatus('${s.id}','Excused Absence')" id="btn-${s.id}-Excused Absence" class="status-btn px-3 py-1 text-xs rounded-full border border-yellow-300 text-yellow-700 hover:bg-yellow-50">~ Excused</button>
+            </div>
+            <input type="hidden" id="status-${s.id}" value="" />
+            <input type="text" id="reason-${s.id}" placeholder="Reason (optional)" class="w-full border rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-blue-400" />
+          </div>`).join('')}
+      </div>
+      <div id="att-modal-error" class="hidden text-red-600 text-sm"></div>
+      <button onclick="saveAttendance()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-semibold hover:bg-blue-700 transition text-sm mt-2">Save Attendance</button>
+    </div>
+  `);
+}
+
+let pendingStatuses = {};
+
+function setStatus(studentId, status) {
+  pendingStatuses[studentId] = status;
+  document.getElementById('status-' + studentId).value = status;
+  ['Present', 'Absent', 'Excused Absence'].forEach(s => {
+    const btn = document.getElementById(`btn-${studentId}-${s}`);
+    if (!btn) return;
+    btn.className = s === status
+      ? 'status-btn px-3 py-1 text-xs rounded-full ' + (s === 'Present' ? 'bg-green-500 text-white' : s === 'Absent' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white')
+      : 'status-btn px-3 py-1 text-xs rounded-full border ' + (s === 'Present' ? 'border-green-300 text-green-700' : s === 'Absent' ? 'border-red-300 text-red-700' : 'border-yellow-300 text-yellow-700') + ' hover:opacity-80';
+  });
+}
+
+async function saveAttendance() {
+  const date = document.getElementById('att-date').value;
+  if (!date) { document.getElementById('att-modal-error').textContent = 'Please select a date.'; document.getElementById('att-modal-error').classList.remove('hidden'); return; }
+
+  const records = students.map(s => ({
+    student_id: s.id,
+    status: document.getElementById('status-' + s.id)?.value || null,
+    reason: document.getElementById('reason-' + s.id)?.value || null,
+  })).filter(r => r.status);
+
+  if (records.length === 0) { document.getElementById('att-modal-error').textContent = 'Please select a status for at least one student.'; document.getElementById('att-modal-error').classList.remove('hidden'); return; }
+
+  // Delete existing records for this date for these students, then insert
+  for (const r of records) {
+    await db.from('hs_attendance').delete().eq('student_id', r.student_id).eq('date', date);
+    await db.from('hs_attendance').insert({ ...r, date, user_id: currentUser.id });
+  }
+
+  closeModal();
+  pendingStatuses = {};
+  await loadAttendance();
+  renderDashboard();
+  renderCalendar();
+  renderAttendanceList();
+}
+
+// --- SUBJECT MODAL ---
+function openSubjectModal() {
+  if (students.length === 0) { alert('Please add students first.'); showTab('students'); return; }
+  const today = new Date().toISOString().split('T')[0];
+  const courseOpts = EASY_PEASY_COURSES.map(c => `<option value="${c}">${c}</option>`).join('');
+
+  openModal(`
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Log Subject</h2>
+    <div class="space-y-3">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Student *</label>
+          <select id="sub-student" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            ${students.map(s => `<option value="${s.id}">${s.name}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Date *</label>
+          <input type="date" id="sub-date" value="${today}" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Easy Peasy Course / Subject *</label>
+        <select id="sub-course" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          ${courseOpts}
+        </select>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Lesson # (if EP)</label>
+          <input type="text" id="sub-lesson" placeholder="e.g. Day 45" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Hours</label>
+          <input type="number" id="sub-hours" placeholder="1.5" step="0.25" min="0" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Notes</label>
+        <textarea id="sub-notes" placeholder="What was covered, observations..." rows="2" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+      </div>
+      <div id="sub-modal-error" class="hidden text-red-600 text-sm"></div>
+      <div class="flex gap-2">
+        <button onclick="saveSubject(false)" class="flex-1 bg-blue-600 text-white rounded-xl py-2.5 font-semibold hover:bg-blue-700 transition text-sm">Save</button>
+        <button onclick="saveSubject(true)" class="flex-1 bg-blue-100 text-blue-700 rounded-xl py-2.5 font-semibold hover:bg-blue-200 transition text-sm">Save + Add Another</button>
+      </div>
+    </div>
+  `);
+}
+
+async function saveSubject(addAnother = false) {
+  const studentId = document.getElementById('sub-student').value;
+  const date = document.getElementById('sub-date').value;
+  const subject = document.getElementById('sub-course').value;
+  const lesson = document.getElementById('sub-lesson').value;
+  const hours = document.getElementById('sub-hours').value;
+  const notes = document.getElementById('sub-notes').value;
+
+  if (!date || !subject) { document.getElementById('sub-modal-error').textContent = 'Date and subject are required.'; document.getElementById('sub-modal-error').classList.remove('hidden'); return; }
+
+  const { error } = await db.from('hs_subjects').insert({
+    student_id: studentId, date, subject, ep_lesson: lesson || null,
+    hours: hours ? parseFloat(hours) : null, notes: notes || null, user_id: currentUser.id
+  });
+
+  if (error) { document.getElementById('sub-modal-error').textContent = error.message; document.getElementById('sub-modal-error').classList.remove('hidden'); return; }
+
+  await loadSubjects();
+  renderSubjectList();
+
+  if (addAnother) {
+    const currentDate = document.getElementById('sub-date').value;
+    const currentStudent = document.getElementById('sub-student').value;
+    openSubjectModal();
+    document.getElementById('sub-date').value = currentDate;
+    document.getElementById('sub-student').value = currentStudent;
+  } else {
+    closeModal();
+  }
+}
+
+// --- STUDENT MODAL ---
+function openStudentModal() {
+  const grades = Array.from({length: 12}, (_, i) => `<option value="${i+1}" ${i+1===11?'selected':''}>${i+1}${['st','nd','rd'][i]||'th'} Grade</option>`).join('');
+  openModal(`
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Add Student</h2>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Full Name *</label>
+        <input type="text" id="stu-name" placeholder="Student name" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Grade *</label>
+          <select id="stu-grade" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">${grades}</select>
+        </div>
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Date of Birth</label>
+          <input type="date" id="stu-dob" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Easy Peasy Courses Enrolled</label>
+        <textarea id="stu-ep" placeholder="e.g. EP All-in-One Level 8, EP High School..." rows="2" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Immunization Status</label>
+        <input type="text" id="stu-immun" placeholder="e.g. Records on file / Religious exemption filed" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Additional Notes</label>
+        <input type="text" id="stu-notes" placeholder="IEP, special needs, graduation plan..." class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div id="stu-modal-error" class="hidden text-red-600 text-sm"></div>
+      <button onclick="saveStudent()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-semibold hover:bg-blue-700 transition text-sm">Add Student</button>
+    </div>
+  `);
+}
+
+async function saveStudent() {
+  const name = document.getElementById('stu-name').value.trim();
+  const grade = document.getElementById('stu-grade').value;
+  if (!name) { document.getElementById('stu-modal-error').textContent = 'Name is required.'; document.getElementById('stu-modal-error').classList.remove('hidden'); return; }
+
+  const { error } = await db.from('hs_students').insert({
+    name, grade: parseInt(grade),
+    dob: document.getElementById('stu-dob').value || null,
+    ep_courses: document.getElementById('stu-ep').value || null,
+    immunization_notes: document.getElementById('stu-immun').value || null,
+    notes: document.getElementById('stu-notes').value || null,
+    user_id: currentUser.id,
+  });
+
+  if (error) { document.getElementById('stu-modal-error').textContent = error.message; document.getElementById('stu-modal-error').classList.remove('hidden'); return; }
+  closeModal();
+  await loadStudents();
+  renderStudentProfiles();
+  renderDashboard();
+  populateReportStudentSelect();
+}
+
+async function deleteStudent(id, name) {
+  if (!confirm(`Delete ${name} and all their records? This cannot be undone.`)) return;
+  await db.from('hs_attendance').delete().eq('student_id', id);
+  await db.from('hs_subjects').delete().eq('student_id', id);
+  await db.from('hs_assessments').delete().eq('student_id', id);
+  await db.from('hs_students').delete().eq('id', id);
+  await loadAll();
+}
+
+// --- ASSESSMENT MODAL ---
+function openAssessmentModal() {
+  if (students.length === 0) { alert('Please add students first.'); return; }
+  const today = new Date().toISOString().split('T')[0];
+  openModal(`
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Log Assessment</h2>
+    <div class="space-y-3">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Student *</label>
+          <select id="ass-student" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            ${students.map(s => `<option value="${s.id}">${s.name}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Date *</label>
+          <input type="date" id="ass-date" value="${today}" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Assessment Type *</label>
+        <select id="ass-type" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option>Standardized Test</option>
+          <option>Teacher Evaluation</option>
+          <option>Portfolio Review</option>
+          <option>Subject Quiz / Test</option>
+          <option>Annual Assessment</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Results / Score</label>
+        <input type="text" id="ass-results" placeholder="e.g. 87th percentile, Pass, A+" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Notes</label>
+        <textarea id="ass-notes" placeholder="Additional context..." rows="2" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+      </div>
+      <div id="ass-modal-error" class="hidden text-red-600 text-sm"></div>
+      <button onclick="saveAssessment()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-semibold hover:bg-blue-700 transition text-sm">Save Assessment</button>
+    </div>
+  `);
+}
+
+async function saveAssessment() {
+  const studentId = document.getElementById('ass-student').value;
+  const date = document.getElementById('ass-date').value;
+  const type = document.getElementById('ass-type').value;
+  const results = document.getElementById('ass-results').value;
+  const notes = document.getElementById('ass-notes').value;
+
+  if (!date) { document.getElementById('ass-modal-error').textContent = 'Date is required.'; document.getElementById('ass-modal-error').classList.remove('hidden'); return; }
+
+  const { error } = await db.from('hs_assessments').insert({ student_id: studentId, date, type, results: results || null, notes: notes || null, user_id: currentUser.id });
+  if (error) { document.getElementById('ass-modal-error').textContent = error.message; document.getElementById('ass-modal-error').classList.remove('hidden'); return; }
+  closeModal();
+  renderAssessments();
+}
+
+// --- DOCUMENT MODAL ---
+function openDocModal() {
+  const docTypeOpts = DOC_TYPES.map(t => `<option>${t}</option>`).join('');
+  const studentOpts = '<option value="">— General (not student-specific) —</option>' + students.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+  openModal(`
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Upload Document</h2>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Document Title *</label>
+        <input type="text" id="doc-title" placeholder="e.g. NC Intent to Homeschool 2025-26" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Document Type</label>
+          <select id="doc-type" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">${docTypeOpts}</select>
+        </div>
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">Student (if applicable)</label>
+          <select id="doc-student" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">${studentOpts}</select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">File URL (Google Drive, Dropbox link, etc.)</label>
+        <input type="url" id="doc-url" placeholder="https://drive.google.com/..." class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <p class="text-xs text-gray-400 mt-1">Tip: Upload to Google Drive, get a shareable link, paste it here.</p>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-600 mb-1">Notes</label>
+        <input type="text" id="doc-notes" placeholder="Filed date, expiration, etc." class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div id="doc-modal-error" class="hidden text-red-600 text-sm"></div>
+      <button onclick="saveDoc()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-semibold hover:bg-blue-700 transition text-sm">Save Document</button>
+    </div>
+  `);
+}
+
+async function saveDoc() {
+  const title = document.getElementById('doc-title').value.trim();
+  const docType = document.getElementById('doc-type').value;
+  const studentId = document.getElementById('doc-student').value || null;
+  const fileUrl = document.getElementById('doc-url').value || null;
+  const notes = document.getElementById('doc-notes').value || null;
+
+  if (!title) { document.getElementById('doc-modal-error').textContent = 'Title is required.'; document.getElementById('doc-modal-error').classList.remove('hidden'); return; }
+
+  const { error } = await db.from('hs_documents').insert({ title, doc_type: docType, student_id: studentId, file_url: fileUrl, notes, user_id: currentUser.id });
+  if (error) { document.getElementById('doc-modal-error').textContent = error.message; document.getElementById('doc-modal-error').classList.remove('hidden'); return; }
+  closeModal();
+  renderDocuments();
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-');
+  return new Date(+y, +m - 1, +d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+</script>
+</body>
+</html>
