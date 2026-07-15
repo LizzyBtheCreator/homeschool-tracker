@@ -29,12 +29,16 @@ export default function PlacementQuiz() {
   const supabase = createClient()
 
   const subjectInfo = SUBJECTS.find(s => s.key === subject)
-  const rawQuestions = PLACEMENT_QUESTIONS[subject] || []
   const [questions, setQuestions] = useState<ShuffledQuestion[]>([])
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    setQuestions(rawQuestions.map(shuffleQuestion))
+    const saved = typeof window !== 'undefined' ? sessionStorage.getItem('activeStudent') : null
+    const grade: number = saved ? (JSON.parse(saved).grade ?? 4) : 4
+    // Only show questions at or near the student's level (2 grades below, up to grade 12)
+    const minGrade = Math.max(4, grade - 2)
+    const filtered = (PLACEMENT_QUESTIONS[subject] || []).filter(q => q.grade >= minGrade)
+    setQuestions(filtered.map(shuffleQuestion))
     setReady(true)
   }, [subject])
 
