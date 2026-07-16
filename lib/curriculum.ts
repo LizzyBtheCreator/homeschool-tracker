@@ -3096,214 +3096,222 @@ The conclusion is your last impression on the reader. Make it count.`
   },
   // ── MATH GRADE 12 ───────────────────────────────────────────────────────────
   {
-    id: 'math-12-1',
-    subject: 'math', grade: 12, lessonNumber: 1,
+    id: 'math-12-1', subject: 'math', grade: 12, lessonNumber: 1,
     title: 'Limits and Continuity',
+    intro: "Welcome to 12th grade math, Elizah! We're diving into calculus — one of the most powerful tools in all of mathematics. Let's build the foundation.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'A **limit** describes what a function approaches as x gets close to a value — not necessarily what it equals there. We write: lim(x→a) f(x) = L.\n\nA function is **continuous** at x = a if: the function is defined there, the limit exists, and they are equal.' },
-      { type: 'learn', content: '**One-sided limits:** lim(x→a⁻) means approaching from the left; lim(x→a⁺) from the right. If both sides equal the same value, the two-sided limit exists.' },
-      { type: 'learn', content: '**Evaluating limits:** For polynomials, just substitute. For 0/0 forms, factor and cancel first.\n\nExample: lim(x→2) (x²−4)/(x−2) = lim(x→2) (x+2) = 4' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'math-12-1-q1', grade: 12, question: 'What does lim(x→3) (x²−9)/(x−3) equal?', options: ['0', '3', '6', 'undefined'], answer: 2, explanation: 'Factor: (x²−9)/(x−3) = (x+3). At x=3: 3+3 = 6.' },
-          { type: 'multiple-choice', id: 'math-12-1-q2', grade: 12, question: 'A function is continuous at x = a if:', options: ['f(a) is defined only', 'The limit exists only', 'f(a) equals the limit and both exist', 'The graph has no sharp corners'], answer: 2, explanation: 'Continuity requires f(a) defined, the limit exists, and f(a) = the limit.' },
-          { type: 'multiple-choice', id: 'math-12-1-q3', grade: 12, question: 'lim(x→0) (sin x)/x =', options: ['0', '1', 'undefined', '∞'], answer: 1, explanation: 'This is a fundamental limit in calculus: lim(x→0) sin(x)/x = 1.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'What is a limit?', content: 'A **limit** describes what a function approaches as x gets close to a value — not necessarily what it equals there.\n\nWe write: lim(x→a) f(x) = L\n\nA function is **continuous** at x = a if: the function is defined there, the limit exists, and they are equal.' },
+      { type: 'example', heading: 'Evaluating a limit', content: 'Find lim(x→2) (x² − 4)/(x − 2)\n\nDirect substitution gives 0/0 — try factoring first:\n(x² − 4)/(x − 2) = (x + 2)(x − 2)/(x − 2) = (x + 2)\n\nNow substitute: 2 + 2 = **4**\n\nlim(x→2) (x² − 4)/(x − 2) = 4' },
+      { type: 'tip', heading: 'Famous limit', content: 'lim(x→0) (sin x)/x = 1\n\nThis comes up constantly in calculus. You cannot just substitute (gives 0/0) — this result is proven using geometry.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'math-12-1-p1', grade: 12, question: 'lim(x→3) (x² − 9)/(x − 3) = ?', options: ['0', '3', '6', 'undefined'], answer: 2, explanation: 'Factor: (x+3)(x−3)/(x−3) = x+3. At x=3: 6.' },
+      { type: 'multiple-choice', id: 'math-12-1-p2', grade: 12, question: 'A function is continuous at x = a when:', options: ['f(a) is defined only', 'The limit exists only', 'f(a) equals the limit and both exist', 'The graph has no corners'], answer: 2, explanation: 'All three conditions must hold: f(a) defined, limit exists, and f(a) equals the limit.' },
+      { type: 'multiple-choice', id: 'math-12-1-p3', grade: 12, question: 'lim(x→0) (sin x)/x = ?', options: ['0', '1', 'undefined', '∞'], answer: 1, explanation: 'This is a fundamental calculus limit: lim(x→0) sin(x)/x = 1.' },
+    ],
   },
   {
-    id: 'math-12-2',
-    subject: 'math', grade: 12, lessonNumber: 2,
+    id: 'math-12-2', subject: 'math', grade: 12, lessonNumber: 2,
     title: 'Introduction to Derivatives',
+    intro: "Great work on limits! Now we use them to build the derivative — the tool that measures how fast things change.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'The **derivative** measures the rate of change of a function. It gives the slope of the tangent line at any point.\n\nf\'(x) = lim(h→0) [f(x+h) − f(x)] / h' },
-      { type: 'learn', content: '**Basic derivative rules:**\n- Power rule: d/dx[xⁿ] = nxⁿ⁻¹\n- Constant rule: d/dx[c] = 0\n- Sum rule: d/dx[f+g] = f\' + g\'\n\nExamples: d/dx[x³] = 3x² &nbsp;&nbsp; d/dx[5x²] = 10x' },
-      { type: 'learn', content: '**Interpreting derivatives:** If f(x) = position, then f\'(x) = velocity. If f\'(x) > 0, the function is increasing. If f\'(x) < 0, it is decreasing. f\'(x) = 0 at peaks and valleys.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'math-12-2-q1', grade: 12, question: 'Using the power rule, what is d/dx[x⁵]?', options: ['x⁴', '5x⁴', '5x⁵', '4x⁵'], answer: 1, explanation: 'Power rule: bring down the exponent, subtract 1. d/dx[x⁵] = 5x⁴.' },
-          { type: 'multiple-choice', id: 'math-12-2-q2', grade: 12, question: 'If f\'(x) = 0 at a point, what does that tell us?', options: ['f(x) = 0 there', 'The function is undefined', 'It could be a peak or valley', 'The function is increasing'], answer: 2, explanation: 'f\'(x) = 0 means the slope is flat — a possible maximum, minimum, or inflection point.' },
-          { type: 'multiple-choice', id: 'math-12-2-q3', grade: 12, question: 'What is d/dx[3x² + 2x − 7]?', options: ['3x + 2', '6x + 2', '6x + 2 − 7', '6x'], answer: 1, explanation: 'd/dx[3x²] = 6x, d/dx[2x] = 2, d/dx[−7] = 0. Sum: 6x + 2.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'What is a derivative?', content: 'The **derivative** measures the rate of change of a function. It gives the slope of the tangent line at any point.\n\nf\'(x) = lim(h→0) [f(x+h) − f(x)] / h' },
+      { type: 'example', heading: 'Power rule', content: 'The power rule makes derivatives fast:\n\nd/dx[xⁿ] = nxⁿ⁻¹\n\nExamples:\n• d/dx[x³] = 3x²\n• d/dx[5x²] = 10x\n• d/dx[7] = 0 (constants disappear)' },
+      { type: 'tip', heading: 'What derivatives tell you', content: 'If f\'(x) > 0 → function is **increasing**\nIf f\'(x) < 0 → function is **decreasing**\nIf f\'(x) = 0 → possible peak or valley (critical point)' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'math-12-2-p1', grade: 12, question: 'd/dx[x⁵] = ?', options: ['x⁴', '5x⁴', '5x⁵', '4x⁵'], answer: 1, explanation: 'Power rule: bring down exponent, subtract 1. 5x⁴.' },
+      { type: 'fill-blank', id: 'math-12-2-p2', grade: 12, question: 'd/dx[3x² + 2x − 7] = ?', answer: '6x + 2', hint: 'Apply power rule to each term. Constants vanish.', explanation: 'd/dx[3x²]=6x, d/dx[2x]=2, d/dx[−7]=0. Answer: 6x + 2.' },
+      { type: 'multiple-choice', id: 'math-12-2-p3', grade: 12, question: "If f'(x) = 0 at a point, that point is a:", options: ['Zero of f', 'Critical point (possible max/min)', 'Discontinuity', 'Vertical asymptote'], answer: 1, explanation: "f'(x) = 0 means the slope is flat — a candidate for a maximum, minimum, or inflection point." },
+    ],
   },
   {
-    id: 'math-12-3',
-    subject: 'math', grade: 12, lessonNumber: 3,
+    id: 'math-12-3', subject: 'math', grade: 12, lessonNumber: 3,
     title: 'Introduction to Integrals',
+    intro: "Derivatives measure change. Integrals accumulate it. Together they form the heart of calculus.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'An **integral** is the reverse of a derivative. It finds the area under a curve or the accumulated total of a rate.\n\n∫f(x)dx — the antiderivative of f(x).' },
-      { type: 'learn', content: '**Basic integral rules:**\n- Power rule: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C\n- Constant: ∫c dx = cx + C\n\nThe "+C" is the constant of integration — needed for indefinite integrals.' },
-      { type: 'learn', content: '**Definite integrals** have bounds and give a number (the area):\n∫[a to b] f(x) dx = F(b) − F(a)\n\nwhere F is the antiderivative of f. This is the Fundamental Theorem of Calculus.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'math-12-3-q1', grade: 12, question: 'What is ∫x³ dx?', options: ['3x²', 'x⁴ + C', 'x⁴/4 + C', '4x⁴ + C'], answer: 2, explanation: '∫xⁿ dx = xⁿ⁺¹/(n+1) + C. So ∫x³ dx = x⁴/4 + C.' },
-          { type: 'multiple-choice', id: 'math-12-3-q2', grade: 12, question: 'Why do we add "+C" in indefinite integrals?', options: ['To make the answer larger', 'Because the constant\'s derivative is 0, so it gets lost', 'It represents the area', 'It is a calculation error'], answer: 1, explanation: 'Any constant has a derivative of 0, so when reversing differentiation we must account for any possible constant.' },
-          { type: 'multiple-choice', id: 'math-12-3-q3', grade: 12, question: 'The Fundamental Theorem of Calculus connects:', options: ['Algebra and geometry', 'Derivatives and integrals', 'Limits and sequences', 'Sine and cosine'], answer: 1, explanation: 'It states that differentiation and integration are inverse operations.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'What is an integral?', content: 'An **integral** is the reverse of a derivative — it finds the accumulated total (or area under a curve).\n\n∫f(x)dx = antiderivative of f(x)\n\nPower rule for integrals: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C' },
+      { type: 'example', heading: 'Indefinite integral example', content: '∫x³ dx\n\nAdd 1 to exponent, divide by new exponent:\n= x⁴/4 + C\n\nThe "+C" is the constant of integration — any constant\'s derivative is 0, so it gets lost when differentiating.' },
+      { type: 'explain', heading: 'Definite integrals', content: 'A **definite integral** has bounds and gives a number (the area between the curve and x-axis):\n\n∫[a to b] f(x) dx = F(b) − F(a)\n\nwhere F is the antiderivative. This is the **Fundamental Theorem of Calculus** — it connects derivatives and integrals.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'math-12-3-p1', grade: 12, question: '∫x³ dx = ?', options: ['3x²', 'x⁴ + C', 'x⁴/4 + C', '4x⁴ + C'], answer: 2, explanation: '∫xⁿ dx = xⁿ⁺¹/(n+1) + C → x⁴/4 + C.' },
+      { type: 'multiple-choice', id: 'math-12-3-p2', grade: 12, question: 'Why do we write "+C" in indefinite integrals?', options: ['To make the answer bigger', 'Constants have zero derivative so they are lost when differentiating', 'It represents area', 'It is an error term'], answer: 1, explanation: 'Any constant disappears when you differentiate, so we must account for it when integrating.' },
+      { type: 'multiple-choice', id: 'math-12-3-p3', grade: 12, question: 'The Fundamental Theorem of Calculus states that differentiation and integration are:', options: ['Unrelated', 'Inverse operations', 'Only useful in physics', 'The same operation'], answer: 1, explanation: 'The FTC connects derivatives and integrals as inverse processes.' },
+    ],
   },
   // ── ELA GRADE 12 ────────────────────────────────────────────────────────────
   {
-    id: 'ela-12-1',
-    subject: 'ela', grade: 12, lessonNumber: 1,
+    id: 'ela-12-1', subject: 'ela', grade: 12, lessonNumber: 1,
     title: 'Rhetoric: Ethos, Pathos, Logos',
+    intro: "Every persuasive text — speech, ad, essay, or news article — uses these three tools. Learning to spot them makes you a sharper reader and a stronger writer.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: '**Rhetoric** is the art of persuasion. Aristotle identified three modes:\n\n- **Ethos** — credibility and character of the speaker\n- **Pathos** — emotional appeal to the audience\n- **Logos** — logical argument using facts and reasoning' },
-      { type: 'learn', content: '**Ethos** example: "As a 20-year surgeon, I recommend…" — the expertise builds trust.\n\n**Pathos** example: A charity ad showing suffering children — designed to move you emotionally.\n\n**Logos** example: "Studies show 90% of participants improved" — data-driven reasoning.' },
-      { type: 'learn', content: 'Strong arguments often use all three. Recognizing these appeals helps you analyze texts critically and write more persuasive essays. Ask: Is the author credible? Do they appeal to emotion? Is the logic sound?' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'ela-12-1-q1', grade: 12, question: 'A politician says "I grew up in poverty, so I understand your struggles." Which appeal is this?', options: ['Logos', 'Pathos', 'Ethos', 'None'], answer: 2, explanation: 'Sharing personal experience to establish credibility and connection is ethos.' },
-          { type: 'multiple-choice', id: 'ela-12-1-q2', grade: 12, question: 'An ad uses statistics to show a product works 95% of the time. This is:', options: ['Ethos', 'Pathos', 'Logos', 'Fallacy'], answer: 2, explanation: 'Data and statistics appeal to logic — that is logos.' },
-          { type: 'multiple-choice', id: 'ela-12-1-q3', grade: 12, question: 'Which best describes pathos?', options: ['Citing expert sources', 'Using data to prove a point', 'Appealing to the audience\'s emotions', 'Showing personal credentials'], answer: 2, explanation: 'Pathos targets feelings — fear, hope, sadness, pride — to persuade.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'The three rhetorical appeals', content: 'Aristotle identified three modes of persuasion:\n\n**Ethos** — credibility of the speaker ("As a doctor of 20 years…")\n**Pathos** — emotional appeal to the audience (images of suffering, inspiring stories)\n**Logos** — logical argument using facts, data, and reasoning ("Studies show 90% improved…")' },
+      { type: 'example', heading: 'Spotting appeals in the wild', content: 'A politician says: "I grew up in poverty. I know what it\'s like to struggle. And the data shows my policy reduced unemployment by 12%."\n\n→ "grew up in poverty" = **Ethos** (personal credibility)\n→ "I know what it\'s like" = **Pathos** (emotional connection)\n→ "data shows... 12%" = **Logos** (evidence)' },
+      { type: 'tip', heading: 'Strong arguments use all three', content: 'The most persuasive writing combines all three appeals. When analyzing a text, ask:\n• Is the author credible? (Ethos)\n• Do they appeal to my emotions? (Pathos)\n• Is the logic sound? (Logos)' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'ela-12-1-p1', grade: 12, question: '"Studies show this medication reduces pain in 94% of patients." This is:', options: ['Ethos', 'Pathos', 'Logos', 'None'], answer: 2, explanation: 'Data and statistics appeal to logic — that is logos.' },
+      { type: 'multiple-choice', id: 'ela-12-1-p2', grade: 12, question: 'A charity ad shows a child crying in a refugee camp. This primarily uses:', options: ['Logos', 'Ethos', 'Pathos', 'Synthesis'], answer: 2, explanation: 'Images designed to make you feel sad or moved are pathos — emotional appeal.' },
+      { type: 'multiple-choice', id: 'ela-12-1-p3', grade: 12, question: '"As a 30-year veteran teacher, I recommend this curriculum." This is:', options: ['Pathos', 'Logos', 'Ethos', 'Fallacy'], answer: 2, explanation: 'Citing expertise and experience to build trust is ethos.' },
+    ],
   },
   {
-    id: 'ela-12-2',
-    subject: 'ela', grade: 12, lessonNumber: 2,
-    title: 'Analyzing Complex Texts',
+    id: 'ela-12-2', subject: 'ela', grade: 12, lessonNumber: 2,
+    title: 'Close Reading and Synthesis',
+    intro: "Reading at the college level means going beyond what a text says — to how and why it says it, and how it connects to other texts.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: '**Close reading** means analyzing a text carefully for meaning beyond the surface. Ask: What does the author really mean? What is left unsaid? What assumptions are being made?' },
-      { type: 'learn', content: 'Key analytical tools:\n- **Tone:** the author\'s attitude (ironic, sincere, urgent, detached)\n- **Diction:** word choice and its effect\n- **Syntax:** sentence structure and its rhythm\n- **Subtext:** meaning implied but not stated' },
-      { type: 'learn', content: '**Synthesis** means combining multiple sources to build your own argument. You don\'t just summarize — you find connections, tensions, and themes across texts and explain what they mean together.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'ela-12-2-q1', grade: 12, question: 'An author describes a war as "a glorious adventure." The soldiers clearly suffer. This gap is called:', options: ['Metaphor', 'Verbal irony', 'Hyperbole', 'Alliteration'], answer: 1, explanation: 'When words mean the opposite of their literal meaning, especially to highlight contradiction, that is verbal irony.' },
-          { type: 'multiple-choice', id: 'ela-12-2-q2', grade: 12, question: 'What does synthesis in writing require?', options: ['Summarizing one source thoroughly', 'Quoting as many sources as possible', 'Connecting ideas from multiple sources to support your own argument', 'Paraphrasing everything'], answer: 2, explanation: 'Synthesis means drawing on multiple sources to develop and support your own original argument.' },
-          { type: 'multiple-choice', id: 'ela-12-2-q3', grade: 12, question: 'Diction refers to:', options: ['The plot of a story', 'An author\'s choice and use of words', 'The physical setting', 'Sentence length'], answer: 1, explanation: 'Diction is word choice — authors select words carefully to create tone, mood, and meaning.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'Close reading tools', content: 'When reading closely, analyze:\n\n**Tone** — the author\'s attitude (ironic, urgent, detached, sincere)\n**Diction** — specific word choices and their effect\n**Syntax** — sentence structure and rhythm\n**Subtext** — meaning implied but not directly stated' },
+      { type: 'example', heading: 'Verbal irony in action', content: 'An author describes war as "a glorious adventure" while the soldiers are clearly suffering and dying.\n\nThe gap between the words and reality = **verbal irony**. The author uses it to criticize those who romanticize war without experiencing it.' },
+      { type: 'explain', heading: 'What is synthesis?', content: '**Synthesis** means pulling ideas from multiple sources to build your own argument — not just summarizing each source separately.\n\nYou find: connections, tensions, patterns, and themes across texts — then explain what they mean together.\n\nThis is the core skill of college writing.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'ela-12-2-p1', grade: 12, question: 'Diction refers to:', options: ['The plot of a story', "An author's word choices and their effect", 'The physical setting', 'Sentence length'], answer: 1, explanation: 'Diction is word choice — authors select words deliberately to shape tone, meaning, and feeling.' },
+      { type: 'multiple-choice', id: 'ela-12-2-p2', grade: 12, question: 'Synthesis in writing requires:', options: ['Summarizing one source thoroughly', 'Quoting as many sources as possible', 'Connecting ideas from multiple sources to support your own argument', 'Paraphrasing everything'], answer: 2, explanation: 'Synthesis integrates multiple sources into a cohesive argument that is yours.' },
+      { type: 'multiple-choice', id: 'ela-12-2-p3', grade: 12, question: 'When an author says the opposite of what they mean to make a point, that is:', options: ['Metaphor', 'Verbal irony', 'Hyperbole', 'Alliteration'], answer: 1, explanation: 'Verbal irony = saying one thing but meaning another, often to highlight contradiction or absurdity.' },
+    ],
   },
   // ── SCIENCE GRADE 12 ────────────────────────────────────────────────────────
   {
-    id: 'science-12-1',
-    subject: 'science', grade: 12, lessonNumber: 1,
-    title: 'Physics: Motion and Forces',
+    id: 'science-12-1', subject: 'science', grade: 12, lessonNumber: 1,
+    title: 'Physics: Motion, Forces, and Energy',
+    intro: "Physics explains how everything in the universe moves and interacts. Let's cover the laws that govern it all.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: '**Newton\'s Three Laws of Motion:**\n1. An object at rest stays at rest unless acted on by a net force (inertia)\n2. F = ma (force = mass × acceleration)\n3. For every action there is an equal and opposite reaction' },
-      { type: 'learn', content: '**Key equations:**\n- Velocity: v = d/t\n- Acceleration: a = (v_f − v_i)/t\n- Force: F = ma\n- Work: W = F × d\n- Kinetic energy: KE = ½mv²' },
-      { type: 'learn', content: '**Gravity** is a force that pulls objects toward each other. Near Earth\'s surface, g = 9.8 m/s². An object in free fall accelerates at 9.8 m/s² downward (ignoring air resistance).' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'science-12-1-q1', grade: 12, question: 'A 5 kg object is pushed with 20 N of force. What is its acceleration?', options: ['4 m/s²', '100 m/s²', '0.25 m/s²', '25 m/s²'], answer: 0, explanation: 'F = ma → a = F/m = 20/5 = 4 m/s².' },
-          { type: 'multiple-choice', id: 'science-12-1-q2', grade: 12, question: 'Newton\'s third law states:', options: ['F = ma', 'Objects resist change in motion', 'Every action has an equal and opposite reaction', 'Gravity is constant'], answer: 2, explanation: 'The third law: for every action force there is an equal and opposite reaction force.' },
-          { type: 'multiple-choice', id: 'science-12-1-q3', grade: 12, question: 'Which formula gives kinetic energy?', options: ['KE = mgh', 'KE = Fd', 'KE = ½mv²', 'KE = ma'], answer: 2, explanation: 'Kinetic energy (energy of motion) = ½ × mass × velocity².' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: "Newton's Three Laws", content: '1. **Inertia** — an object stays at rest (or in motion) unless acted on by a net force\n2. **F = ma** — force equals mass times acceleration\n3. **Action-Reaction** — every action has an equal and opposite reaction' },
+      { type: 'example', heading: 'Applying F = ma', content: 'A 5 kg box is pushed with 20 N of force. What is its acceleration?\n\nF = ma → a = F/m\na = 20 N ÷ 5 kg = **4 m/s²**\n\nThe box accelerates at 4 meters per second per second in the direction of the push.' },
+      { type: 'explain', heading: 'Energy', content: '**Kinetic energy** (energy of motion): KE = ½mv²\n**Potential energy** (stored energy): PE = mgh\n\n**Conservation of energy**: energy cannot be created or destroyed — it transforms between forms. A falling ball converts PE to KE.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'science-12-1-p1', grade: 12, question: 'A 10 kg object experiences 50 N of force. Its acceleration is:', options: ['5 m/s²', '500 m/s²', '0.2 m/s²', '40 m/s²'], answer: 0, explanation: 'a = F/m = 50/10 = 5 m/s².' },
+      { type: 'multiple-choice', id: 'science-12-1-p2', grade: 12, question: "Newton's third law explains why:", options: ['Objects fall at the same rate', 'A rocket is pushed forward when gas is expelled backward', 'Heavy objects need more force to move', 'Planets orbit the sun'], answer: 1, explanation: 'Gas expelled backward = action. Rocket pushed forward = equal and opposite reaction.' },
+      { type: 'multiple-choice', id: 'science-12-1-p3', grade: 12, question: 'Kinetic energy is calculated using:', options: ['KE = mgh', 'KE = Fd', 'KE = ½mv²', 'KE = ma'], answer: 2, explanation: 'Kinetic energy = ½ × mass × velocity².' },
+    ],
   },
   {
-    id: 'science-12-2',
-    subject: 'science', grade: 12, lessonNumber: 2,
-    title: 'Chemistry: Reactions and the Periodic Table',
+    id: 'science-12-2', subject: 'science', grade: 12, lessonNumber: 2,
+    title: 'Chemistry: The Periodic Table and Reactions',
+    intro: "Chemistry is the science of matter and how it transforms. Understanding the periodic table and reactions is foundational for college science.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'The **periodic table** organizes elements by atomic number. Key groups:\n- **Alkali metals** (Group 1): highly reactive\n- **Noble gases** (Group 18): very stable, rarely react\n- **Halogens** (Group 17): reactive nonmetals\n\nPeriods (rows) = energy levels. Groups (columns) = similar properties.' },
-      { type: 'learn', content: '**Chemical reactions** rearrange atoms. They must be balanced — the same number of each atom on both sides.\n\nTypes:\n- **Synthesis:** A + B → AB\n- **Decomposition:** AB → A + B\n- **Combustion:** fuel + O₂ → CO₂ + H₂O' },
-      { type: 'learn', content: '**Acids and bases:**\n- Acids: pH < 7, donate H⁺ ions (lemon juice, vinegar)\n- Bases: pH > 7, accept H⁺ ions (baking soda, bleach)\n- Neutral: pH = 7 (pure water)\n\npH scale runs 0–14.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'science-12-2-q1', grade: 12, question: 'Elements in the same column of the periodic table have:', options: ['The same atomic mass', 'Similar chemical properties', 'The same number of neutrons', 'Identical electron counts'], answer: 1, explanation: 'Elements in the same group (column) have similar valence electron configurations and therefore similar chemical behavior.' },
-          { type: 'multiple-choice', id: 'science-12-2-q2', grade: 12, question: 'What type of reaction is: 2H₂ + O₂ → 2H₂O?', options: ['Decomposition', 'Combustion', 'Synthesis', 'Replacement'], answer: 2, explanation: 'Two elements combining into one compound is a synthesis (combination) reaction.' },
-          { type: 'multiple-choice', id: 'science-12-2-q3', grade: 12, question: 'A solution with pH = 3 is:', options: ['Neutral', 'A base', 'An acid', 'A salt'], answer: 2, explanation: 'pH below 7 = acid. pH 3 is a fairly strong acid.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'The periodic table', content: 'Elements are organized by **atomic number** (number of protons).\n\n**Groups** (columns) = similar chemical properties\n**Periods** (rows) = same number of electron shells\n\nKey groups:\n• Group 1 (Alkali metals) — very reactive\n• Group 17 (Halogens) — reactive nonmetals\n• Group 18 (Noble gases) — very stable, rarely react' },
+      { type: 'explain', heading: 'Types of chemical reactions', content: '**Synthesis:** A + B → AB (combining)\n**Decomposition:** AB → A + B (breaking apart)\n**Combustion:** fuel + O₂ → CO₂ + H₂O (burning)\n\nAll reactions must be **balanced** — same number of each atom on both sides.' },
+      { type: 'example', heading: 'Acids and bases', content: 'pH scale runs 0–14:\n• pH < 7 = **acid** (lemon juice, vinegar)\n• pH = 7 = **neutral** (pure water)\n• pH > 7 = **base** (baking soda, bleach)\n\nAcids donate H⁺ ions; bases accept them.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'science-12-2-p1', grade: 12, question: 'Elements in the same column of the periodic table have:', options: ['Same atomic mass', 'Similar chemical properties', 'Same number of neutrons', 'Identical electron counts'], answer: 1, explanation: 'Same group = similar valence electrons = similar chemical behavior.' },
+      { type: 'multiple-choice', id: 'science-12-2-p2', grade: 12, question: '2H₂ + O₂ → 2H₂O is what type of reaction?', options: ['Decomposition', 'Combustion', 'Synthesis', 'Replacement'], answer: 2, explanation: 'Two substances combining into one product = synthesis reaction.' },
+      { type: 'multiple-choice', id: 'science-12-2-p3', grade: 12, question: 'A solution with pH = 2 is:', options: ['Neutral', 'A strong base', 'A strong acid', 'A salt'], answer: 2, explanation: 'pH 2 is well below 7 — a strong acid.' },
+    ],
   },
   // ── HISTORY GRADE 12 ────────────────────────────────────────────────────────
   {
-    id: 'history-12-1',
-    subject: 'history', grade: 12, lessonNumber: 1,
+    id: 'history-12-1', subject: 'history', grade: 12, lessonNumber: 1,
     title: 'The U.S. Constitution and Checks & Balances',
+    intro: "Understanding how the U.S. government is structured is essential — for citizenship, college, and life. Let's go deep on the Constitution.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'The U.S. Constitution (1787) created a federal government with three branches:\n- **Legislative** (Congress): makes laws\n- **Executive** (President): enforces laws\n- **Judicial** (Supreme Court): interprets laws\n\n**Checks and balances** prevent any one branch from having too much power.' },
-      { type: 'learn', content: 'Key checks:\n- Congress passes bills; the President can **veto** them; Congress can **override** with 2/3 vote\n- The President appoints judges; the Senate must **confirm** them\n- The Supreme Court can declare laws **unconstitutional** (judicial review — established by *Marbury v. Madison*, 1803)' },
-      { type: 'learn', content: 'The **Bill of Rights** (first 10 amendments) protects individual freedoms:\n- 1st: speech, religion, press, assembly\n- 4th: protection from unreasonable searches\n- 5th: right not to self-incriminate\n- 6th: right to a fair trial' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'history-12-1-q1', grade: 12, question: 'Which Supreme Court case established judicial review?', options: ['Brown v. Board of Education', 'Marbury v. Madison', 'Roe v. Wade', 'McCulloch v. Maryland'], answer: 1, explanation: 'Marbury v. Madison (1803) established that the Supreme Court can strike down laws that violate the Constitution.' },
-          { type: 'multiple-choice', id: 'history-12-1-q2', grade: 12, question: 'What happens if the President vetoes a bill?', options: ['It becomes law anyway', 'Congress can override with a 2/3 vote', 'The Supreme Court decides', 'It is permanently rejected'], answer: 1, explanation: 'Congress can override a presidential veto with a two-thirds majority in both the House and Senate.' },
-          { type: 'multiple-choice', id: 'history-12-1-q3', grade: 12, question: 'The First Amendment protects:', options: ['The right to bear arms', 'Protection from searches', 'Speech, religion, press, and assembly', 'The right to a trial'], answer: 2, explanation: 'The First Amendment guarantees freedom of speech, religion, press, petition, and assembly.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'Three branches of government', content: 'The Constitution (1787) created three branches to prevent any one person or group from having too much power:\n\n**Legislative** (Congress) — makes laws\n**Executive** (President) — enforces laws\n**Judicial** (Supreme Court) — interprets laws\n\nThis system of **checks and balances** keeps each branch accountable.' },
+      { type: 'example', heading: 'How checks work', content: '• Congress passes a bill → President can **veto** it → Congress can **override** with 2/3 vote\n• President appoints judges → Senate must **confirm** them\n• Supreme Court can strike down laws as **unconstitutional** (judicial review)\n\nJudicial review was established in *Marbury v. Madison* (1803).' },
+      { type: 'explain', heading: 'The Bill of Rights', content: 'The first 10 amendments protect individual freedoms:\n\n1st — Speech, religion, press, assembly, petition\n4th — Protection from unreasonable searches\n5th — Right not to self-incriminate\n6th — Right to a fair and speedy trial\n8th — No cruel and unusual punishment' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'history-12-1-p1', grade: 12, question: 'Which case established judicial review?', options: ['Brown v. Board of Education', 'Marbury v. Madison', 'Roe v. Wade', 'McCulloch v. Maryland'], answer: 1, explanation: 'Marbury v. Madison (1803) gave the Supreme Court power to strike down unconstitutional laws.' },
+      { type: 'multiple-choice', id: 'history-12-1-p2', grade: 12, question: 'If the President vetoes a bill, Congress can:', options: ['Do nothing', 'Override it with a 2/3 majority vote', 'Ask the Supreme Court to reverse it', 'Send it back unchanged'], answer: 1, explanation: 'A 2/3 vote in both the House and Senate overrides a presidential veto.' },
+      { type: 'multiple-choice', id: 'history-12-1-p3', grade: 12, question: 'The First Amendment protects:', options: ['The right to bear arms', 'Protection from searches', 'Speech, religion, press, and assembly', 'Right to a fair trial'], answer: 2, explanation: 'The First Amendment covers freedom of speech, religion, the press, assembly, and petition.' },
+    ],
   },
   {
-    id: 'history-12-2',
-    subject: 'history', grade: 12, lessonNumber: 2,
+    id: 'history-12-2', subject: 'history', grade: 12, lessonNumber: 2,
     title: 'The Civil Rights Movement',
+    intro: "The Civil Rights Movement is one of the most important chapters in American history. Understanding it deeply is essential for college and for life.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'After the Civil War, **Jim Crow laws** enforced racial segregation in the South. The **Civil Rights Movement** (1950s–1960s) fought to end legal discrimination against Black Americans.' },
-      { type: 'learn', content: 'Key events:\n- **1954** — *Brown v. Board of Education*: Supreme Court rules segregated schools unconstitutional\n- **1955** — Montgomery Bus Boycott: Rosa Parks, MLK Jr.\n- **1963** — March on Washington: "I Have a Dream" speech\n- **1964** — Civil Rights Act: bans discrimination in public life\n- **1965** — Voting Rights Act: protects Black voting rights' },
-      { type: 'learn', content: 'Strategies of the movement:\n- **Nonviolent protest** (sit-ins, marches, boycotts)\n- **Legal challenges** through the courts\n- **Legislation** pushed through Congress\n\nKey leaders: Martin Luther King Jr., Rosa Parks, John Lewis, Thurgood Marshall, Malcolm X.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'history-12-2-q1', grade: 12, question: 'What did the Civil Rights Act of 1964 do?', options: ['Freed enslaved people', 'Gave women the right to vote', 'Banned discrimination based on race, color, religion, sex, or national origin', 'Ended the Vietnam War'], answer: 2, explanation: 'The Civil Rights Act of 1964 banned discrimination in employment, public accommodations, and federally assisted programs.' },
-          { type: 'multiple-choice', id: 'history-12-2-q2', grade: 12, question: 'What did Brown v. Board of Education rule?', options: ['Slavery was unconstitutional', 'Segregated schools violated equal protection', 'Voting rights must be protected', 'The draft was legal'], answer: 1, explanation: 'The Supreme Court unanimously ruled that "separate but equal" public schools were inherently unequal and unconstitutional.' },
-          { type: 'multiple-choice', id: 'history-12-2-q3', grade: 12, question: 'What was a key strategy of the Civil Rights Movement?', options: ['Armed rebellion', 'Nonviolent direct action', 'Leaving the country', 'Ignoring discriminatory laws'], answer: 1, explanation: 'Nonviolent protest — marches, sit-ins, boycotts — was the cornerstone strategy, inspired by Gandhi and led by MLK Jr.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'Background: Jim Crow', content: 'After the Civil War, **Jim Crow laws** enforced racial segregation across the South — separate schools, water fountains, buses, restaurants. Black Americans faced violence and were systematically denied voting rights.\n\nThe **Civil Rights Movement** (1950s–1960s) fought to end this system through law, protest, and moral force.' },
+      { type: 'example', heading: 'Key events timeline', content: '**1954** — *Brown v. Board*: segregated schools are unconstitutional\n**1955** — Montgomery Bus Boycott: Rosa Parks refuses to give up her seat\n**1963** — March on Washington: MLK delivers "I Have a Dream"\n**1964** — Civil Rights Act: bans discrimination in employment and public life\n**1965** — Voting Rights Act: protects Black voting rights' },
+      { type: 'explain', heading: 'Strategies and leaders', content: 'The movement used three strategies:\n• **Nonviolent direct action** (sit-ins, marches, boycotts)\n• **Legal challenges** through the courts (Thurgood Marshall)\n• **Legislative advocacy** to change laws\n\nKey leaders: Martin Luther King Jr., Rosa Parks, John Lewis, Fannie Lou Hamer, Malcolm X.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'history-12-2-p1', grade: 12, question: 'What did the Civil Rights Act of 1964 do?', options: ['Freed enslaved people', 'Gave women the vote', 'Banned discrimination based on race, color, religion, sex, or national origin', 'Ended the Vietnam War'], answer: 2, explanation: 'The Civil Rights Act banned discrimination in employment, public accommodations, and federally assisted programs.' },
+      { type: 'multiple-choice', id: 'history-12-2-p2', grade: 12, question: 'Brown v. Board of Education (1954) ruled that:', options: ['Slavery was unconstitutional', 'Segregated schools violated equal protection under the law', 'Voting rights must be protected', 'The draft was constitutional'], answer: 1, explanation: '"Separate but equal" was inherently unequal — segregated schools were unconstitutional.' },
+      { type: 'multiple-choice', id: 'history-12-2-p3', grade: 12, question: 'The primary strategy of the Civil Rights Movement was:', options: ['Armed resistance', 'Nonviolent direct action', 'Moving to northern states', 'Ignoring unjust laws'], answer: 1, explanation: 'Nonviolent protest — inspired by Gandhi, led by MLK — was the cornerstone of the movement.' },
+    ],
   },
   {
-    id: 'history-12-3',
-    subject: 'history', grade: 12, lessonNumber: 3,
-    title: 'The Cold War and U.S. Foreign Policy',
+    id: 'history-12-3', subject: 'history', grade: 12, lessonNumber: 3,
+    title: 'The Cold War',
+    intro: "For nearly 50 years, two superpowers faced off in a conflict that shaped the entire world. Understanding the Cold War is essential for college history and current events.",
+    streakNeeded: 3,
     steps: [
-      { type: 'learn', content: 'After WWII, two superpowers emerged: the **United States** (democracy, capitalism) and the **Soviet Union** (communist). Their rivalry from 1947–1991 is called the **Cold War** — no direct military conflict, but intense political, economic, and ideological competition.' },
-      { type: 'learn', content: 'Key events:\n- **1947** — Truman Doctrine: U.S. pledges to stop the spread of communism\n- **1950–53** — Korean War\n- **1957** — Sputnik: USSR launches first satellite, starting the Space Race\n- **1962** — Cuban Missile Crisis: closest the world came to nuclear war\n- **1964–75** — Vietnam War\n- **1989** — Berlin Wall falls; Cold War ends' },
-      { type: 'learn', content: '**Containment policy**: the U.S. strategy of preventing communism from spreading, rather than rolling it back. Proposed by diplomat George Kennan in 1946 and adopted as the basis of U.S. foreign policy for decades.' },
-      {
-        type: 'quiz', questions: [
-          { type: 'multiple-choice', id: 'history-12-3-q1', grade: 12, question: 'What was the U.S. policy of "containment"?', options: ['Invading communist countries', 'Preventing communism from spreading to new countries', 'Building a wall around the Soviet Union', 'Isolating the U.S. from world affairs'], answer: 1, explanation: 'Containment, first articulated by George Kennan, meant stopping Soviet communism from expanding — not attacking the USSR directly.' },
-          { type: 'multiple-choice', id: 'history-12-3-q2', grade: 12, question: 'The Cuban Missile Crisis (1962) was significant because:', options: ['Cuba invaded Florida', 'The U.S. and USSR came close to nuclear war', 'Castro was overthrown', 'The Space Race ended'], answer: 1, explanation: 'The USSR placed nuclear missiles in Cuba, 90 miles from Florida. A 13-day standoff brought the world to the brink of nuclear war.' },
-          { type: 'multiple-choice', id: 'history-12-3-q3', grade: 12, question: 'The Cold War was primarily between:', options: ['The U.S. and Germany', 'The U.S. and China', 'The U.S. and the Soviet Union', 'NATO and Japan'], answer: 2, explanation: 'The Cold War was the geopolitical rivalry between the United States and the Soviet Union from 1947 to 1991.' },
-        ]
-      }
-    ]
+      { type: 'explain', heading: 'What was the Cold War?', content: 'After WWII (1945), two superpowers emerged:\n• **United States** — democracy, capitalism, NATO\n• **Soviet Union** — communist, Warsaw Pact\n\nTheir rivalry (1947–1991) was called the **Cold War** — no direct military conflict, but intense competition through politics, economics, proxy wars, and the threat of nuclear destruction.' },
+      { type: 'example', heading: 'Key events', content: '**1947** — Truman Doctrine: U.S. pledges to stop the spread of communism (**containment**)\n**1950–53** — Korean War: U.S. fights communist North Korea\n**1957** — Sputnik: USSR launches first satellite (Space Race begins)\n**1962** — Cuban Missile Crisis: 13 days from nuclear war\n**1975** — U.S. withdraws from Vietnam\n**1989** — Berlin Wall falls; Cold War ends' },
+      { type: 'explain', heading: 'Containment policy', content: '**Containment** was the U.S. strategy of preventing communism from spreading to new countries — not attacking the USSR directly.\n\nProposed by diplomat George Kennan (1946), adopted by Truman, and used as the basis of U.S. foreign policy for 40+ years.\n\nIt shaped every major U.S. military action from Korea to Vietnam to Afghanistan.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'history-12-3-p1', grade: 12, question: 'U.S. "containment" policy meant:', options: ['Invading communist countries', 'Preventing communism from spreading to new countries', 'Building walls around the Soviet Union', 'Isolating the U.S. from world affairs'], answer: 1, explanation: 'Containment = stop Soviet communism from expanding, without directly attacking the USSR.' },
+      { type: 'multiple-choice', id: 'history-12-3-p2', grade: 12, question: 'The Cuban Missile Crisis (1962) was significant because:', options: ['Cuba invaded the U.S.', 'The U.S. and USSR came close to nuclear war', 'Castro was overthrown', 'The Space Race ended'], answer: 1, explanation: 'Soviet missiles in Cuba (90 miles from Florida) brought the world to the brink of nuclear war for 13 days.' },
+      { type: 'multiple-choice', id: 'history-12-3-p3', grade: 12, question: 'The Cold War ended when:', options: ['The U.S. won a war against the USSR', 'The Berlin Wall fell and the Soviet Union collapsed', 'Nixon visited China', 'The Korean War ended'], answer: 1, explanation: 'The Berlin Wall fell in 1989 and the Soviet Union dissolved in 1991, ending the Cold War.' },
+    ],
   },
   // ── WRITING GRADE 12 ────────────────────────────────────────────────────────
   {
-    id: 'writing-12-1',
-    subject: 'writing', grade: 12, lessonNumber: 1,
+    id: 'writing-12-1', subject: 'writing', grade: 12, lessonNumber: 1,
     title: 'The College Essay',
+    intro: "This is one of the most important pieces of writing you'll ever do. Let's make sure yours stands out for the right reasons.",
+    streakNeeded: 3,
     paperBased: true,
-    paperAssignment: 'Write your college essay draft (650 words max). Choose ONE prompt:\n\n1. "Describe a challenge you have faced and what it taught you about yourself."\n\n2. "Share a story that shows who you are beyond your grades and test scores."\n\n3. "Describe a moment when your perspective on something important changed."\n\nYour essay should:\n• Open with a specific scene or moment (not "I was born…" or "Since I was little…")\n• Show — don\'t just tell. Use details and action.\n• Connect the story to what it reveals about you\n• End with insight, not just summary\n• Sound like YOU — authentic, not formal\n\nWrite your draft on paper. Read it aloud when done.',
+    paperAssignment: 'Write your college essay draft (650 words max). Choose ONE prompt:\n\n1. "Describe a challenge you have faced and what it taught you about yourself."\n2. "Share a story that shows who you are beyond your grades and test scores."\n3. "Describe a moment when your perspective on something important changed."\n\nYour essay must:\n• Open with a specific scene or moment — not "I was born…" or "Since I was little…"\n• Show, don\'t just tell. Use real details and action.\n• Connect the story to what it reveals about you\n• End with insight, not just summary\n• Sound like YOU — authentic voice, not formal\n\nWrite your draft on paper. Read it aloud when done.',
     steps: [
-      { type: 'learn', content: 'The **college essay** is your chance to speak directly to admissions officers. They want to know WHO you are — not just what you have done.\n\nThe best essays are: specific (a real moment, not a general trait), honest (your true voice), and revealing (what does this show about you?).' },
-      { type: 'learn', content: '**Structure:**\n1. **Hook** — drop the reader into a specific scene\n2. **Story** — what happened, with real details\n3. **Reflection** — what did this mean to you? How did it change you?\n4. **Connection** — tie it to who you are now and where you\'re going\n\nAvoid clichés: "I learned that hard work pays off," "My grandmother taught me everything," sports injury inspiration.' },
-      { type: 'learn', content: '**Common mistakes:**\n- Trying to sound impressive instead of real\n- Writing a resume in paragraph form\n- Picking a "safe" topic with nothing personal at stake\n- Starting too broadly\n\nThe strongest essays are often about small, specific moments — not big life events.' },
-    ]
+      { type: 'explain', heading: 'What admissions officers want', content: 'They read thousands of essays about sports injuries, mission trips, and overcoming adversity. They want to know WHO YOU ARE.\n\nThe best essays are:\n• **Specific** — a real moment, not a general trait\n• **Honest** — your true voice, not what sounds impressive\n• **Revealing** — what does this story show about how you think and who you are?' },
+      { type: 'example', heading: 'Structure that works', content: '1. **Hook** — drop into a specific scene immediately\n2. **Story** — what happened, with real sensory detail\n3. **Reflection** — what did this mean to you? How did it change you?\n4. **Connection** — tie it to who you are now\n\nWeak opening: "Ever since I was little, I have loved science."\nStrong opening: "The beaker cracked at 11:47 PM, two hours before the science fair, and my project was ruined."' },
+      { type: 'tip', heading: 'Avoid these mistakes', content: '• Trying to sound impressive instead of real\n• Writing a resume in paragraph form\n• Choosing a "safe" topic with nothing personal at stake\n• Starting too broadly\n• Summarizing instead of showing\n\nThe strongest essays are often about small, quiet moments — not big life events.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'writing-12-1-p1', grade: 12, question: 'The best college essays are:', options: ['Long and detailed about all your achievements', 'Specific, honest, and revealing about who you are', 'Written in formal academic language', 'About your most impressive accomplishment'], answer: 1, explanation: 'Admissions officers want to know YOU — not a resume. Specific, honest, and personal beats impressive every time.' },
+      { type: 'multiple-choice', id: 'writing-12-1-p2', grade: 12, question: 'A strong college essay hook:', options: ['Begins with "I was born…"', 'Starts with a broad statement about life', 'Drops the reader into a specific moment or scene', 'Opens with a famous quote'], answer: 2, explanation: 'Opening in a specific scene creates immediate engagement and shows rather than tells.' },
+      { type: 'multiple-choice', id: 'writing-12-1-p3', grade: 12, question: 'After telling your story, the essay should:', options: ['List more achievements', 'Reflect on what it reveals about you and who you are now', 'Summarize everything you wrote', 'Add more examples'], answer: 1, explanation: 'Reflection connects your story to your identity — that is what admissions officers are looking for.' },
+    ],
   },
   {
-    id: 'writing-12-2',
-    subject: 'writing', grade: 12, lessonNumber: 2,
-    title: 'Research Papers: Finding and Citing Sources',
+    id: 'writing-12-2', subject: 'writing', grade: 12, lessonNumber: 2,
+    title: 'Research Papers and Citations',
+    intro: "College writing is research writing. Let's master finding credible sources, citing them correctly, and avoiding plagiarism.",
+    streakNeeded: 3,
     paperBased: true,
-    paperAssignment: 'Choose a topic you care about (a social issue, historical question, or science topic). Write a 1-page research plan on paper:\n\n1. Your topic and your research question (not just "about climate change" — something specific like "How does food production contribute to climate change?")\n\n2. Three types of sources you would look for (academic article, book, news report, etc.) and WHY each type is useful\n\n3. Your working thesis — one sentence stating your argument\n\n4. Write one properly formatted MLA citation for a real or example source:\nLastName, FirstName. "Article Title." Journal Name, vol. #, no. #, Year, pp. ##-##.\n\n5. One possible counterargument to your thesis and how you might respond to it.',
+    paperAssignment: 'Choose a topic you care about. Write a 1-page research plan on paper:\n\n1. Your specific research question (not just "about climate change" — something like "How does industrial meat production contribute to climate change?")\n\n2. Three types of sources you would use and WHY each is useful\n\n3. Your working thesis — one sentence stating your argument\n\n4. One properly formatted MLA citation:\nLastName, FirstName. "Article Title." Journal Name, vol. #, no. #, Year, pp. ##–##.\n\n5. One counterargument to your thesis and how you would respond to it.',
     steps: [
-      { type: 'learn', content: 'A **research paper** makes an argument supported by evidence from credible sources. It is not a summary — it takes a position and defends it.\n\n**Credible sources:**\n- Peer-reviewed academic journals\n- Books from established publishers\n- Government and educational (.gov, .edu) websites\n- Reputable news organizations' },
-      { type: 'learn', content: '**Citation styles:**\n- **MLA** (Modern Language Association) — English and humanities\n- **APA** (American Psychological Association) — social sciences\n- **Chicago** — history and some social sciences\n\nAlways cite: direct quotes, paraphrased ideas, statistics, and specific facts that aren\'t common knowledge.' },
-      { type: 'learn', content: '**Avoiding plagiarism:**\n- Put quotation marks around exact words from a source\n- Paraphrase means truly rewriting in your own words — not just changing a few words\n- Even paraphrased ideas need citations\n- Keep track of every source from the start' },
-    ]
+      { type: 'explain', heading: 'What makes a source credible?', content: 'Not all sources are equal. Credible sources include:\n• **Peer-reviewed journals** (reviewed by experts before publishing)\n• **Books from established publishers**\n• **.gov and .edu websites**\n• **Reputable news organizations** (AP, Reuters, major newspapers)\n\nWikipedia is a starting point — not a source to cite.' },
+      { type: 'explain', heading: 'Citation styles', content: '**MLA** — English, humanities\n**APA** — social sciences, psychology\n**Chicago** — history\n\nAlways cite:\n• Direct quotes (exact words)\n• Paraphrased ideas (your words, someone else\'s idea)\n• Statistics and specific facts\n• Anything that is not common knowledge' },
+      { type: 'tip', heading: 'Avoiding plagiarism', content: 'Plagiarism is using someone else\'s words or ideas without credit — even accidentally.\n\n• Quote marks around EXACT words\n• Paraphrase = truly rewrite in your own words (not just change a few)\n• Keep track of ALL sources from the start\n• When in doubt, cite it' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'writing-12-2-p1', grade: 12, question: 'Which is the most credible source for a research paper?', options: ['A Wikipedia article', 'A peer-reviewed academic journal', 'A personal blog post', 'A social media post'], answer: 1, explanation: 'Peer-reviewed journals are vetted by experts — the gold standard for academic research.' },
+      { type: 'multiple-choice', id: 'writing-12-2-p2', grade: 12, question: 'You paraphrase an idea from a source. Do you need to cite it?', options: ['No — you used your own words', 'Yes — the idea still belongs to the original author', 'Only if it is a quote', 'Only if it is a statistic'], answer: 1, explanation: 'Even paraphrased ideas need citations. The words are yours but the idea is not.' },
+      { type: 'multiple-choice', id: 'writing-12-2-p3', grade: 12, question: 'MLA citation style is used primarily in:', options: ['Social sciences', 'History', 'English and the humanities', 'Natural sciences'], answer: 2, explanation: 'MLA (Modern Language Association) is the standard for English and humanities courses.' },
+    ],
   },
   {
-    id: 'writing-12-3',
-    subject: 'writing', grade: 12, lessonNumber: 3,
+    id: 'writing-12-3', subject: 'writing', grade: 12, lessonNumber: 3,
     title: 'Argumentative Writing: Claim, Evidence, Rebuttal',
+    intro: "College writing is argumentative writing. Every paper takes a position and defends it. Let's build that skill.",
+    streakNeeded: 3,
     paperBased: true,
-    paperAssignment: 'Write a 2-page argumentative essay on paper on ONE of these topics:\n\n1. Should community service be required for high school graduation?\n2. Do social media companies have a responsibility to protect teen mental health?\n3. Should the voting age be lowered to 16?\n\nYour essay must include:\n• A clear thesis (your position)\n• At least 2 body paragraphs with evidence and reasoning\n• One paragraph addressing the opposing view and rebutting it\n• A conclusion that reinforces your position\n• At least one specific fact, statistic, or example per body paragraph\n\nUse this structure: Claim → Evidence → Explanation → Link back to thesis.',
+    paperAssignment: 'Write a 2-page argumentative essay on ONE of these topics:\n\n1. Should community service be required for high school graduation?\n2. Do social media companies have a responsibility to protect teen mental health?\n3. Should the voting age be lowered to 16?\n\nYour essay must include:\n• A clear thesis stating your position\n• At least 2 body paragraphs with evidence and reasoning\n• One paragraph addressing the opposing view and rebutting it\n• A conclusion that reinforces your argument\n• At least one specific fact or statistic per body paragraph\n\nStructure each body paragraph: Claim → Evidence → Explanation → Link to thesis.',
     steps: [
-      { type: 'learn', content: 'A strong argument has three parts:\n1. **Claim** — your position (the thesis)\n2. **Evidence** — facts, statistics, examples that support it\n3. **Reasoning** — explaining WHY the evidence supports your claim\n\nEvidence alone does not make an argument. You must connect it to your claim.' },
-      { type: 'learn', content: '**The rebuttal paragraph** makes your essay stronger, not weaker. It shows you understand the issue fully.\n\nStructure: "Some argue that [opposing view]. However, [why that view is wrong or incomplete] because [your reasoning and evidence]."\n\nDo not ignore the strongest objection — address it head-on.' },
-      { type: 'learn', content: '**Logical fallacies** weaken arguments. Avoid:\n- **Ad hominem:** attacking the person, not the argument\n- **Straw man:** misrepresenting the opponent\'s view\n- **False dichotomy:** presenting only two options when more exist\n- **Slippery slope:** claiming one step inevitably leads to extreme outcomes' },
-    ]
+      { type: 'explain', heading: 'The anatomy of an argument', content: 'A strong argument has three parts:\n\n**Claim** — your position (the thesis)\n**Evidence** — facts, statistics, examples that support it\n**Reasoning** — WHY the evidence supports your claim\n\nEvidence alone is not an argument. A list of facts proves nothing until you explain what they mean and why they matter.' },
+      { type: 'example', heading: 'The rebuttal paragraph', content: 'Addressing the opposing view makes your essay STRONGER — it shows you understand the full issue.\n\nFormula:\n"Some argue that [opposing view]. However, [why that is wrong or incomplete] because [your reasoning + evidence]."\n\nDo not pick a weak version of the opposing argument (straw man). Address the strongest objection — then defeat it.' },
+      { type: 'tip', heading: 'Logical fallacies to avoid', content: '**Ad hominem** — attacking the person, not the argument\n**Straw man** — misrepresenting the opponent\'s view\n**False dichotomy** — "either X or Y" when more options exist\n**Slippery slope** — claiming one step inevitably leads to extreme outcomes\n**Appeal to emotion** — using feelings as a substitute for evidence' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'writing-12-3-p1', grade: 12, question: 'In an argument, "reasoning" means:', options: ['Repeating your claim louder', 'Explaining WHY evidence supports your claim', 'Adding more evidence', 'Summarizing the paragraph'], answer: 1, explanation: 'Evidence + reasoning = argument. Reasoning explains the connection between your evidence and your claim.' },
+      { type: 'multiple-choice', id: 'writing-12-3-p2', grade: 12, question: 'Including a rebuttal paragraph:', options: ['Weakens your essay', 'Shows you do not believe your own argument', 'Strengthens your essay by showing you understand the full issue', 'Is only needed in very long essays'], answer: 2, explanation: 'Addressing and defeating the opposing view demonstrates depth of understanding and strengthens your argument.' },
+      { type: 'multiple-choice', id: 'writing-12-3-p3', grade: 12, question: 'Attacking the person making an argument instead of the argument itself is called:', options: ['Straw man', 'False dichotomy', 'Ad hominem', 'Slippery slope'], answer: 2, explanation: 'Ad hominem = attacking the person rather than addressing what they actually said.' },
+    ],
   },
 ]
 
