@@ -3094,8 +3094,6 @@ The conclusion is your last impression on the reader. Make it count.`
       },
     ]
   },
-]
-
   // ── MATH GRADE 12 ───────────────────────────────────────────────────────────
   {
     id: 'math-12-1',
@@ -3307,6 +3305,7 @@ The conclusion is your last impression on the reader. Make it count.`
       { type: 'learn', content: '**Logical fallacies** weaken arguments. Avoid:\n- **Ad hominem:** attacking the person, not the argument\n- **Straw man:** misrepresenting the opponent\'s view\n- **False dichotomy:** presenting only two options when more exist\n- **Slippery slope:** claiming one step inevitably leads to extreme outcomes' },
     ]
   },
+]
 
 export function getLessonsForSubjectAndGrade(subject: Subject, grade: number): Lesson[] {
   return LESSONS.filter(l => l.subject === subject && l.grade === grade)
