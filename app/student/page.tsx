@@ -249,7 +249,7 @@ export default function StudentDashboard() {
                   </>
                 )}
                 {status === 'lesson' && !currentLesson && (
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Grade {DEFAULT_GRADES[s.key]} · Ready to start</div>
+                  <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Grade {p?.placed_grade ?? DEFAULT_GRADES[s.key]} · Ready to start</div>
                 )}
                 {status === 'done' && (
                   <div style={{ color: 'var(--success)', fontSize: '0.85rem', fontWeight: 600 }}>✓ All lessons complete!</div>

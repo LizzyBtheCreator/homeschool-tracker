@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
-import { PLACEMENT_QUESTIONS, SUBJECTS, type Subject, type QuizQuestion } from '@/lib/curriculum'
+import { PLACEMENT_QUESTIONS, SUBJECTS, getHighestAvailableGrade, type Subject, type QuizQuestion } from '@/lib/curriculum'
 
 interface ShuffledQuestion extends QuizQuestion {
   shuffledOptions: string[]
@@ -86,6 +86,8 @@ export default function PlacementQuiz() {
         placed = grade
       }
     }
+    // Cap at highest grade that actually has lessons for this subject
+    placed = getHighestAvailableGrade(subject, placed)
     setPlacedGrade(placed)
     // Save immediately so results persist even if student navigates away
     const { data: { user } } = await supabase.auth.getUser()

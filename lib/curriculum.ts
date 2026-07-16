@@ -3100,3 +3100,11 @@ export function getLessonsForSubjectAndGrade(subject: Subject, grade: number): L
   return LESSONS.filter(l => l.subject === subject && l.grade === grade)
     .sort((a, b) => a.lessonNumber - b.lessonNumber)
 }
+
+// Returns the highest grade that has lessons for a subject, at or below the target grade
+export function getHighestAvailableGrade(subject: Subject, targetGrade: number): number {
+  const available = [...new Set(LESSONS.filter(l => l.subject === subject).map(l => l.grade))]
+    .filter(g => g <= targetGrade)
+    .sort((a, b) => b - a)
+  return available[0] ?? targetGrade
+}
