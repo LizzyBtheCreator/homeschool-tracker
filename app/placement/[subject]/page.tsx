@@ -31,12 +31,14 @@ export default function PlacementQuiz() {
   const subjectInfo = SUBJECTS.find(s => s.key === subject)
   const [questions, setQuestions] = useState<ShuffledQuestion[]>([])
   const [ready, setReady] = useState(false)
+  const [minPlacementGrade, setMinPlacementGrade] = useState(4)
 
   useEffect(() => {
     const saved = typeof window !== 'undefined' ? sessionStorage.getItem('activeStudent') : null
     const grade: number = saved ? (JSON.parse(saved).grade ?? 4) : 4
     // Only show questions at or near the student's level (2 grades below, up to grade 12)
     const minGrade = Math.max(4, grade - 2)
+    setMinPlacementGrade(minGrade)
     const filtered = (PLACEMENT_QUESTIONS[subject] || []).filter(q => q.grade >= minGrade)
     setQuestions(filtered.map(shuffleQuestion))
     setReady(true)
@@ -76,8 +78,8 @@ export default function PlacementQuiz() {
   }
 
   async function computePlacement() {
-    // Find highest grade where student got >= 67% correct
-    let placed = 4
+    // Find highest grade where student got >= 67% correct, floor at student's min grade
+    let placed = minPlacementGrade
     for (const grade of [4, 5, 6, 7, 8, 9, 10, 11, 12]) {
       const gs = gradeScores[grade]
       if (gs && gs.total > 0 && (gs.right / gs.total) >= 0.67) {
