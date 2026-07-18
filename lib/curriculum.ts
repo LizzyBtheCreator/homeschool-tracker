@@ -173,6 +173,8 @@ export interface LessonStep {
   type: 'explain' | 'example' | 'tip' | 'warning'
   heading?: string
   content: string       // plain text / markdown-lite
+  svg?: string          // optional SVG diagram to display below content
+  videoUrl?: string     // optional YouTube embed URL
 }
 
 export interface Lesson {
@@ -2580,120 +2582,476 @@ Today there are **27 amendments** total. The most recent was ratified in 1992 �
   {
     id: 'writing-5-3',
     subject: 'writing', grade: 5, lessonNumber: 3,
-    title: 'Cursive Refresher: Connecting Letters Into Words',
-    intro: "You already know how to write cursive letters — now we're going to focus on the part that trips a lot of people up: connecting them smoothly into words. Once you get the flow, cursive actually feels faster and easier than printing.",
-    streakNeeded: 3,
+    title: 'Cursive from Scratch: Letters a–e',
+    intro: "We're starting cursive from the very beginning — no pressure, no rush. Watch the video, then trace the letters. Go slow. Every expert was once a beginner.",
+    streakNeeded: 2,
     paperBased: true,
-    paperAssignment: `**Cursive Practice — Connecting Letters**
+    paperAssignment: `Cursive Practice — Letters a, b, c, d, e
 
-Read through the lesson, then complete these practice activities on paper in your best cursive:
+Get lined paper and a pencil. Go slow — this is about correct form, not speed.
 
-**Part 1 — Warm-up strokes (2 lines each):**
-Write these joining strokes repeatedly to warm up your hand:
-- ou  ow  or  of  ot
-- an  in  un  en  on
-- st  nd  ld  ll  tt
+1. WARM UP: Make these oval strokes across one full line:
+   ooo ooo ooo ooo ooo
 
-**Part 2 — Practice words (write each word 3 times in cursive):**
-- the, and, was, that, with
-- have, this, they, from, word
-- your, when, there, which, some
+2. TRACE then COPY each letter 5 times on its own line:
+   a  a  a  a  a
+   b  b  b  b  b
+   c  c  c  c  c
+   d  d  d  d  d
+   e  e  e  e  e
 
-**Part 3 — Connecting challenge (write each phrase 2 times):**
-- my name is Mathias
-- I like to learn
-- today is a good day
-- the sun is shining bright
+3. WORDS — write each word 3 times:
+   cab   bad   ace   bed   cad
 
-**Part 4 — Sentence (copy once, then write from memory):**
-"Learning cursive takes practice, but once it flows it feels natural."
+4. Check your work:
+   • Do your letters sit on the baseline?
+   • Are your oval letters (a, d) closed at the top?
+   • Does b loop above the midline?
 
-Show your parent when you're done! 📝`,
+Show your parent when done!`,
     steps: [
       {
         type: 'explain',
-        heading: 'Why connecting letters feels hard',
-        content: `When you write individual cursive letters, you lift your pencil between each one. That's fine for practice — but in real cursive writing, letters **connect** to each other without lifting.
+        heading: 'Starting from scratch — that is totally fine',
+        content: `Lots of people forget cursive after not using it for a while. We are going to learn it the right way this time — starting with just five letters.
 
-The tricky part: different letters connect differently depending on where they end.
+Cursive is about **flowing, connected strokes**. The secret is: most cursive letters start the same way — with a small upward swing from the baseline.
 
-Letters that end at the **bottom** (a, c, d, e, h, i, k, l, m, n, u, x, z) → connect by sliding forward along the baseline
+Before we write letters, let us talk about the three zones on a line:
+• **Top zone** — tall letters reach here (b, d, h, k, l)
+• **Middle zone** — most letters live here (a, c, e, m, n, o, etc.)
+• **Bottom zone** — letters with tails hang here (g, j, p, q, y)`,
+        svg: `<svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:500px">
+  <line x1="20" y1="20" x2="480" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="20" y1="55" x2="480" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="20" y1="80" x2="480" y2="80" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="20" y1="105" x2="480" y2="105" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <text x="28" y="40" fill="#64748b" font-size="11" font-family="sans-serif">top zone</text>
+  <text x="28" y="70" fill="#64748b" font-size="11" font-family="sans-serif">middle zone</text>
+  <text x="28" y="98" fill="#64748b" font-size="11" font-family="sans-serif">bottom zone</text>
+  <text x="200" y="78" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">a</text>
+  <text x="250" y="60" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">b</text>
+  <text x="300" y="78" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">c</text>
+  <text x="345" y="60" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">d</text>
+  <text x="395" y="78" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">e</text>
+</svg>`
+      },
+      {
+        type: 'example',
+        heading: 'How to form each letter',
+        content: `Here is how each letter is made. Read it, then watch the video below.
 
-Letters that end at the **top** (b, o, v, w) → connect by a small loop or curve going down to meet the next letter
+**a** — Start at the midline. Make a small oval (counterclockwise), close it at the top, then swing right along the baseline to exit.
 
-Once you know which group a letter belongs to, the connections get much easier.`
+**b** — Start at the top zone. Swing down to the baseline, loop back up to midline, make a small bump to the right, exit right.
+
+**c** — Start just below the midline. Curve left and around counterclockwise, stopping open at the right side. Exit right.
+
+**d** — Make a small oval like "a" first, then instead of exiting right, swing UP to the top zone, come back down to the baseline, and exit right.
+
+**e** — Start at midline, loop right and curve counterclockwise into a small closed loop, exit right along the baseline.`,
+        videoUrl: 'https://www.youtube.com/embed/9OnxZDOhKKw'
+      },
+      {
+        type: 'tip',
+        heading: 'The golden rules of cursive',
+        content: `1. **Go slow.** Speed comes after your hand knows the shape. Not before.
+
+2. **Light pressure.** You should be able to erase easily. Gripping hard makes your hand tense and letters stiff.
+
+3. **Tilt your paper.** Right-handed: tilt the bottom-left toward you. Left-handed: tilt the bottom-right toward you.
+
+4. **Sit up straight.** Your arm should rest on the desk from elbow to wrist — not just your fingers.
+
+5. **Every letter starts with an upswing.** Coming up from the baseline is the entry stroke for almost every cursive letter.`
+      },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'wri5-3-p1', grade: 5,
+        question: 'Which cursive letters reach into the TOP zone?',
+        options: ['a, c, e', 'b, d', 'g, j, y', 'All letters'],
+        answer: 1, explanation: 'Tall letters like b and d have loops that reach above the midline into the top zone.' },
+      { type: 'multiple-choice', id: 'wri5-3-p2', grade: 5,
+        question: 'What is the most important rule when first learning cursive?',
+        options: ['Write as fast as you can', 'Go slow and focus on correct form', 'Press hard so letters are dark', 'Skip difficult letters'],
+        answer: 1, explanation: 'Speed comes naturally with practice. In the beginning, slow and correct is everything.' },
+      { type: 'multiple-choice', id: 'wri5-3-p3', grade: 5,
+        question: 'Which letter is formed by making a small oval FIRST, then going up to the top zone?',
+        options: ['a', 'b', 'c', 'd'],
+        answer: 3, explanation: 'd starts with the same oval as "a", then the stroke goes UP to the top zone before coming back down.' },
+    ]
+  },
+
+  {
+    id: 'writing-5-3b',
+    subject: 'writing', grade: 5, lessonNumber: 4,
+    title: 'Cursive: Letters f–j',
+    intro: "Five more letters today. f and g are tricky — they go into the bottom zone. Take your time with those.",
+    streakNeeded: 2,
+    paperBased: true,
+    paperAssignment: `Cursive Practice — Letters f, g, h, i, j
+
+1. WARM UP: Write looping strokes down and up across one line:
+   llll llll llll
+
+2. TRACE then COPY each letter 5 times:
+   f  f  f  f  f
+   g  g  g  g  g
+   h  h  h  h  h
+   i  i  i  i  i
+   j  j  j  j  j
+
+3. WORDS — write each word 3 times:
+   fig   jig   hid   gif   iff
+
+4. Don't forget:
+   • Dot your i after you finish the whole word
+   • f and j both dip into the bottom zone
+   • h has a hump like an arch — not a loop
+
+Show your parent when done!`,
+    steps: [
+      {
+        type: 'explain',
+        heading: 'Letters that go below the line',
+        content: `Today we add f, g, h, i, and j. Two of them — **g** and **j** — have tails that dip into the **bottom zone** below the baseline. This is new!
+
+When a letter goes below the baseline, your pencil swings down, makes a small loop or hook, and comes back up.
+
+**f** also goes both up (into the top zone) AND slightly below — it is the only letter that crosses in both directions.`,
+        svg: `<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:500px">
+  <line x1="20" y1="20" x2="480" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="20" y1="55" x2="480" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="20" y1="80" x2="480" y2="80" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="20" y1="115" x2="480" y2="115" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <text x="60" y="78" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">f</text>
+  <text x="120" y="82" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">g</text>
+  <text x="185" y="62" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">h</text>
+  <text x="250" y="78" fill="#6366f1" font-size="38" font-family="Georgia,serif" font-style="italic">i</text>
+  <text x="295" y="82" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">j</text>
+  <text x="24" y="100" fill="#ef4444" font-size="10" font-family="sans-serif">↑ top zone</text>
+  <text x="24" y="115" fill="#f59e0b" font-size="10" font-family="sans-serif">↓ bottom zone (g, j)</text>
+</svg>`
+      },
+      {
+        type: 'example',
+        heading: 'How to form each letter',
+        content: `**f** — Start at the top zone, curve right and come down through the baseline into the bottom zone (small tail), swing back up, cross with a horizontal stroke at the midline. Exit right.
+
+**g** — Make a small oval like "a," close it, then instead of exiting right, curve DOWN into the bottom zone and make a small leftward loop. Come back up and exit right.
+
+**h** — Start at the top zone, come down to the baseline, then make an arch (hump) up to the midline and back down to the baseline. Exit right. (No loop — just an arch.)
+
+**i** — Short upswing to midline, come down to baseline, exit right. Add the dot AFTER you finish the whole word.
+
+**j** — Like "i" but dip into the bottom zone with a small leftward hook. Add the dot after.`,
+        videoUrl: 'https://www.youtube.com/embed/9OnxZDOhKKw'
+      },
+      {
+        type: 'tip',
+        heading: 'The dot trick',
+        content: `For **i** and **j**, do NOT add the dot immediately after writing the letter. Keep writing the whole word first, then go back and add dots.
+
+This keeps your writing flow smooth — stopping mid-word to dot breaks your rhythm.
+
+Same rule applies to crossing the **t** — write the whole word, then go back and cross.`
+      },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'wri5-4b-p1', grade: 5,
+        question: 'Which letters dip into the bottom zone below the baseline?',
+        options: ['f and h', 'g and j', 'i and j', 'f and g'],
+        answer: 1, explanation: 'g and j both have tails that swing below the baseline into the bottom zone.' },
+      { type: 'multiple-choice', id: 'wri5-4b-p2', grade: 5,
+        question: 'When should you add the dot to the letter i?',
+        options: ['Right after writing the i', 'Before starting the word', 'After finishing the whole word', 'Never in cursive'],
+        answer: 2, explanation: 'Add dots (and cross t\'s) after writing the whole word to keep your writing flow smooth.' },
+      { type: 'multiple-choice', id: 'wri5-4b-p3', grade: 5,
+        question: 'The letter h in cursive has:',
+        options: ['A loop at the top', 'A tail below the baseline', 'An arch (hump) shape — no loop', 'Two bumps'],
+        answer: 2, explanation: 'Cursive h has an arch shape — it looks like a hill, not a loop. It starts at the top zone.' },
+    ]
+  },
+
+  {
+    id: 'writing-5-3c',
+    subject: 'writing', grade: 5, lessonNumber: 5,
+    title: 'Cursive: Letters k–p',
+    intro: "You are halfway through the alphabet! Today's letters include some of the most satisfying ones to write — especially k and l.",
+    streakNeeded: 2,
+    paperBased: true,
+    paperAssignment: `Cursive Practice — Letters k, l, m, n, o, p
+
+1. WARM UP: Write these humps across a line:
+   mmmm  nnnn  mmmm
+
+2. COPY each letter 5 times:
+   k  k  k  k  k
+   l  l  l  l  l
+   m  m  m  m  m
+   n  n  n  n  n
+   o  o  o  o  o
+   p  p  p  p  p
+
+3. WORDS — write each word 3 times:
+   milk   lion   moon   name   pink   open
+
+4. Challenge sentence (write twice):
+   "Mom makes lemon pie."
+
+Show your parent when done!`,
+    steps: [
+      {
+        type: 'explain',
+        heading: 'The hump letters — m and n',
+        content: `**m** and **n** are built from humps (arches). This is important because they are two of the most common letters in English.
+
+**n** has ONE hump. **m** has TWO humps.
+
+The key: each hump comes down to the baseline before going back up. If your humps float above the baseline, the letters look wrong.
+
+Think of it like rolling hills — down, up, down, (up, down for m). Stay on the ground between hills.`,
+        svg: `<svg viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:500px">
+  <line x1="20" y1="20" x2="480" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="20" y1="55" x2="480" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="20" y1="80" x2="480" y2="80" stroke="#94a3b8" stroke-width="2"/>
+  <text x="40" y="78" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">k</text>
+  <text x="100" y="62" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">l</text>
+  <text x="148" y="78" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">m</text>
+  <text x="220" y="78" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">n</text>
+  <text x="270" y="78" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">o</text>
+  <text x="318" y="82" fill="#6366f1" font-size="42" font-family="Georgia,serif" font-style="italic">p</text>
+</svg>`
+      },
+      {
+        type: 'example',
+        heading: 'How to form each letter',
+        content: `**k** — Start at the top zone, come down to baseline. Then make a small loop at the midline and kick out to the right. Exit right.
+
+**l** — Long loop up into the top zone, come back down to baseline. Exit right. (Like a tall, stretched loop.)
+
+**m** — Upswing to midline, make first hump (down to baseline, back up), make second hump (down to baseline), exit right.
+
+**n** — Upswing to midline, one hump (down to baseline, back up), come down to baseline, exit right.
+
+**o** — Small oval: start just below midline, curve counterclockwise all the way around, close it, exit right at the top.
+
+**p** — Start at midline, go DOWN into the bottom zone, come back up, make a bump to the right at midline, exit right.`,
+        videoUrl: 'https://www.youtube.com/embed/9OnxZDOhKKw'
+      },
+      {
+        type: 'tip',
+        heading: 'Stay on the baseline between humps',
+        content: `The most common mistake with m and n: the humps float up and never touch the baseline.
+
+Every hump MUST touch down before going up again.
+
+Try this: say "down-up-down-up" out loud as you write the humps of m. It keeps your hand on track.`
+      },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'wri5-5b-p1', grade: 5,
+        question: 'How many humps does the cursive letter m have?',
+        options: ['One', 'Two', 'Three', 'None'],
+        answer: 1, explanation: 'm has two humps. n has one. Count them: m = two hills, n = one hill.' },
+      { type: 'multiple-choice', id: 'wri5-5b-p2', grade: 5,
+        question: 'Which letter goes DOWN into the bottom zone?',
+        options: ['m', 'n', 'p', 'o'],
+        answer: 2, explanation: 'p dips below the baseline into the bottom zone — similar to g and j.' },
+      { type: 'multiple-choice', id: 'wri5-5b-p3', grade: 5,
+        question: 'What is the most common mistake when writing m and n in cursive?',
+        options: ['Making them too tall', 'Humps that float and do not touch the baseline', 'Writing them backwards', 'Making too many humps'],
+        answer: 1, explanation: 'Every hump must touch the baseline between peaks — like rolling hills that touch the ground.' },
+    ]
+  },
+
+  {
+    id: 'writing-5-3d',
+    subject: 'writing', grade: 5, lessonNumber: 6,
+    title: 'Cursive: Letters q–z',
+    intro: "Last group of lowercase letters! After this lesson you will know the whole lowercase cursive alphabet.",
+    streakNeeded: 2,
+    paperBased: true,
+    paperAssignment: `Cursive Practice — Letters q, r, s, t, u, v, w, x, y, z
+
+1. COPY each letter 4 times:
+   q  q  q  q
+   r  r  r  r
+   s  s  s  s
+   t  t  t  t
+   u  u  u  u
+   v  v  v  v
+   w  w  w  w
+   x  x  x  x
+   y  y  y  y
+   z  z  z  z
+
+2. WORDS — write each 3 times:
+   quit   rest   sun   true   very   with   six   yet   zip
+
+3. FULL ALPHABET — write the entire lowercase cursive alphabet in order:
+   a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+4. Challenge sentence (write twice, then cross t's and dot i's):
+   "The quick brown fox jumps over the lazy dog."
+   (This sentence uses every letter in the alphabet!)
+
+Show your parent when done!`,
+    steps: [
+      {
+        type: 'explain',
+        heading: 'The last ten letters',
+        content: `You are almost there! A few notes on tricky ones:
+
+**q** — Like a backwards p. Oval first (like a), then go DOWN into the bottom zone with a rightward hook.
+
+**r** — Short upswing, then a small bump that barely makes it to midline. Very short and simple.
+
+**s** — A small reverse-S curve. Does not close all the way. Exit right.
+
+**t** — Like a tall i. Go up into the top zone, come down. Cross it AFTER the whole word.
+
+**v and w** — v has one valley. w has two valleys. Both exit right at the top.
+
+**x** — Make two curved strokes that cross in the middle.
+
+**y** — Like v but the right stroke goes DOWN into the bottom zone with a hook.
+
+**z** — A flat zig-zag: right, down-left, right. Exit right.`,
+        svg: `<svg viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:500px">
+  <line x1="20" y1="20" x2="480" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="20" y1="55" x2="480" y2="55" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="20" y1="80" x2="480" y2="80" stroke="#94a3b8" stroke-width="2"/>
+  <text x="22" y="84" fill="#6366f1" font-size="36" font-family="Georgia,serif" font-style="italic">q r s t u v w x y z</text>
+</svg>`
+      },
+      {
+        type: 'example',
+        heading: 'The pangram — practice all 26 letters at once',
+        content: `A **pangram** is a sentence that uses every letter of the alphabet at least once.
+
+The most famous one is:
+"The quick brown fox jumps over the lazy dog."
+
+This is your ultimate cursive practice sentence. Once you can write this smoothly in cursive, you know you have all the letters down.
+
+Write it slowly. Go back and add dots and crosses at the end. Read it to make sure it looks right.`,
+        videoUrl: 'https://www.youtube.com/embed/9OnxZDOhKKw'
+      },
+      {
+        type: 'tip',
+        heading: 'You now know all 26 lowercase letters',
+        content: `Take a moment — that is a real accomplishment.
+
+Next we will work on **connecting letters into words** smoothly, and then **uppercase letters**.
+
+The most important thing right now: keep practicing a little every day. Even five minutes of writing the alphabet or a sentence keeps your muscle memory sharp.
+
+Your hand needs repetition the same way your legs need walking — use it and it gets easier.`
+      },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'wri5-6b-p1', grade: 5,
+        question: 'Which letter is crossed (like t) AFTER writing the whole word?',
+        options: ['s', 't', 'r', 'z'],
+        answer: 1, explanation: 'Cross t\'s and dot i\'s AFTER finishing the whole word to keep your writing flow uninterrupted.' },
+      { type: 'multiple-choice', id: 'wri5-6b-p2', grade: 5,
+        question: 'What is a pangram?',
+        options: ['A sentence with no vowels', 'A sentence that uses every letter of the alphabet', 'A type of cursive font', 'A sentence written backwards'],
+        answer: 1, explanation: '"The quick brown fox jumps over the lazy dog" is the most famous pangram — it contains all 26 letters.' },
+      { type: 'multiple-choice', id: 'wri5-6b-p3', grade: 5,
+        question: 'The letter y in cursive:',
+        options: ['Stays in the middle zone', 'Goes up into the top zone', 'Dips into the bottom zone with a hook', 'Looks exactly like v'],
+        answer: 2, explanation: 'y starts like v but the right stroke dips below the baseline into the bottom zone.' },
+    ]
+  },
+
+  {
+    id: 'writing-5-3e',
+    subject: 'writing', grade: 5, lessonNumber: 7,
+    title: 'Cursive: Connecting Letters Into Words',
+    intro: "You know all the letters — now we put them together. Connecting is where cursive really comes alive.",
+    streakNeeded: 3,
+    paperBased: true,
+    paperAssignment: `Cursive Connection Practice
+
+1. JOINING STROKES — write each pair 5 times:
+   an   in   on   un   en
+   th   ch   sh   wh   ng
+   ou   ow   oo   ll   tt
+
+2. COMMON WORDS — write each 3 times (these are the most common words in English):
+   the   and   that   with   have
+   they   from   your   when   were
+
+3. PHRASES — write each 2 times:
+   my name is Mathias
+   today is a great day
+   I love to learn new things
+
+4. SENTENCE — copy it once, then write from memory:
+   "Learning cursive feels hard at first, but then it starts to flow."
+
+5. BONUS — write a 2-sentence paragraph about anything you like, entirely in cursive.
+
+Show your parent when done!`,
+    steps: [
+      {
+        type: 'explain',
+        heading: 'How letters connect',
+        content: `In cursive, most letters end with an **exit stroke** going right along the baseline. The next letter begins with an **entry stroke** coming up from the baseline.
+
+These two strokes meet and become one smooth connection.
+
+Two types of exits:
+• **Bottom exit** (most letters: a, c, d, e, h, i, k, l, m, n, u, x, z) → connect by sliding right at the baseline into the next letter's upswing
+• **Top exit** (b, o, v, w) → curve down from the top to meet the next letter's starting point
+
+Once you know which type a letter uses, connections become automatic.`
       },
       {
         type: 'example',
         heading: 'The most common connections',
-        content: `Let's look at the most common letter pairs in English:
+        content: `**"th"** — t exits at the top (crossbar), curves into h's upswing. Very common: the, that, this, they, with, them
 
-**"th" connection** — t ends at the top, h starts at the bottom. The t's cross-stroke leads right into the h.
-Practice: the, that, then, with, they, this
+**"an"** — a exits at the baseline, slides right into n's upswing. Very common: and, can, hand, plant, than
 
-**"an" connection** — a ends at bottom, slides smoothly into n.
-Practice: and, can, man, hand, plant, than
+**"ou" / "ow"** — o exits at the top, curves down into u or w. Very common: out, our, you, down, town, now
 
-**"ou" and "ow" connection** — o ends at top, curves down into u or w.
-Practice: out, our, down, town, you, your
+**"in"** — i exits at baseline, swings right into n. Very common: in, into, think, bring, find
 
-**"in" and "on" connection** — i and o both connect easily to n.
-Practice: in, on, into, one, only, until
-
-**Double letters** — ll, tt, ss, ff: write the first, continue the stroke directly into the second.
-Practice: will, tell, little, off, miss, across`
+**Double letters** — ll, tt, ss, ff: after the first letter, continue the stroke directly. Practice: will, all, little, off, miss`,
+        videoUrl: 'https://www.youtube.com/embed/9OnxZDOhKKw'
       },
       {
         type: 'tip',
-        heading: '✍️ Tips for smooth connected cursive',
-        content: `**Keep your pencil moving.** The #1 mistake is pausing between letters. Cursive should flow — slow and steady, not fast and jerky.
+        heading: 'Think in words, not letters',
+        content: `Here is the real secret to fluent cursive: **stop thinking letter by letter.**
 
-**Stay on the baseline.** All letters should sit on the line. Connections that drift up or down look messy.
+Instead of "t… then h… then e," train your hand to see "the" as one single flowing shape.
 
-**Don't press too hard.** Light pressure = more fluid movement. Heavy pressing makes your hand tire out and your letters look stiff.
+This happens through repetition. Write "the" 20 times and your hand starts to just know it.
 
-**Tilt your paper.** Most people find cursive easier with the paper tilted slightly (right-handed: tilt left; left-handed: tilt right).
+Start with the 10 most common English words:
+the, and, a, to, in, is, you, that, it, he
 
-**Go slow at first.** Speed comes naturally after the movements become familiar. Right now, focus on correct form.`
-      },
-      {
-        type: 'explain',
-        heading: 'The secret to cursive words feeling natural',
-        content: `Here's something that helped a lot of people: **stop thinking about letters and start thinking about words as shapes.**
-
-When you see the word "the" in cursive, don't think "t… then h… then e." Instead, train your hand to recognize "the" as one flowing shape.
-
-The way you get there: **repetition**. Write the same word over and over until your hand knows the shape.
-
-Start with the 20 most common words in English:
-the, and, a, to, in, is, you, that, it, he,
-was, for, on, are, as, with, his, they, I, at
-
-If your hand knows these words automatically, you'll be able to write most sentences in cursive without thinking hard about connections at all.`
+If your hand knows these automatically, you can write most of any sentence without thinking hard about connections.`
       },
     ],
     practice: [
-      {
-        type: 'multiple-choice', id: 'wri5-3-q1', grade: 5,
-        question: 'In cursive writing, what is the main difference from printing?',
-        options: ['Letters connect to each other without lifting the pencil between them', 'You write faster by skipping some letters', 'Each letter is written separately', 'You only use capital letters'],
-        answer: 0,
-        explanation: 'Cursive connects letters into a flowing word — you lift your pencil at the end of the word, not between every letter.'
-      },
-      {
-        type: 'multiple-choice', id: 'wri5-3-q2', grade: 5,
-        question: 'What is the #1 tip for smooth cursive connections?',
-        options: ['Keep your pencil moving — don\'t pause between letters', 'Press harder so letters are clear', 'Write as fast as possible', 'Lift your pencil between every letter to reset'],
-        answer: 0,
-        explanation: 'Pausing between letters breaks the flow. Cursive should be one continuous motion through the whole word.'
-      },
-      {
-        type: 'fill-blank', id: 'wri5-3-q3', grade: 5,
-        question: 'Instead of thinking letter by letter, what should you train your hand to recognize?',
-        answer: 'words as shapes',
-        hint: 'Think of the whole word at once, not each letter separately.',
-        explanation: 'Recognizing whole words as single flowing shapes is what makes cursive feel natural and fast.'
-      },
+      { type: 'multiple-choice', id: 'wri5-7b-p1', grade: 5,
+        question: 'In cursive, when do you lift your pencil?',
+        options: ['Between every letter', 'Only at the end of a word', 'Every three letters', 'Whenever a letter feels hard'],
+        answer: 1, explanation: 'In cursive you keep your pencil moving through the whole word — lifting only at the end of each word.' },
+      { type: 'multiple-choice', id: 'wri5-7b-p2', grade: 5,
+        question: 'Which letters have a TOP exit stroke (making connections trickier)?',
+        options: ['a, e, i', 'b, o, v, w', 'm, n, u', 'h, k, l'],
+        answer: 1, explanation: 'b, o, v, and w exit at the top, so they need to curve DOWN to connect to the next letter.' },
+      { type: 'fill-blank', id: 'wri5-7b-p3', grade: 5,
+        question: 'Instead of thinking letter by letter, what should you train your hand to see whole words as?',
+        answer: 'shapes',
+        hint: 'Think of the whole word at once as one flowing ____.',
+        explanation: 'Recognizing whole words as single flowing shapes is what makes cursive feel natural and fast.' },
     ]
   },
 

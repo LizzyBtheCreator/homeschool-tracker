@@ -529,6 +529,18 @@ export default function LessonPage() {
           </h2>
         )}
         <ContentBlock text={currentStep.content} />
+        {currentStep.svg && (
+          <div style={{ margin: '1rem 0 0', overflowX: 'auto', textAlign: 'center' }}
+            dangerouslySetInnerHTML={{ __html: currentStep.svg }} />
+        )}
+        {currentStep.videoUrl && (
+          <div style={{ margin: '1rem 0 0', position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 10, overflow: 'hidden' }}>
+            <iframe src={currentStep.videoUrl} title="Lesson video"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen />
+          </div>
+        )}
       </div>
 
       {/* Navigation */}
