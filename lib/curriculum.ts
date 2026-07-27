@@ -3056,8 +3056,8 @@ If your hand knows these automatically, you can write most of any sentence witho
   },
 
   {
-    id: 'writing-5-4',
-    subject: 'writing', grade: 5, lessonNumber: 4,
+    id: 'writing-5-8',
+    subject: 'writing', grade: 5, lessonNumber: 8,
     title: 'Creative Story Writing',
     intro: "Stories are one of the oldest forms of human communication — people have been telling them around fires for thousands of years. Today you're going to learn what makes a story come alive, then write one of your own.",
     streakNeeded: 3,
@@ -3179,8 +3179,8 @@ Also remember: **your first draft doesn't have to be good.** It just has to exis
   },
 
   {
-    id: 'writing-5-5',
-    subject: 'writing', grade: 5, lessonNumber: 5,
+    id: 'writing-5-9',
+    subject: 'writing', grade: 5, lessonNumber: 9,
     title: 'Journal Writing: Your Voice, Your Life',
     intro: "A journal is one of the best writing tools there is — and the coolest part? There's no wrong way to do it. Today we're learning how to use journal writing to get better at putting your thoughts and feelings into words.",
     streakNeeded: 3,
@@ -3296,8 +3296,8 @@ A lot of writers say the journal is where they do their best thinking.`
   },
 
   {
-    id: 'writing-5-6',
-    subject: 'writing', grade: 5, lessonNumber: 6,
+    id: 'writing-5-10',
+    subject: 'writing', grade: 5, lessonNumber: 10,
     title: 'Essay Structure: Introduction, Body, Conclusion',
     intro: "An essay is just an organized way to share an opinion or idea with a reader. Once you know the structure, you can write about almost anything. Today we're learning the format that every essay follows — from school assignments to newspaper columns to books.",
     streakNeeded: 3,
@@ -3669,6 +3669,380 @@ The conclusion is your last impression on the reader. Make it count.`
       { type: 'multiple-choice', id: 'writing-12-3-p1', grade: 12, question: 'In an argument, "reasoning" means:', options: ['Repeating your claim louder', 'Explaining WHY evidence supports your claim', 'Adding more evidence', 'Summarizing the paragraph'], answer: 1, explanation: 'Evidence + reasoning = argument. Reasoning explains the connection between your evidence and your claim.' },
       { type: 'multiple-choice', id: 'writing-12-3-p2', grade: 12, question: 'Including a rebuttal paragraph:', options: ['Weakens your essay', 'Shows you do not believe your own argument', 'Strengthens your essay by showing you understand the full issue', 'Is only needed in very long essays'], answer: 2, explanation: 'Addressing and defeating the opposing view demonstrates depth of understanding and strengthens your argument.' },
       { type: 'multiple-choice', id: 'writing-12-3-p3', grade: 12, question: 'Attacking the person making an argument instead of the argument itself is called:', options: ['Straw man', 'False dichotomy', 'Ad hominem', 'Slippery slope'], answer: 2, explanation: 'Ad hominem = attacking the person rather than addressing what they actually said.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MATH GRADE 4 — Lessons 4 & 5
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'math-4-4', subject: 'math', grade: 4, lessonNumber: 4,
+    title: 'Division: Sharing Equally',
+    intro: "Division is just multiplication in reverse. If you can multiply, you can divide — let's prove it.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What is division?', content: 'Division means splitting a number into equal groups.\n\n12 ÷ 3 = 4 means "if I split 12 into 3 equal groups, each group has 4."\n\nThe parts: **12** = dividend, **3** = divisor, **4** = quotient' },
+      { type: 'example', heading: 'Division as the reverse of multiplication', content: 'You already know 4 × 3 = 12.\nSo 12 ÷ 3 = 4 and 12 ÷ 4 = 3.\n\nEvery multiplication fact gives you two division facts for free!\n\n7 × 8 = 56 → 56 ÷ 7 = 8 and 56 ÷ 8 = 7\n6 × 9 = 54 → 54 ÷ 6 = 9 and 54 ÷ 9 = 6' },
+      { type: 'tip', heading: 'Division by 1 and by itself', content: 'Any number ÷ 1 = itself. (15 ÷ 1 = 15)\nAny number ÷ itself = 1. (15 ÷ 15 = 1)\nZero divided by anything = 0. (0 ÷ 7 = 0)\nYou can NEVER divide by zero.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-4-p1', grade: 4, question: '36 ÷ 6 = ?', options: ['5', '6', '7', '8'], answer: 1, explanation: '6 × 6 = 36, so 36 ÷ 6 = 6.' },
+      { type: 'fill-blank', id: 'm4-4-p2', grade: 4, question: '63 ÷ 9 = ?', answer: '7', hint: 'What times 9 equals 63?', explanation: '9 × 7 = 63, so 63 ÷ 9 = 7.' },
+      { type: 'multiple-choice', id: 'm4-4-p3', grade: 4, question: 'If 5 × 8 = 40, then 40 ÷ 5 = ?', options: ['6', '7', '8', '9'], answer: 2, explanation: 'Division is multiplication in reverse. 5 × 8 = 40 means 40 ÷ 5 = 8.' },
+      { type: 'fill-blank', id: 'm4-4-p4', grade: 4, question: '72 ÷ 8 = ?', answer: '9', hint: '8 × ? = 72', explanation: '8 × 9 = 72, so 72 ÷ 8 = 9.' },
+      { type: 'multiple-choice', id: 'm4-4-p5', grade: 4, question: '56 ÷ 7 = ?', options: ['6', '7', '8', '9'], answer: 2, explanation: '7 × 8 = 56, so 56 ÷ 7 = 8.' },
+    ],
+  },
+  {
+    id: 'math-4-5', subject: 'math', grade: 4, lessonNumber: 5,
+    title: 'Fractions: Parts of a Whole',
+    intro: "Fractions show up everywhere — pizza slices, measuring cups, money. Let's make sure they make total sense.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What is a fraction?', content: 'A fraction shows part of a whole.\n\n**1/4** means: cut something into 4 equal pieces, take 1.\n- **Numerator** (top) = how many parts you have\n- **Denominator** (bottom) = how many equal parts total\n\n3/8 = you have 3 out of 8 equal parts.' },
+      { type: 'example', heading: 'Fractions on a number line', content: 'Between 0 and 1, you can fit fractions:\n0 ... 1/4 ... 1/2 ... 3/4 ... 1\n\n1/2 is exactly in the middle.\n1/4 is halfway between 0 and 1/2.\n3/4 is halfway between 1/2 and 1.\n\nThe bigger the denominator, the smaller each piece.' },
+      { type: 'tip', heading: 'Comparing fractions', content: 'Same denominator? Bigger numerator = bigger fraction.\n3/8 > 2/8 (more pieces of the same size)\n\nSame numerator? Bigger denominator = SMALLER fraction.\n1/4 < 1/2 (same number of pieces but each piece is smaller)\n\nHalf is your anchor — is the fraction more or less than 1/2?' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-5-p1', grade: 4, question: 'In the fraction 5/8, what does the 8 mean?', options: ['You have 8 pieces', 'There are 8 equal parts total', 'The answer is 8', 'You need 8 more'], answer: 1, explanation: 'The denominator (bottom number) tells you how many equal parts the whole is divided into.' },
+      { type: 'multiple-choice', id: 'm4-5-p2', grade: 4, question: 'Which fraction is larger: 3/5 or 3/8?', options: ['3/8', '3/5', 'They are equal', 'Cannot tell'], answer: 1, explanation: 'Same numerator — bigger denominator means smaller pieces. So 3/5 > 3/8.' },
+      { type: 'fill-blank', id: 'm4-5-p3', grade: 4, question: 'What fraction represents 2 out of 6 equal parts?', answer: '2/6', hint: 'Parts you have / Total parts', explanation: '2 parts out of 6 equal parts = 2/6.' },
+      { type: 'multiple-choice', id: 'm4-5-p4', grade: 4, question: 'Which fraction equals one half?', options: ['1/4', '2/6', '3/6', '2/5'], answer: 2, explanation: '3/6 = 1/2 because 3 is exactly half of 6.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ELA GRADE 4 — Lessons 3, 4, 5
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'ela-4-3', subject: 'ela', grade: 4, lessonNumber: 3,
+    title: 'Main Idea and Supporting Details',
+    intro: "Every paragraph has a point — a main idea. Everything else in that paragraph is there to support it. Let's learn how to find it.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What is the main idea?', content: 'The **main idea** is what a paragraph (or whole passage) is mostly about. It is the big point the author wants you to understand.\n\n**Supporting details** are the facts, examples, and reasons that explain or prove the main idea.\n\nThink of it like a table: the main idea is the tabletop, and the details are the legs holding it up.' },
+      { type: 'example', heading: 'Finding the main idea', content: 'Read this paragraph:\n"Dogs make excellent pets for families. They are loyal and love their owners deeply. Dogs also encourage exercise because they need daily walks. Many children grow up feeling safer and happier with a family dog."\n\nMain idea: Dogs make excellent family pets.\nSupporting details: loyal, encourage exercise, make children happier.' },
+      { type: 'tip', heading: 'Where to find the main idea', content: 'It is often in the **first or last sentence** of a paragraph — but not always!\n\nIf you cannot find it stated directly, ask yourself: "What is every sentence in this paragraph talking about?" Your answer is the implied main idea.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e4-3-p1', grade: 4, question: 'Supporting details in a paragraph are used to:', options: ['Introduce a new topic', 'Explain or prove the main idea', 'Summarize the whole passage', 'Change the subject'], answer: 1, explanation: 'Supporting details back up the main idea with facts, examples, and reasons.' },
+      { type: 'multiple-choice', id: 'e4-3-p2', grade: 4, question: 'Where is the main idea most often found?', options: ['In the middle of a paragraph', 'In the first or last sentence', 'Only in the title', 'Never stated directly'], answer: 1, explanation: 'The main idea is usually in the first or last sentence, though sometimes it is implied.' },
+      { type: 'fill-blank', id: 'e4-3-p3', grade: 4, question: 'The big point an author wants you to understand is called the _____ idea.', answer: 'main', hint: 'It is what the whole paragraph is mostly about.', explanation: 'The main idea is the central point of a paragraph or passage.' },
+    ],
+  },
+  {
+    id: 'ela-4-4', subject: 'ela', grade: 4, lessonNumber: 4,
+    title: 'Point of View: Who Is Telling the Story?',
+    intro: "The same story feels completely different depending on who is telling it. Today we learn how to identify who the narrator is — and why it matters.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Three points of view', content: '**First person** — the narrator is IN the story. Uses: I, me, my, we.\n"I walked to school and forgot my lunch."\n\n**Second person** — speaks directly to the reader. Uses: you, your.\n"You walk to school and forget your lunch." (rare in stories)\n\n**Third person** — narrator is outside the story. Uses: he, she, they, it.\n"She walked to school and forgot her lunch."' },
+      { type: 'example', heading: 'Why point of view matters', content: 'First person: You know exactly what the narrator thinks and feels — but only their side.\n\nThird person limited: You follow one character closely but from outside.\n\nThird person omniscient: The narrator knows EVERYONE\'s thoughts and feelings.\n\nExample: In a mystery, first person makes you feel the suspense. Third person omniscient might give away too much!' },
+      { type: 'tip', heading: 'Quick identification trick', content: 'Look at the pronouns:\n• "I, me, my" → First person\n• "You, your" → Second person\n• "He, she, they, it" → Third person\n\nThe first paragraph of any story almost always reveals the point of view.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e4-4-p1', grade: 4, question: '"We ran as fast as we could through the forest." What point of view is this?', options: ['First person', 'Second person', 'Third person', 'No point of view'], answer: 0, explanation: '"We" is a first-person pronoun — the narrator is part of the story.' },
+      { type: 'multiple-choice', id: 'e4-4-p2', grade: 4, question: '"She looked up at the dark sky and felt afraid." What point of view is this?', options: ['First person', 'Second person', 'Third person', 'Cannot tell'], answer: 2, explanation: '"She" is a third-person pronoun — the narrator is outside the story.' },
+      { type: 'multiple-choice', id: 'e4-4-p3', grade: 4, question: 'What is one advantage of first-person point of view?', options: ['You know every character\'s thoughts', 'You feel closely connected to the narrator\'s thoughts and feelings', 'The story is always more exciting', 'There are no disadvantages'], answer: 1, explanation: 'First person gives deep access to one character\'s inner life, creating strong connection and intimacy.' },
+    ],
+  },
+  {
+    id: 'ela-4-5', subject: 'ela', grade: 4, lessonNumber: 5,
+    title: 'Context Clues: Figuring Out Unknown Words',
+    intro: "You will always run into words you do not know. The best readers do not skip them — they figure them out from the clues around them.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What are context clues?', content: '**Context clues** are hints in the surrounding sentences that help you figure out what an unknown word means.\n\nTypes of clues:\n• **Definition** — the author explains it right there ("The herbivore, or plant-eating animal, grazed...")\n• **Example** — examples show the meaning ("Citrus fruits, such as oranges and lemons, are high in vitamin C")\n• **Contrast** — an opposite hint ("Unlike the noisy city, the village was tranquil")' },
+      { type: 'example', heading: 'Using contrast clues', content: '"Marcus was usually timid, but today he spoke with great boldness."\n\nYou may not know "timid." But notice "but" — it signals a contrast. The contrast is "boldness." So timid must mean the OPPOSITE of bold.\n\nTimid = shy, lacking confidence.\n\nThe word "but," "however," and "unlike" often signal contrast clues.' },
+      { type: 'tip', heading: 'Steps for using context clues', content: '1. Read the whole sentence (and the sentences before and after)\n2. Look for signal words: "means," "or," "such as," "for example," "but," "however," "unlike"\n3. Make your best guess\n4. Substitute your guess back into the sentence — does it make sense?' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e4-5-p1', grade: 4, question: '"The ancient, or very old, castle stood on the hill." What does "ancient" mean?', options: ['Very tall', 'Very old', 'Very dark', 'Very small'], answer: 1, explanation: 'The author provides a definition clue right after the word: "or very old."' },
+      { type: 'multiple-choice', id: 'e4-5-p2', grade: 4, question: '"Unlike the generous king, the duke was miserly with his gold." What does "miserly" mean?', options: ['Very generous', 'Very brave', 'Unwilling to spend or share', 'Very powerful'], answer: 2, explanation: '"Unlike" signals a contrast. Generous is the opposite of miserly, so miserly means unwilling to share or spend.' },
+      { type: 'fill-blank', id: 'e4-5-p3', grade: 4, question: 'Context clues are hints in the _______ text that help you understand unknown words.', answer: 'surrounding', hint: 'Look at what is around the unknown word.', explanation: 'Context clues come from the surrounding sentences and words near the unknown term.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SCIENCE GRADE 8 — Lessons 3 & 4
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'science-8-3', subject: 'science', grade: 8, lessonNumber: 3,
+    title: 'Cells: The Building Blocks of Life',
+    intro: "Every living thing — from a single bacterium to a blue whale — is made of cells. Let's go inside.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Two types of cells', content: '**Prokaryotic cells** — no nucleus, no membrane-bound organelles. Bacteria are prokaryotes. Simple but incredibly successful.\n\n**Eukaryotic cells** — have a nucleus and organelles. Plants, animals, fungi = eukaryotes.\n\nAll cells have: cell membrane, cytoplasm, DNA, and ribosomes.' },
+      { type: 'example', heading: 'Key organelles and their jobs', content: '**Nucleus** — control center; contains DNA\n**Mitochondria** — produces energy (ATP) — "powerhouse of the cell"\n**Ribosome** — makes proteins\n**Cell membrane** — controls what enters and exits\n**Cell wall** (plants only) — rigid outer layer for support\n**Chloroplast** (plants only) — captures sunlight for photosynthesis\n**Vacuole** — storage; large central vacuole in plant cells' },
+      { type: 'tip', heading: 'Plant vs. animal cells', content: 'Animal cells have: cell membrane, nucleus, mitochondria, ribosomes\nPlant cells have ALL of the above PLUS:\n• Cell wall (rigid)\n• Chloroplasts (green, for photosynthesis)\n• Large central vacuole\n\nMemory trick: Plants need a WALL, CHLOROPHYLL (green), and a big STORAGE tank.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 's8-3-p1', grade: 8, question: 'Which organelle is called the "powerhouse of the cell"?', options: ['Nucleus', 'Ribosome', 'Mitochondria', 'Vacuole'], answer: 2, explanation: 'Mitochondria produce ATP — the energy currency the cell uses to do everything.' },
+      { type: 'multiple-choice', id: 's8-3-p2', grade: 8, question: 'Which structures are found in plant cells but NOT animal cells?', options: ['Nucleus and ribosomes', 'Cell wall and chloroplasts', 'Mitochondria and vacuoles', 'Cell membrane and cytoplasm'], answer: 1, explanation: 'Plant cells have a cell wall (rigid support) and chloroplasts (for photosynthesis) — animal cells have neither.' },
+      { type: 'multiple-choice', id: 's8-3-p3', grade: 8, question: 'Prokaryotic cells differ from eukaryotic cells because they:', options: ['Have no DNA', 'Have no cell membrane', 'Have no nucleus or membrane-bound organelles', 'Are always larger'], answer: 2, explanation: 'Prokaryotes (like bacteria) lack a true nucleus — their DNA floats freely in the cytoplasm.' },
+      { type: 'fill-blank', id: 's8-3-p4', grade: 8, question: 'The organelle that contains the cell\'s DNA and acts as the control center is the _____.',  answer: 'nucleus', hint: 'It is the "brain" of the cell.', explanation: 'The nucleus houses DNA and directs all cellular activities.' },
+    ],
+  },
+  {
+    id: 'science-8-4', subject: 'science', grade: 8, lessonNumber: 4,
+    title: 'Ecosystems and Food Webs',
+    intro: "Nothing in nature exists alone. Every organism is connected to others through food, shelter, and resources. Today we map those connections.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Producers, consumers, decomposers', content: '**Producers** (autotrophs) — make their own food via photosynthesis. All plants, algae.\n\n**Consumers** (heterotrophs) — eat other organisms:\n• Primary consumers — eat producers (herbivores)\n• Secondary consumers — eat primary consumers\n• Tertiary consumers — eat secondary consumers\n\n**Decomposers** — break down dead matter back into nutrients (fungi, bacteria).' },
+      { type: 'example', heading: 'A food chain vs. a food web', content: 'Food chain (simple): Grass → Grasshopper → Frog → Snake → Hawk\n\nFood WEB = many food chains linked together. More realistic — most animals eat multiple things.\n\nEnergy flows ONE direction: producer → consumer → consumer\nEach level passes only about 10% of its energy to the next level. That is why there are fewer hawks than grasshoppers.' },
+      { type: 'explain', heading: 'Biotic and abiotic factors', content: '**Biotic** factors = living things (plants, animals, bacteria, fungi)\n**Abiotic** factors = non-living things (sunlight, water, temperature, soil, air)\n\nBoth shape an ecosystem. Remove sunlight — producers die — the whole web collapses.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 's8-4-p1', grade: 8, question: 'A rabbit eating grass is an example of a:', options: ['Producer', 'Primary consumer', 'Secondary consumer', 'Decomposer'], answer: 1, explanation: 'The rabbit eats a producer (grass), making it a primary consumer (herbivore).' },
+      { type: 'multiple-choice', id: 's8-4-p2', grade: 8, question: 'Why are there always fewer top predators than prey animals in an ecosystem?', options: ['Predators reproduce faster', 'Only about 10% of energy transfers to each higher level', 'Predators do not need as much food', 'Prey animals are smaller'], answer: 1, explanation: '90% of energy is lost as heat at each level — so it takes enormous amounts of prey to support a few predators.' },
+      { type: 'multiple-choice', id: 's8-4-p3', grade: 8, question: 'Fungi breaking down a fallen log are acting as:', options: ['Producers', 'Primary consumers', 'Decomposers', 'Secondary consumers'], answer: 2, explanation: 'Decomposers break down dead organic matter and return nutrients to the soil.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HISTORY GRADE 7 — Lessons 6 & 7
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'history-7-6', subject: 'history', grade: 7, lessonNumber: 6,
+    title: 'The Civil War: Causes and Consequences',
+    intro: "The Civil War was the bloodiest conflict in American history — and it changed the country forever. Let's understand why it happened and what it meant.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Causes of the Civil War', content: 'The Civil War (1861–1865) had several causes:\n\n**Slavery** — the fundamental issue. Southern economy depended on enslaved labor; abolitionists in the North demanded its end.\n\n**States\' rights** — Southern states believed they had the right to leave the Union (secede).\n\n**Economic differences** — the South was agricultural; the North was industrial.\n\n**Election of 1860** — Abraham Lincoln won the presidency without winning a single Southern state. Southern states began seceding.' },
+      { type: 'example', heading: 'Key events and people', content: '**1861** — Confederate states form; war begins at Fort Sumter, SC\n**1863** — Emancipation Proclamation: Lincoln declares enslaved people in Confederate states free\n**1863** — Battle of Gettysburg: turning point; Union victory\n**1865** — Confederate General Lee surrenders; war ends\n**1865** — 13th Amendment abolishes slavery throughout the U.S.\n\nKey people: Abraham Lincoln, Frederick Douglass, Ulysses S. Grant, Robert E. Lee, Harriet Tubman' },
+      { type: 'explain', heading: 'Reconstruction', content: 'After the war came **Reconstruction** (1865–1877) — rebuilding the South and integrating formerly enslaved people as citizens.\n\n13th Amendment — abolished slavery\n14th Amendment — equal protection under the law\n15th Amendment — right to vote (for Black men)\n\nReconstruction ended in 1877 through political compromise. Jim Crow laws soon followed, rolling back many gains.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'h7-6-p1', grade: 7, question: 'What was the FUNDAMENTAL cause of the Civil War?', options: ['Disagreement about taxes', 'Slavery and its expansion', 'A dispute over land with Britain', 'Religious differences'], answer: 1, explanation: 'While multiple factors contributed, slavery was the central issue — economic, moral, and political.' },
+      { type: 'multiple-choice', id: 'h7-6-p2', grade: 7, question: 'The Emancipation Proclamation (1863):', options: ['Ended the war', 'Declared enslaved people in Confederate states to be free', 'Abolished slavery everywhere in the U.S.', 'Gave women the right to vote'], answer: 1, explanation: 'The Proclamation freed enslaved people in rebelling Confederate states — it was a war measure and a moral statement.' },
+      { type: 'multiple-choice', id: 'h7-6-p3', grade: 7, question: 'Which amendment abolished slavery throughout the United States?', options: ['13th', '14th', '15th', '1st'], answer: 0, explanation: 'The 13th Amendment (1865) formally abolished slavery and involuntary servitude throughout the nation.' },
+    ],
+  },
+  {
+    id: 'history-7-7', subject: 'history', grade: 7, lessonNumber: 7,
+    title: 'World War I and II: Causes and Global Impact',
+    intro: "The two World Wars reshaped every country on Earth. Understanding them is essential to understanding the modern world.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'World War I (1914–1918)', content: 'Causes (MAIN):\n**M**ilitarism — European powers were building massive armies and navies\n**A**lliances — countries were locked into defensive pacts\n**I**mperialism — competition for colonies created tensions\n**N**ationalism — ethnic groups wanted independence; rivalries ran deep\n\nSpark: Assassination of Archduke Franz Ferdinand (1914)\nResult: 17 million dead; Germany blamed; harsh Treaty of Versailles — setting the stage for WWII.' },
+      { type: 'explain', heading: 'World War II (1939–1945)', content: 'Causes:\n• Great Depression created economic desperation across Europe\n• Rise of Hitler and Nazi Germany; aggressive expansion\n• Failure of appeasement (giving in to Hitler\'s demands hoping to avoid war)\n• Germany invaded Poland — Britain and France declared war\n\n**Holocaust**: Nazi Germany systematically murdered 6 million Jewish people and millions of others.\n\n**U.S. entry**: Japan attacked Pearl Harbor, Hawaii on December 7, 1941.' },
+      { type: 'example', heading: 'Results of WWII', content: '• 70–85 million deaths — deadliest conflict in history\n• United States and Soviet Union emerged as superpowers → Cold War\n• United Nations founded to prevent future world wars\n• Nuremberg Trials: Nazi leaders tried for war crimes\n• Marshall Plan: U.S. helped rebuild Western Europe\n• Decolonization: colonial empires began to dissolve' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'h7-7-p1', grade: 7, question: 'What event directly sparked World War I?', options: ['Germany invaded Poland', 'The assassination of Archduke Franz Ferdinand', 'The bombing of Pearl Harbor', 'The Treaty of Versailles'], answer: 1, explanation: 'The assassination of Archduke Franz Ferdinand in 1914 triggered the alliance system, pulling all major powers into war.' },
+      { type: 'multiple-choice', id: 'h7-7-p2', grade: 7, question: 'What brought the United States into World War II?', options: ['Germany invaded France', 'Japan attacked Pearl Harbor', 'The Holocaust was discovered', 'Britain asked for help'], answer: 1, explanation: 'Japan\'s surprise attack on Pearl Harbor, Hawaii on December 7, 1941 led the U.S. to declare war.' },
+      { type: 'multiple-choice', id: 'h7-7-p3', grade: 7, question: 'The Holocaust refers to:', options: ['The bombing of Pearl Harbor', 'The atomic bombs dropped on Japan', 'Nazi Germany\'s systematic murder of 6 million Jewish people and others', 'The Battle of Normandy'], answer: 2, explanation: 'The Holocaust was the Nazi regime\'s genocide of 6 million Jews and millions of others including Roma, disabled people, and political prisoners.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MATH GRADE 12 — Lessons 4 & 5
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'math-12-4', subject: 'math', grade: 12, lessonNumber: 4,
+    title: 'Trigonometry: Sine, Cosine, Tangent',
+    intro: "Trigonometry connects angles to side lengths in triangles — and it shows up in physics, engineering, music, and architecture.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'The three trig ratios', content: 'In a right triangle with an angle θ:\n\n**SOH-CAH-TOA**\n• **Sin(θ)** = Opposite / Hypotenuse\n• **Cos(θ)** = Adjacent / Hypotenuse\n• **Tan(θ)** = Opposite / Adjacent\n\nThe hypotenuse is always the longest side (opposite the right angle).\nOpposite and adjacent depend on which angle you are looking at.' },
+      { type: 'example', heading: 'Using SOH-CAH-TOA', content: 'A right triangle: angle θ = 30°, hypotenuse = 10.\nFind the opposite side.\n\nsin(30°) = opposite / hypotenuse\n0.5 = opposite / 10\nopposite = 5\n\nKey angle values to memorize:\nsin(30°) = 0.5 &nbsp; cos(30°) = 0.866\nsin(45°) = 0.707 &nbsp; cos(45°) = 0.707\nsin(60°) = 0.866 &nbsp; cos(60°) = 0.5' },
+      { type: 'tip', heading: 'Unit circle basics', content: 'On the unit circle (radius = 1), for any angle θ:\n• x-coordinate = cos(θ)\n• y-coordinate = sin(θ)\n\nThis extends trig beyond right triangles to ALL angles — even negative angles and angles greater than 360°.\n\nThis is what makes trig so powerful for modeling waves, cycles, and oscillations.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm12-4-p1', grade: 12, question: 'SOH-CAH-TOA: Sin(θ) equals:', options: ['Adjacent/Hypotenuse', 'Opposite/Adjacent', 'Opposite/Hypotenuse', 'Hypotenuse/Opposite'], answer: 2, explanation: 'SOH: Sin = Opposite over Hypotenuse.' },
+      { type: 'multiple-choice', id: 'm12-4-p2', grade: 12, question: 'In a right triangle, if sin(θ) = 0.5, what is the angle θ?', options: ['45°', '30°', '60°', '90°'], answer: 1, explanation: 'sin(30°) = 0.5. This is a standard angle to memorize.' },
+      { type: 'multiple-choice', id: 'm12-4-p3', grade: 12, question: 'Tan(θ) is defined as:', options: ['Sin/Cos', 'Cos/Sin', 'Sin × Cos', '1/Sin'], answer: 0, explanation: 'Tan(θ) = Sin(θ)/Cos(θ) = Opposite/Adjacent.' },
+    ],
+  },
+  {
+    id: 'math-12-5', subject: 'math', grade: 12, lessonNumber: 5,
+    title: 'Statistics: Distributions and Probability',
+    intro: "Statistics is how we make sense of data — and probability tells us how likely things are. Both are essential for college, science, and everyday decision-making.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Measures of center and spread', content: '**Mean** — average (add all values, divide by count)\n**Median** — middle value when sorted\n**Mode** — most frequent value\n**Range** — max minus min\n**Standard deviation** — measures how spread out data is from the mean\n\nWhen data is skewed (outliers present), median is more useful than mean.' },
+      { type: 'explain', heading: 'Normal distribution', content: 'The **normal distribution** (bell curve) is symmetrical around the mean.\n\n**68-95-99.7 rule:**\n• 68% of data falls within 1 standard deviation of the mean\n• 95% within 2 standard deviations\n• 99.7% within 3 standard deviations\n\nExample: If test scores have mean 75 and SD 10, then 68% of students scored between 65 and 85.' },
+      { type: 'example', heading: 'Basic probability', content: 'P(event) = favorable outcomes / total outcomes\n\nFlipping a coin: P(heads) = 1/2 = 0.5 = 50%\nRolling a 3 on a die: P(3) = 1/6 ≈ 0.167 = 16.7%\n\n**Independent events**: P(A and B) = P(A) × P(B)\nTwo coin flips both heads: 0.5 × 0.5 = 0.25 = 25%' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm12-5-p1', grade: 12, question: 'When data has extreme outliers, which measure of center is most useful?', options: ['Mean', 'Mode', 'Median', 'Range'], answer: 2, explanation: 'Outliers pull the mean up or down dramatically. The median (middle value) is resistant to outliers.' },
+      { type: 'multiple-choice', id: 'm12-5-p2', grade: 12, question: 'In a normal distribution, approximately what percent of data falls within 2 standard deviations of the mean?', options: ['50%', '68%', '95%', '99.7%'], answer: 2, explanation: 'The 68-95-99.7 rule: 95% of data falls within 2 standard deviations.' },
+      { type: 'multiple-choice', id: 'm12-5-p3', grade: 12, question: 'P(rolling an even number on a standard die) = ?', options: ['1/6', '1/3', '1/2', '2/3'], answer: 2, explanation: 'Even numbers on a die: 2, 4, 6 = 3 out of 6 total outcomes = 1/2.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ELA GRADE 12 — Lessons 3 & 4
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'ela-12-3', subject: 'ela', grade: 12, lessonNumber: 3,
+    title: 'Literary Analysis: Theme and Symbolism',
+    intro: "College literature courses are built on these two skills. Let's make sure you can identify and write about theme and symbolism with confidence.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Theme vs. topic', content: '**Topic** — what a story is about (e.g., war, friendship, justice)\n**Theme** — what the story SAYS about that topic — the author\'s message\n\nTopic: war\nTheme: "War destroys the innocence of those who fight in it."\n\nTheme is always a complete statement — not a single word. A story can have multiple themes.' },
+      { type: 'example', heading: 'Symbolism', content: 'A **symbol** is something that represents both itself and something beyond itself.\n\nExamples:\n• A dove = peace\n• A green light (Gatsby) = hope and the unattainable dream\n• Seasons = cycles of life, death, renewal\n• Darkness = ignorance or evil; light = knowledge or goodness\n\nTo identify symbolism: an author draws unusual attention to an object or repeats it. Ask: "What could this represent beyond its literal meaning?"' },
+      { type: 'tip', heading: 'Writing about theme', content: 'When writing a theme analysis:\n1. State the theme as a complete sentence (not just a word)\n2. Identify at least 2 pieces of evidence from the text\n3. Explain HOW each piece of evidence develops the theme\n4. Connect to the author\'s larger message or purpose\n\nAvoid: "The theme of this story is friendship." → Too vague.\nBetter: "The story argues that true friendship requires sacrifice."' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e12-3-p1', grade: 12, question: 'The difference between a topic and a theme is:', options: ['They are the same thing', 'A topic is a single word; a theme is the author\'s complete message about that topic', 'A theme is shorter than a topic', 'Topics are for non-fiction only'], answer: 1, explanation: 'Topic = what it\'s about. Theme = what the work says about that topic. Theme is always a complete claim.' },
+      { type: 'multiple-choice', id: 'e12-3-p2', grade: 12, question: 'A symbol in literature is:', options: ['A simile using "like" or "as"', 'Something that represents both itself and something beyond itself', 'A metaphor that is very obvious', 'Only used in poetry'], answer: 1, explanation: 'Symbols carry double meaning — they exist literally in the story AND represent something larger (an idea, emotion, or concept).' },
+      { type: 'multiple-choice', id: 'e12-3-p3', grade: 12, question: 'Which is the strongest statement of theme?', options: ['Friendship', 'This story is about friendship', 'True friendship requires honesty even when it is painful', 'The characters are friends'], answer: 2, explanation: 'A theme is a complete statement of the author\'s message — not a topic word or a plot summary.' },
+    ],
+  },
+  {
+    id: 'ela-12-4', subject: 'ela', grade: 12, lessonNumber: 4,
+    title: 'Grammar for College: Sentence Structure and Style',
+    intro: "Strong grammar is invisible — readers only notice it when it breaks. College writing demands precision. Let's sharpen your toolkit.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Sentence variety', content: 'College writing uses varied sentence structures:\n\n**Simple** — one independent clause: "She studied all night."\n**Compound** — two independent clauses joined by a conjunction: "She studied all night, but she still felt unprepared."\n**Complex** — independent + dependent clause: "Although she studied all night, she still felt unprepared."\n**Compound-complex** — mix of both\n\nGood writers mix all four. All simple sentences feel choppy. All complex sentences feel exhausting.' },
+      { type: 'example', heading: 'Common errors to avoid', content: '**Run-on sentence**: Two complete thoughts jammed together without proper punctuation.\nWrong: "I finished the essay it took three hours."\nRight: "I finished the essay. It took three hours." OR "I finished the essay; it took three hours."\n\n**Comma splice**: Using only a comma to join two independent clauses.\nWrong: "I was tired, I kept writing."\nRight: "I was tired, but I kept writing." (add a conjunction)\n\n**Fragment**: Incomplete sentence.\nWrong: "Because I was tired."\nRight: "I kept writing because I was tired."' },
+      { type: 'tip', heading: 'Active vs. passive voice', content: '**Active**: Subject does the action. "The dog bit the man." — Clear, direct, strong.\n**Passive**: Subject receives the action. "The man was bitten by the dog." — Wordy, weak.\n\nCollege writing strongly prefers active voice. Passive voice is sometimes appropriate in science writing to emphasize results over the researcher ("The samples were tested"), but in essays, go active.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e12-4-p1', grade: 12, question: '"Although she studied all night, she still felt unprepared." This is a:', options: ['Simple sentence', 'Compound sentence', 'Complex sentence', 'Fragment'], answer: 2, explanation: '"Although she studied all night" is a dependent clause — combined with an independent clause = complex sentence.' },
+      { type: 'multiple-choice', id: 'e12-4-p2', grade: 12, question: '"I was tired, I kept writing." This is a:', options: ['Complex sentence', 'Comma splice', 'Run-on sentence', 'Correct sentence'], answer: 1, explanation: 'Two independent clauses joined by only a comma = comma splice. Fix with a conjunction or semicolon.' },
+      { type: 'multiple-choice', id: 'e12-4-p3', grade: 12, question: 'Which sentence is in active voice?', options: ['The report was written by Maria.', 'The essay was completed on time.', 'Maria wrote the report.', 'The assignment had been submitted.'], answer: 2, explanation: '"Maria wrote the report" — Maria (subject) does the action. Active voice is direct and clear.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SCIENCE GRADE 12 — Lessons 3 & 4
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'science-12-3', subject: 'science', grade: 12, lessonNumber: 3,
+    title: 'Biology: DNA, Genetics, and Heredity',
+    intro: "DNA is the instruction manual for every living thing. Understanding it is essential for medicine, biology, and understanding yourself.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'DNA structure', content: 'DNA (deoxyribonucleic acid) is a double helix made of **nucleotides**.\n\nEach nucleotide has:\n• A sugar (deoxyribose)\n• A phosphate group\n• A nitrogenous base: A, T, G, or C\n\n**Base pairing rules**: A pairs with T, G pairs with C.\nThis complementary pairing allows DNA to replicate exactly.' },
+      { type: 'explain', heading: 'Genes and inheritance', content: 'A **gene** is a segment of DNA that codes for a protein (or trait).\nHumans have ~20,000 genes on 23 pairs of chromosomes.\n\n**Dominant** allele (B) — expressed when present\n**Recessive** allele (b) — only expressed when two copies present\n\nGenotypes: BB (homozygous dominant), Bb (heterozygous), bb (homozygous recessive)\nOnly bb shows the recessive trait.' },
+      { type: 'example', heading: 'Punnett squares', content: 'Two carrier parents (Bb × Bb):\n\n| | B | b |\n|---|---|---|\n| B | BB | Bb |\n| b | Bb | bb |\n\nResults: 25% BB, 50% Bb, 25% bb\nPhenotype ratio: 75% dominant trait, 25% recessive trait\n\nThis predicts PROBABILITY — not a guarantee for any individual offspring.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 's12-3-p1', grade: 12, question: 'In DNA, adenine (A) always pairs with:', options: ['Guanine (G)', 'Cytosine (C)', 'Thymine (T)', 'Another adenine (A)'], answer: 2, explanation: 'Base pairing rules: A-T and G-C. Adenine always bonds with thymine.' },
+      { type: 'multiple-choice', id: 's12-3-p2', grade: 12, question: 'A person with genotype "Bb" is:', options: ['Homozygous dominant', 'Homozygous recessive', 'Heterozygous', 'Unable to pass on genes'], answer: 2, explanation: 'Bb = heterozygous — one dominant allele and one recessive. They show the dominant trait but can pass on the recessive.' },
+      { type: 'multiple-choice', id: 's12-3-p3', grade: 12, question: 'From a Bb × Bb cross, what percentage of offspring will show the recessive trait?', options: ['0%', '25%', '50%', '75%'], answer: 1, explanation: 'Only bb shows the recessive trait. Bb × Bb gives 25% bb offspring.' },
+    ],
+  },
+  {
+    id: 'science-12-4', subject: 'science', grade: 12, lessonNumber: 4,
+    title: 'Environmental Science: Climate and Human Impact',
+    intro: "The planet is changing, and science is how we understand why — and what can be done. This is one of the most important topics of your generation.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'The greenhouse effect', content: 'The **greenhouse effect** is natural and necessary — it keeps Earth warm enough for life.\n\nGreenhouse gases (CO₂, methane, water vapor) trap heat from the sun in the atmosphere.\n\n**Enhanced greenhouse effect**: Human activities (burning fossil fuels, deforestation, agriculture) have dramatically increased CO₂ and other greenhouse gases, causing Earth to warm faster than natural cycles explain.' },
+      { type: 'example', heading: 'Effects of climate change', content: '• Rising global average temperatures\n• Melting polar ice and glaciers → rising sea levels\n• More extreme weather events (hurricanes, droughts, floods)\n• Ocean acidification (CO₂ dissolves in water → carbonic acid → harms marine life)\n• Shifting ecosystems — species moving toward poles or higher elevations\n• Threats to agriculture and food security' },
+      { type: 'explain', heading: 'Human impact and solutions', content: '**Human impacts**: fossil fuels, deforestation, industrial agriculture, plastic pollution, habitat destruction\n\n**Solutions**:\n• Renewable energy (solar, wind, hydro)\n• Energy efficiency\n• Reforestation\n• Sustainable agriculture\n• International agreements (Paris Agreement)\n• Individual choices (reduce, reuse, recycle)\n\nScience gives us the tools to understand the problem. Policy and individual action determine the response.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 's12-4-p1', grade: 12, question: 'The greenhouse effect is:', options: ['Entirely human-made and harmful', 'A natural process essential for life, enhanced by human activity', 'Caused only by water vapor', 'Not connected to global temperatures'], answer: 1, explanation: 'The greenhouse effect is natural and keeps Earth habitable. Human emissions have enhanced it, causing rapid warming.' },
+      { type: 'multiple-choice', id: 's12-4-p2', grade: 12, question: 'Ocean acidification is caused by:', options: ['Plastic pollution', 'CO₂ dissolving in seawater', 'Oil spills', 'Overfishing'], answer: 1, explanation: 'When CO₂ dissolves in seawater it forms carbonic acid, lowering pH — threatening coral reefs and shellfish.' },
+      { type: 'multiple-choice', id: 's12-4-p3', grade: 12, question: 'Which is an example of a renewable energy source?', options: ['Coal', 'Natural gas', 'Nuclear power', 'Solar energy'], answer: 3, explanation: 'Solar energy is renewable — it comes from the sun, which will not run out on any human timescale.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HISTORY GRADE 12 — Lessons 4 & 5
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'history-12-4', subject: 'history', grade: 12, lessonNumber: 4,
+    title: 'The American Economy: Capitalism, Markets, and Policy',
+    intro: "Understanding how the economy works is one of the most practical things you can learn before college and adulthood.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'How capitalism works', content: '**Capitalism** = an economic system where individuals and businesses own the means of production, and prices are determined by supply and demand in free markets.\n\n**Supply** — how much of something is available\n**Demand** — how much people want it\n\nWhen demand rises and supply stays the same → prices go up.\nWhen supply rises and demand stays the same → prices go down.' },
+      { type: 'example', heading: 'Government\'s role in the economy', content: '**The Great Depression (1929)** — stock market crash → bank failures → massive unemployment (25%)\n\nFDR\'s **New Deal** (1933–1939):\n• Government created jobs (Civilian Conservation Corps, Public Works Administration)\n• Banking regulations\n• Social Security established\n• Showed that government CAN and sometimes must intervene in the economy\n\nThis debate — how much government involvement is right — continues today.' },
+      { type: 'explain', heading: 'Key economic terms', content: '**GDP** (Gross Domestic Product) — total value of all goods and services produced in a country\n**Inflation** — rising prices over time (purchasing power falls)\n**Recession** — two or more quarters of negative GDP growth\n**Federal Reserve** — U.S. central bank; controls interest rates to manage inflation and employment\n**Fiscal policy** — government spending and taxes\n**Monetary policy** — Federal Reserve controlling money supply and interest rates' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'h12-4-p1', grade: 12, question: 'When demand for a product rises but supply stays the same, prices will:', options: ['Fall', 'Stay the same', 'Rise', 'Disappear'], answer: 2, explanation: 'Higher demand for the same supply = prices rise. This is basic supply and demand.' },
+      { type: 'multiple-choice', id: 'h12-4-p2', grade: 12, question: 'FDR\'s New Deal was a response to:', options: ['World War II', 'The Civil War', 'The Great Depression', 'The Cold War'], answer: 2, explanation: 'The New Deal was FDR\'s set of programs to address the economic catastrophe of the Great Depression (1929+).' },
+      { type: 'multiple-choice', id: 'h12-4-p3', grade: 12, question: 'GDP measures:', options: ['How much money the government spends', 'The total value of goods and services produced in a country', 'The inflation rate', 'The unemployment rate'], answer: 1, explanation: 'GDP (Gross Domestic Product) is the total monetary value of all goods and services produced within a country in a year.' },
+    ],
+  },
+  {
+    id: 'history-12-5', subject: 'history', grade: 12, lessonNumber: 5,
+    title: 'Contemporary Issues: Technology, Globalization, and Democracy',
+    intro: "You are inheriting a world shaped by forces that did not exist 30 years ago. Understanding them is essential for being an informed citizen.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Globalization', content: '**Globalization** — the increasing interconnection of economies, cultures, and governments worldwide.\n\nDriven by: trade agreements, the internet, transportation, multinational corporations.\n\nBenefits: lower prices, cultural exchange, economic growth in developing nations\nChallenges: job displacement, income inequality, loss of local culture, environmental harm\n\nExample: Your smartphone was designed in California, manufactured in China, with materials from Congo, Brazil, and Australia.' },
+      { type: 'explain', heading: 'Technology and democracy', content: 'Social media has transformed how information (and misinformation) spreads.\n\n**Challenges to democracy:**\n• Disinformation — false information spread deliberately\n• Echo chambers — algorithms show people only what confirms their beliefs\n• Foreign interference in elections\n• Digital divide — unequal access to technology\n\n**Media literacy** — the ability to find, evaluate, and think critically about information — is now an essential democratic skill.' },
+      { type: 'example', heading: 'Being an informed citizen', content: 'Skills for navigating today\'s information environment:\n\n1. **Check the source** — Who published this? What is their credibility?\n2. **Read beyond the headline** — Headlines are designed to get clicks, not inform\n3. **Verify with multiple sources** — Does this appear in other credible outlets?\n4. **Check the date** — Old stories get reshared as if they are new\n5. **Consider your own biases** — We all tend to believe what confirms what we already think\n\nAn informed democracy requires informed citizens.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'h12-5-p1', grade: 12, question: 'Globalization refers to:', options: ['The spread of American culture worldwide', 'The increasing interconnection of economies, cultures, and governments', 'Only international trade agreements', 'The internet replacing newspapers'], answer: 1, explanation: 'Globalization is the broad process of increasing interconnection — economic, cultural, political, and technological.' },
+      { type: 'multiple-choice', id: 'h12-5-p2', grade: 12, question: 'An "echo chamber" in social media means:', options: ['Hearing an echo when you speak', 'Algorithms showing you mostly content that confirms your existing beliefs', 'Government censorship of social media', 'Very loud notifications'], answer: 1, explanation: 'Social media algorithms prioritize content you engage with — gradually showing more of what confirms your worldview, limiting exposure to different perspectives.' },
+      { type: 'multiple-choice', id: 'h12-5-p3', grade: 12, question: 'Media literacy is:', options: ['The ability to read quickly', 'Knowing all the news channels', 'The ability to find, evaluate, and think critically about information', 'Having a media subscription'], answer: 2, explanation: 'Media literacy means knowing how to assess sources, detect bias, verify claims, and think critically — an essential citizenship skill.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // WRITING GRADE 12 — Lessons 4 & 5
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'writing-12-4', subject: 'writing', grade: 12, lessonNumber: 4,
+    title: 'Literary Analysis Essay',
+    intro: "The literary analysis essay is a cornerstone of college English. Let's master the form.",
+    streakNeeded: 3,
+    paperBased: true,
+    paperAssignment: `Write a 2-page literary analysis essay about a book, story, or film you have read or watched.
+
+Your essay must:
+• State a clear thesis about a theme or literary technique
+• Include at least 2 body paragraphs, each with a quote or specific example and your analysis of it
+• Use the format: Claim → Evidence (quote or scene) → Analysis (what does this show/mean?)
+• Include a conclusion that restates your thesis in new words
+
+Do NOT just summarize the plot. Analyze — explain WHY and HOW, not just WHAT happened.
+
+Example thesis: "In The Outsiders, Hinton uses the conflict between the Greasers and Socs to argue that socioeconomic class divides people who are fundamentally the same."`,
+    steps: [
+      { type: 'explain', heading: 'What literary analysis is NOT', content: 'Literary analysis is NOT a plot summary.\n\n"In this story, a boy goes on an adventure and learns about friendship." → Summary.\n\n"The protagonist\'s journey mirrors the hero\'s journey archetype, suggesting that personal growth requires leaving the comfort of the known world." → Analysis.\n\nYou are answering WHY and HOW — not WHAT.' },
+      { type: 'example', heading: 'The CEA paragraph format', content: '**C**laim — your analytical point for this paragraph\n**E**vidence — a quote or specific scene from the text\n**A**nalysis — explain what the evidence means and how it supports your claim\n\nExample:\n**C**: Fitzgerald uses the green light to symbolize Gatsby\'s unattainable dreams.\n**E**: In Chapter 1, Nick observes Gatsby "trembling" as he reaches toward "a single green light" across the water.\n**A**: The physical trembling reveals the emotional intensity of Gatsby\'s longing, while the light\'s distance across the water suggests his dreams will always remain just out of reach — beautiful but impossible.' },
+      { type: 'tip', heading: 'Integrating quotes properly', content: 'Never drop a quote without introduction and analysis:\n\nWrong: "Gatsby trembled. This shows he is nervous."\n\nRight: "Fitzgerald reveals Gatsby\'s desperate longing when Nick observes him \'trembling\' as he reaches toward the light (Fitzgerald 20). This trembling suggests that Gatsby\'s dream is not merely a wish but an obsession that controls his entire being."\n\nFormat: introduce the quote → provide the quote → cite it → analyze it.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'writing-12-4-p1', grade: 12, question: 'A literary analysis essay primarily:', options: ['Summarizes the plot', 'Analyzes HOW and WHY an author makes choices and what they mean', 'Retells the story from a different point of view', 'Describes the author\'s life'], answer: 1, explanation: 'Literary analysis examines how and why authors make specific choices — not what happens in the plot.' },
+      { type: 'multiple-choice', id: 'writing-12-4-p2', grade: 12, question: 'In the CEA format, what does the "A" stand for?', options: ['Argument', 'Author', 'Analysis', 'Attention'], answer: 2, explanation: 'CEA = Claim, Evidence, Analysis. The analysis is where you explain what the evidence means and how it proves your claim.' },
+      { type: 'multiple-choice', id: 'writing-12-4-p3', grade: 12, question: 'After including a quote, you should immediately:', options: ['Start a new paragraph', 'Add another quote', 'Analyze what the quote means and how it supports your claim', 'Restate the quote in your own words'], answer: 2, explanation: 'Every quote needs analysis — explain what it shows and why it matters to your argument.' },
+    ],
+  },
+  {
+    id: 'writing-12-5', subject: 'writing', grade: 12, lessonNumber: 5,
+    title: 'College Application: Short Answers and Supplements',
+    intro: "Beyond the main essay, most colleges ask short-answer questions. These matter — do not rush them.",
+    streakNeeded: 3,
+    paperBased: true,
+    paperAssignment: `Write responses to THREE of these common college supplement prompts. Keep each under 150 words.
+
+1. "Why do you want to attend [this college]?" (Be specific — name a program, professor, or opportunity)
+
+2. "Describe an extracurricular activity that is meaningful to you."
+
+3. "What is an intellectual topic you have explored outside of school?"
+
+4. "Describe a challenge or failure and what you learned from it."
+
+5. "What will you contribute to our campus community?"
+
+Rules for all short answers:
+• Be SPECIFIC — vague answers are forgettable
+• Show personality — your voice should come through
+• Answer the actual question asked
+• Every word counts — no filler`,
+    steps: [
+      { type: 'explain', heading: 'Why short answers matter', content: 'Colleges use short answers to:\n• See if you actually know anything about their school\n• Get more glimpses of your personality and interests\n• Check your writing clarity under constraints\n\nA weak "Why us?" answer that could apply to any college is a red flag. A specific, genuine answer shows real interest.' },
+      { type: 'example', heading: 'The "Why us?" answer — weak vs. strong', content: 'WEAK: "I want to attend State University because it has a great academic reputation and I know I will get an excellent education there."\n(This could describe 500 schools — worthless.)\n\nSTRONG: "Professor Kim\'s research on urban food deserts directly connects to the community garden project I founded in 10th grade. State\'s Urban Policy program, combined with the Food Systems minor, would let me combine my community work with the policy knowledge to create real change. I also want to continue playing bass in a jazz ensemble — State\'s music department offers open jam sessions every Thursday that I have already researched."\n(Specific, personal, researched.)' },
+      { type: 'tip', heading: 'Under-150-words discipline', content: 'Short answers teach you to write with precision. Every word must earn its place.\n\nCut:\n• "I feel that..." → Just say it\n• "In conclusion..." → You\'re 150 words — no conclusion needed\n• "As I mentioned..." → You have 150 words, you mentioned nothing twice\n• Adjectives that do not add information ("amazing," "incredible," "great")\n\nKeep:\n• Specific nouns and verbs\n• Concrete examples\n• Your actual voice' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'writing-12-5-p1', grade: 12, question: 'A strong "Why us?" answer should:', options: ['Praise the college generally', 'Be identical to your main essay', 'Name specific programs, professors, or opportunities at that school', 'Focus on the campus beauty'], answer: 2, explanation: 'Colleges want to know you have done your research and have genuine, specific reasons for applying — not generic flattery.' },
+      { type: 'multiple-choice', id: 'writing-12-5-p2', grade: 12, question: 'In a 150-word short answer, "I feel that" at the start of a sentence should be:', options: ['Kept — it shows emotion', 'Replaced — just say the thing directly', 'Used at the beginning of every sentence', 'Put at the end instead'], answer: 1, explanation: 'Filler phrases waste your limited word count. Cut "I feel that" and just make the statement.' },
+      { type: 'multiple-choice', id: 'writing-12-5-p3', grade: 12, question: 'What makes a short answer about an extracurricular activity strong?', options: ['Listing all your activities', 'Describing what the activity is generally', 'Showing what it means to you and what you contribute or gained specifically', 'Making it sound impressive regardless of truth'], answer: 2, explanation: 'Specific meaning and personal reflection — not impressive-sounding descriptions — make short answers memorable.' },
     ],
   },
 ]
