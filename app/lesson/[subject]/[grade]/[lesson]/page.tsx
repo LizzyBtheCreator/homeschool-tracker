@@ -137,10 +137,17 @@ function FillBlank({ q, onCorrect, onWrong }: { q: FillBlankQuestion; onCorrect:
   const [correct, setCorrect] = useState(false)
   const [showHint, setShowHint] = useState(false)
 
+  function normalize(s: string) {
+    return s.trim().toLowerCase().replace(/,/g, '').replace(/\s+/g, ' ')
+  }
+
   function submit(e: React.FormEvent) {
     e.preventDefault()
     if (submitted) return
-    const isCorrect = value.trim().toLowerCase().replace(/,/g, '') === q.answer.toLowerCase().replace(/,/g, '')
+    const expected = normalize(q.answer)
+    const given = normalize(value)
+    // Accept exact match or if answer is a single key word and user's response contains it
+    const isCorrect = given === expected || (expected.split(' ').length === 1 && given.includes(expected))
     setCorrect(isCorrect)
     setSubmitted(true)
     if (isCorrect) onCorrect(); else onWrong()
@@ -155,7 +162,7 @@ function FillBlank({ q, onCorrect, onWrong }: { q: FillBlankQuestion; onCorrect:
           onChange={e => setValue(e.target.value)}
           disabled={submitted}
           placeholder="Type your answer…"
-          style={{ flex: 1, minWidth: 160, maxWidth: 280, border: submitted ? `2px solid ${correct ? 'var(--success)' : 'var(--danger)'}` : '2px solid var(--border)', borderRadius: 8, padding: '0.625rem 0.875rem', fontSize: '1rem', background: submitted ? (correct ? 'var(--success-light)' : 'var(--danger-light)') : 'white' }}
+          style={{ flex: 1, minWidth: 160, maxWidth: 280, border: submitted ? `2px solid ${correct ? 'var(--success)' : 'var(--danger)'}` : '2px solid var(--border)', borderRadius: 8, padding: '0.625rem 0.875rem', fontSize: '1rem', background: submitted ? (correct ? 'var(--success-light)' : 'var(--danger-light)') : 'var(--card)' }}
           autoComplete="off"
         />
         {!submitted && <button className="btn btn-primary" type="submit" disabled={!value.trim()}>Check</button>}

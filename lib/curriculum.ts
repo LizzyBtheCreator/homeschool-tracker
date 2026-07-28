@@ -4045,6 +4045,122 @@ Rules for all short answers:
       { type: 'multiple-choice', id: 'writing-12-5-p3', grade: 12, question: 'What makes a short answer about an extracurricular activity strong?', options: ['Listing all your activities', 'Describing what the activity is generally', 'Showing what it means to you and what you contribute or gained specifically', 'Making it sound impressive regardless of truth'], answer: 2, explanation: 'Specific meaning and personal reflection — not impressive-sounding descriptions — make short answers memorable.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MATH GRADE 4 — Foundational Building Blocks (Lessons 6–10)
+  // Going back to addition/subtraction of large numbers, then building up
+  // step-by-step to 2-digit × 2-digit multiplication
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'math-4-6', subject: 'math', grade: 4, lessonNumber: 6,
+    title: 'Adding Large Numbers',
+    intro: "Before we multiply big numbers, we need to be solid on addition. Let's make sure carrying (regrouping) makes total sense.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Place value review', content: 'Every digit has a place — ones, tens, hundreds, thousands.\n\n   4, 3 2 7\n     ↑ ↑ ↑ ↑\n     T H T O\n     h u e n\n     o n n e\n     u d s s\n     s r\n     a e\n     n d\n     d s\n     s\n\n4,327 = 4 thousands + 3 hundreds + 2 tens + 7 ones\n\nWhen adding, always line up the digits by place value first.' },
+      { type: 'example', heading: 'Adding without carrying', content: '  3 4 2\n+ 1 5 6\n──────\nStart from the RIGHT (ones place):\n2 + 6 = 8  ✓\n4 + 5 = 9  ✓\n3 + 1 = 4  ✓\n\nAnswer: 498\n\nRule: always add ones first, then tens, then hundreds.' },
+      { type: 'explain', heading: 'Carrying (regrouping)', content: 'When a column adds up to 10 or more, you CARRY to the next column.\n\n  2 6 8\n+ 1 4 5\n──────\nOnes: 8 + 5 = 13 → write 3, carry 1\nTens: 6 + 4 + 1(carried) = 11 → write 1, carry 1\nHundreds: 2 + 1 + 1(carried) = 4\n\nAnswer: 413\n\nThink of carrying like this: 13 ones is the same as 1 ten and 3 ones. You move that extra ten to the tens column.' },
+      { type: 'tip', heading: 'Checking your work', content: 'Always double-check by adding from the TOP down, then from the BOTTOM up.\n\nIf you get the same answer both ways — you got it right!\n\nOr estimate first: 268 ≈ 270, 145 ≈ 150. 270 + 150 = 420. Our answer 413 is close to 420 ✓' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-6-p1', grade: 4, question: '347 + 215 = ?', options: ['552', '562', '462', '542'], answer: 0, explanation: 'Ones: 7+5=12, write 2 carry 1. Tens: 4+1+1=6. Hundreds: 3+2=5. Answer: 562. Wait — 347+215: ones 7+5=12 write 2 carry 1, tens 4+1+1=6, hundreds 3+2=5. Answer is 562.' },
+      { type: 'fill-blank', id: 'm4-6-p2', grade: 4, question: '486 + 237 = ?', answer: '723', hint: 'Start with ones: 6 + 7 = 13, write 3, carry 1', explanation: 'Ones: 6+7=13, write 3 carry 1. Tens: 8+3+1=12, write 2 carry 1. Hundreds: 4+2+1=7. Answer: 723.' },
+      { type: 'multiple-choice', id: 'm4-6-p3', grade: 4, question: '1,245 + 3,638 = ?', options: ['4,873', '4,783', '4,883', '5,883'], answer: 0, explanation: 'Ones: 5+8=13, write 3 carry 1. Tens: 4+3+1=8. Hundreds: 2+6=8. Thousands: 1+3=4. Answer: 4,883.' },
+      { type: 'fill-blank', id: 'm4-6-p4', grade: 4, question: '594 + 178 = ?', answer: '772', hint: 'Ones: 4+8=12, write 2, carry 1. Then tens: 9+7+1=17...', explanation: 'Ones: 4+8=12 write 2 carry 1. Tens: 9+7+1=17 write 7 carry 1. Hundreds: 5+1+1=7. Answer: 772.' },
+    ],
+  },
+  {
+    id: 'math-4-7', subject: 'math', grade: 4, lessonNumber: 7,
+    title: 'Subtracting Large Numbers',
+    intro: "Subtraction is the reverse of addition. The tricky part is borrowing — but once you see WHY it works, it becomes easy.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'Subtracting without borrowing', content: 'Line up digits by place value, then subtract from RIGHT to LEFT.\n\n  7 8 9\n− 3 4 5\n──────\nOnes:    9 − 5 = 4\nTens:    8 − 4 = 4\nHundreds: 7 − 3 = 4\n\nAnswer: 444\n\nEasy when the top digit is always bigger.' },
+      { type: 'explain', heading: 'Borrowing (regrouping)', content: 'What if the top digit is SMALLER than the bottom?\n\n  6 3 2\n− 2 4 8\n──────\nOnes: 2 − 8? Can\'t do it! Borrow from the tens.\nBorrow 1 ten from the 3 → the 3 becomes 2, and ones becomes 12.\n12 − 8 = 4 ✓\n\nTens: 2 − 4? Can\'t do it! Borrow from hundreds.\nBorrow 1 hundred from the 6 → 6 becomes 5, tens becomes 12.\n12 − 4 = 8 ✓\n\nHundreds: 5 − 2 = 3 ✓\n\nAnswer: 384' },
+      { type: 'tip', heading: 'Why borrowing works', content: 'Borrowing is just trading.\n\n1 ten = 10 ones\n1 hundred = 10 tens\n\nWhen you borrow 1 from the tens column, you\'re trading that ten for 10 ones — the total value doesn\'t change, just how it\'s grouped.\n\nCheck: 632 − 248 = 384. Does 248 + 384 = 632? Yes! ✓\n\nAlways check subtraction by adding your answer back to the number you subtracted.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-7-p1', grade: 4, question: '875 − 342 = ?', options: ['533', '523', '433', '543'], answer: 0, explanation: 'Ones: 5−2=3. Tens: 7−4=3. Hundreds: 8−3=5. Answer: 533.' },
+      { type: 'fill-blank', id: 'm4-7-p2', grade: 4, question: '743 − 268 = ?', answer: '475', hint: 'Ones: can\'t do 3−8, borrow from tens. Then tens: can\'t do the result−6, borrow from hundreds.', explanation: 'Ones: borrow, 13−8=5. Tens: borrow, 13−6−1(lent)... work it column by column. Answer: 475.' },
+      { type: 'multiple-choice', id: 'm4-7-p3', grade: 4, question: '1,000 − 347 = ?', options: ['653', '663', '753', '643'], answer: 0, explanation: '1,000 − 347 = 653. Check: 347 + 653 = 1,000 ✓' },
+      { type: 'fill-blank', id: 'm4-7-p4', grade: 4, question: '825 − 469 = ?', answer: '356', hint: 'Start at ones: 5−9, need to borrow. Then tens: keep going left as needed.', explanation: 'Ones: borrow, 15−9=6. Tens: 1−6, borrow, 11−6=5 but we lent 1 so 10−6=4... Actually: 825−469=356. Check: 469+356=825 ✓' },
+    ],
+  },
+  {
+    id: 'math-4-8', subject: 'math', grade: 4, lessonNumber: 8,
+    title: 'Multiplication: Building the Foundation',
+    intro: "Multiplication is fast adding. Before we multiply big numbers, let's make sure the basics are solid and explore place value patterns that make everything easier.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What multiplication means', content: 'Multiplication = adding the same number over and over.\n\n4 × 3 = 3 + 3 + 3 + 3 = 12\n6 × 5 = 5 + 5 + 5 + 5 + 5 + 5 = 30\n\nBut memorizing the times tables lets us skip all that repeated adding.\n\nThe most important ones to know cold:\n× 2, × 3, × 4, × 5, × 6, × 7, × 8, × 9' },
+      { type: 'example', heading: 'Place value × patterns', content: 'Watch what happens when you multiply by 10 or 100:\n\n7 × 10 = 70       (add a zero)\n7 × 100 = 700     (add two zeros)\n7 × 1,000 = 7,000  (add three zeros)\n\n30 × 4 = ?  Think: 3 × 4 = 12, then × 10 = 120\n50 × 6 = ?  Think: 5 × 6 = 30, then × 10 = 300\n\nThis works because multiplication is about place value.' },
+      { type: 'tip', heading: 'Multiplying a 2-digit number × 1 digit', content: 'Break it apart by place value:\n\n43 × 7 = ?\nThink: 40 × 7 = 280\n       3 × 7 = 21\nAdd:   280 + 21 = 301\n\nOr do it in your head: 43 × 7\n→ 7 × 40 = 280 (7 × 4 tens)\n→ 7 × 3 = 21\n→ 280 + 21 = 301 ✓' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-8-p1', grade: 4, question: '6 × 8 = ?', options: ['42', '46', '48', '56'], answer: 2, explanation: '6 × 8 = 48. This is a core times table fact to memorize.' },
+      { type: 'fill-blank', id: 'm4-8-p2', grade: 4, question: '70 × 4 = ?', answer: '280', hint: 'Think: 7 × 4 = 28, then × 10 = ?', explanation: '7 × 4 = 28. Multiply by 10 → 280.' },
+      { type: 'multiple-choice', id: 'm4-8-p3', grade: 4, question: '32 × 3 = ?', options: ['86', '96', '92', '99'], answer: 1, explanation: '30 × 3 = 90, and 2 × 3 = 6. Add: 90 + 6 = 96.' },
+      { type: 'fill-blank', id: 'm4-8-p4', grade: 4, question: '54 × 2 = ?', answer: '108', hint: '50 × 2 = 100, and 4 × 2 = 8. Add them.', explanation: '50 × 2 = 100. 4 × 2 = 8. 100 + 8 = 108.' },
+    ],
+  },
+  {
+    id: 'math-4-9', subject: 'math', grade: 4, lessonNumber: 9,
+    title: 'Multiplying 2 Digits × 2 Digits: Partial Products',
+    intro: "This is exactly what you have been working on! We are going to break it into pieces so it is totally manageable. No rush — understanding beats speed every time.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'The partial products method', content: 'To multiply 23 × 14, break BOTH numbers apart:\n\n23 = 20 + 3\n14 = 10 + 4\n\nNow multiply each piece:\n20 × 10 = 200\n20 × 4  = 80\n3  × 10 = 30\n3  × 4  = 12\n\nAdd all the parts:\n200 + 80 + 30 + 12 = 322\n\nSo 23 × 14 = 322 ✓' },
+      { type: 'example', heading: 'Step-by-step: 36 × 25', content: 'Break apart:\n36 = 30 + 6\n25 = 20 + 5\n\nMultiply each pair:\n30 × 20 = 600\n30 × 5  = 150\n6  × 20 = 120\n6  × 5  = 30\n\nAdd them all:\n600 + 150 + 120 + 30 = 900\n\nSo 36 × 25 = 900\n\nDouble-check: 36 × 25 is the same as 36 × 25. We can estimate: 36 ≈ 40, 25 is 25. 40 × 25 = 1,000. Our answer 900 is close ✓' },
+      { type: 'tip', heading: 'Staying organized', content: 'Write it out in a list so you do not lose track:\n\n  47 × 13\n= (40 + 7) × (10 + 3)\n\n40 × 10 = 400\n40 × 3  = 120\n7  × 10 = 70\n7  × 3  = 21\n──────────\nTotal  = 611\n\nAdd: 400 + 120 = 520, + 70 = 590, + 21 = 611 ✓\n\nTake your time with each step. Getting 4 small multiplications right is easier than one big mess.' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'm4-9-p1', grade: 4, question: 'To use partial products on 24 × 13, you would break it into:', options: ['24 pieces', '(20+4) × (10+3)', '24 × 10 only', '2 × 4 × 1 × 3'], answer: 1, explanation: 'Break each number by place value: 24 = 20+4 and 13 = 10+3. Then multiply each pair.' },
+      { type: 'fill-blank', id: 'm4-9-p2', grade: 4, question: 'In 21 × 12: 20×10=200, 20×2=40, 1×10=10, 1×2=2. Total = ?', answer: '252', hint: 'Add up all four partial products: 200 + 40 + 10 + 2', explanation: '200 + 40 + 10 + 2 = 252. So 21 × 12 = 252.' },
+      { type: 'multiple-choice', id: 'm4-9-p3', grade: 4, question: '15 × 12 = ?', options: ['160', '175', '180', '185'], answer: 2, explanation: '10×10=100, 10×2=20, 5×10=50, 5×2=10. Total: 100+20+50+10=180.' },
+      { type: 'fill-blank', id: 'm4-9-p4', grade: 4, question: '22 × 14 = ?', answer: '308', hint: '20×10=200, 20×4=80, 2×10=20, 2×4=8. Add all four.', explanation: '200 + 80 + 20 + 8 = 308.' },
+    ],
+  },
+  {
+    id: 'math-4-10', subject: 'math', grade: 4, lessonNumber: 10,
+    title: 'Practice: 2-Digit × 2-Digit Multiplication',
+    intro: "Let's practice the partial products method with different problems until it feels natural. Slow is smooth, smooth is fast.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'example', heading: 'Walk-through: 34 × 26', content: 'Step 1: Break apart.\n34 = 30 + 4\n26 = 20 + 6\n\nStep 2: Multiply every pair.\n30 × 20 = 600\n30 × 6  = 180\n4  × 20 = 80\n4  × 6  = 24\n\nStep 3: Add.\n600 + 180 = 780\n780 + 80  = 860\n860 + 24  = 884\n\n34 × 26 = 884' },
+      { type: 'example', heading: 'Walk-through: 45 × 32', content: '45 = 40 + 5\n32 = 30 + 2\n\n40 × 30 = 1,200\n40 × 2  = 80\n5  × 30 = 150\n5  × 2  = 10\n\nAdd: 1,200 + 80 + 150 + 10 = 1,440\n\n45 × 32 = 1,440\n\nEstimate check: 45 ≈ 50, 32 ≈ 30. 50 × 30 = 1,500. Our answer 1,440 is close ✓' },
+      { type: 'tip', heading: 'Common mistakes to avoid', content: '1. Forgetting one of the four partial products — write all four down before adding\n2. Adding wrong — double-check your addition at the end\n3. Mixing up place values — always break numbers as TENS + ONES\n\nIf you get a weird answer, estimate first. 23 × 41 should be around 20 × 40 = 800. If your answer is 200, something went wrong.' },
+    ],
+    practice: [
+      { type: 'fill-blank', id: 'm4-10-p1', grade: 4, question: '13 × 11 = ?', answer: '143', hint: '10×10=100, 10×1=10, 3×10=30, 3×1=3. Add all four.', explanation: '100+10+30+3=143.' },
+      { type: 'multiple-choice', id: 'm4-10-p2', grade: 4, question: '23 × 21 = ?', options: ['443', '463', '483', '453'], answer: 2, explanation: '20×20=400, 20×1=20, 3×20=60, 3×1=3. Total: 400+20+60+3=483.' },
+      { type: 'fill-blank', id: 'm4-10-p3', grade: 4, question: '32 × 12 = ?', answer: '384', hint: '30×10=300, 30×2=60, 2×10=20, 2×2=4. Add all four.', explanation: '300+60+20+4=384.' },
+      { type: 'multiple-choice', id: 'm4-10-p4', grade: 4, question: '25 × 14 = ?', options: ['300', '320', '350', '360'], answer: 2, explanation: '20×10=200, 20×4=80, 5×10=50, 5×4=20. Total: 200+80+50+20=350.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ELA GRADE 4 — Context Clues (simplified rebuild, Lesson 6)
+  // Lesson 5 already exists; this breaks it down more for struggling students
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'ela-4-6', subject: 'ela', grade: 4, lessonNumber: 6,
+    title: 'Context Clues: Simple Steps (Extra Practice)',
+    intro: "Context clues can be tricky at first. We are going to slow way down, use really clear examples, and practice step by step until it clicks.",
+    streakNeeded: 3,
+    steps: [
+      { type: 'explain', heading: 'What is a context clue? (Simple version)', content: 'A context clue is a HINT inside the sentence that tells you what an unknown word means.\n\nYou do not need a dictionary — the answer is right there in the sentence!\n\nExample:\n"The puppy was famished, so she ate the entire bowl of food in seconds."\n\nUnknown word: famished\nClue: "she ate the entire bowl of food in seconds"\n\nThat sounds like she was VERY hungry. So famished = very hungry. ✓' },
+      { type: 'example', heading: 'Type 1: Definition clues', content: 'Sometimes the author just TELLS you the meaning.\n\nLook for these signal words: is, means, or, which is\n\nExamples:\n"A cactus, which is a plant that stores water, can survive in the desert."\n→ cactus = a plant that stores water\n\n"The veterinarian, or animal doctor, treated the sick dog."\n→ veterinarian = animal doctor\n\nSimple! The sentence does the work for you.' },
+      { type: 'example', heading: 'Type 2: Contrast clues', content: 'Sometimes the clue is the OPPOSITE of the unknown word.\n\nLook for: but, however, unlike, instead, while, on the other hand\n\nExample:\n"My sister is talkative, but I am very quiet."\n→ "but" signals an opposite\n→ quiet is the opposite of talkative\n→ talkative = likes to talk\n\nExample:\n"Instead of being happy, she felt melancholy."\n→ instead signals contrast\n→ melancholy = the opposite of happy = sad' },
+      { type: 'tip', heading: 'Your 3-step method', content: 'Step 1: Circle the unknown word.\nStep 2: Look for signal words nearby (or, which is, but, however, unlike).\nStep 3: Use what you find to guess the meaning.\n\nAlways test your guess: put your definition back in the sentence. Does it still make sense?\n\n"The puppy was [very hungry], so she ate the entire bowl of food in seconds." ✓ Makes sense!' },
+    ],
+    practice: [
+      { type: 'multiple-choice', id: 'e4-6-p1', grade: 4, question: '"The enormous elephant was the biggest animal at the zoo." What does enormous mean?', options: ['Very small', 'Very fast', 'Very large', 'Very loud'], answer: 2, explanation: 'The clue is "biggest animal" — so enormous means very large.' },
+      { type: 'multiple-choice', id: 'e4-6-p2', grade: 4, question: '"A nocturnal animal, or an animal that sleeps during the day and is awake at night, includes owls and bats." Nocturnal means:', options: ['An animal that flies', 'Awake at night and sleeping during the day', 'A very large animal', 'An animal that lives in water'], answer: 1, explanation: 'The author gives the definition right after "or" — nocturnal = awake at night and sleeping during the day.' },
+      { type: 'multiple-choice', id: 'e4-6-p3', grade: 4, question: '"Unlike the messy art room, the library was immaculate." What does immaculate most likely mean?', options: ['Very noisy', 'Very colorful', 'Very dirty', 'Very clean'], answer: 3, explanation: '"Unlike" signals a contrast. Messy is contrasted with immaculate, so immaculate = the opposite of messy = very clean.' },
+      { type: 'multiple-choice', id: 'e4-6-p4', grade: 4, question: 'Which signal word tells you a DEFINITION clue is coming?', options: ['"but"', '"or"', '"however"', '"unlike"'], answer: 1, explanation: '"Or" often introduces a definition or restatement. "But," "however," and "unlike" signal contrast clues.' },
+      { type: 'multiple-choice', id: 'e4-6-p5', grade: 4, question: 'What is the BEST way to test your context clue guess?', options: ['Look it up in the dictionary', 'Ask your teacher', 'Replace the unknown word with your guess and see if the sentence still makes sense', 'Skip the word and keep reading'], answer: 2, explanation: 'The best test: substitute your guess back into the sentence. If it makes sense, your guess is probably correct!' },
+    ],
+  },
 ]
 
 export function getLessonsForSubjectAndGrade(subject: Subject, grade: number): Lesson[] {
