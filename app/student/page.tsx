@@ -113,7 +113,7 @@ export default function StudentDashboard() {
   }
 
   const DEFAULT_GRADES: Record<Subject, number> = {
-    math: 4, ela: 4, science: 8, history: 7, writing: 5
+    math: 4, ela: 4, science: 8, history: 7, writing: 5, medical: 4
   }
 
   async function startSubject(subject: Subject) {
