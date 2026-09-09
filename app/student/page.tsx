@@ -3,6 +3,10 @@ import { useEffect, useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { SUBJECTS, getLessonsForSubjectAndGrade, type Subject } from '@/lib/curriculum'
+import dynamic from 'next/dynamic'
+
+// Load StudyBuddy only on client (it uses window/document)
+const StudyBuddy = dynamic(() => import('@/components/StudyBuddy'), { ssr: false })
 
 interface Student {
   id: string
@@ -57,11 +61,9 @@ export default function StudentDashboard() {
     const { data } = await supabase.from('hs_students').select('id,name,grade').eq('user_id', user.id).order('name')
     const list = data || []
     setAllStudents(list)
-    // Check if we already have an active student in this session
     const saved = sessionStorage.getItem('activeStudent')
     if (saved) {
       const active = JSON.parse(saved) as Student
-      // Verify they're still in the list
       if (list.find(s => s.id === active.id)) {
         setStudentId(active.id)
         setStudentName(active.name)
@@ -75,7 +77,6 @@ export default function StudentDashboard() {
       setStudentName(list[0].name)
       loadProgress(list[0].id)
     } else if (list.length > 1) {
-      // Multiple students — show picker
       setPickingStudent(true)
       setLoading(false)
     } else {
@@ -193,6 +194,9 @@ export default function StudentDashboard() {
 
   return (
     <div style={{ maxWidth: 700, margin: '0 auto', padding: '1.5rem 1rem' }}>
+      {/* Study Buddy — floats over entire page */}
+      {studentName && <StudyBuddy studentName={studentName} />}
+
       <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800 }}>Hey, {studentName}! 👋</h1>
